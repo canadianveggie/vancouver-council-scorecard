@@ -77,7 +77,7 @@ The initial vote-value mapping is:
 | Abstained | 0 |
 | Absent | 0 |
 | Opposed | -1 |
-| Amend to Oppose | -2 |
+| Amended in Opposition | -2 |
 
 The score for a vote is:
 
@@ -175,7 +175,7 @@ data/
 The current collected data is in:
 
 ```text
-data/2023-2026 Vancouver Council Voting Record - Votes.csv
+data/votes.csv
 ```
 
 The current CSV layout is a useful starting point but is not yet the final
@@ -192,8 +192,8 @@ produce normalized records similar to:
   "desiredOutcome": "pass",
   "weight": 2,
   "outcome": "Failed",
+  "outcomeDetails": "Short explanation of the final outcome.",
   "sourceUrl": "https://example.com",
-  "description": "Short explanation.",
   "votes": {
     "councillor-id": "Supported"
   }

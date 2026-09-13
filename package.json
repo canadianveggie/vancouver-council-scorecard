@@ -5,6 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "data:build": "tsx scripts/build-data.ts",
+    "data:validate": "tsx scripts/build-data.ts",
+    "prebuild": "pnpm data:build",
     "build": "tsc -b && vite build",
     "preview": "vite preview"
   },
@@ -21,6 +24,8 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.1",
+    "csv-parse": "^7.0.2",
+    "tsx": "^4.23.13",
     "typescript": "^7.0.2",
     "vite": "^8.3.0"
   }

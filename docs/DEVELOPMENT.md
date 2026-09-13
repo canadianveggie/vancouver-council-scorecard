@@ -39,17 +39,39 @@ Acceptance criteria:
 
 Goal: make the current files reliable inputs for the application.
 
-- [ ] Define the canonical schema for parties, councillors, and votes.
-- [ ] Decide whether vote categories remain comma-separated in the CSV or are
-  represented in a separate field.
-- [ ] Add stable vote IDs to the source data or generate deterministic IDs.
-- [ ] Define the accepted vote-value vocabulary.
-- [ ] Define how `null`, `Absent`, and `Abstained` are represented.
-- [ ] Create a CSV parser and data transformation script.
-- [ ] Validate councillor IDs, party IDs, categories, weights, dates, URLs, and
+- [x] Define the canonical schema for parties, councillors, and votes.
+- [x] Decide to keep vote categories comma-separated in the CSV and split them
+  into an array during transformation.
+- [x] Add stable vote IDs to the source data or generate deterministic IDs.
+- [x] Define the accepted vote-value vocabulary.
+- [x] Define how `null`, `Absent`, and `Abstained` are represented.
+- [x] Create a CSV parser and data transformation script.
+- [x] Validate councillor IDs, party IDs, categories, weights, dates, URLs, and
   vote values.
-- [ ] Produce browser-friendly JSON in a generated directory.
-- [ ] Fail the build when the source data is invalid.
+- [x] Produce browser-friendly JSON in a generated directory.
+- [x] Fail the build when the source data is invalid.
+
+The source CSV uses strict `YYYY-MM-DD` dates and the vote-value vocabulary is:
+
+```text
+Proposed
+Supported
+Abstained
+Absent
+Opposed
+Amended in Opposition
+```
+
+Blank vote cells become `null` in the generated data. Blank weights are not
+currently expected in the source data; the transformer defaults them to `1`
+with a warning for backwards compatibility.
+
+The `Outcome Details` column is preserved as `outcomeDetails` in the generated
+data, while `News Link` becomes `sourceUrl`.
+
+The transformer currently generates browser data at
+`data/generated/scorecard.json`, which is ignored by Git and recreated during
+the build.
 
 Acceptance criteria:
 
