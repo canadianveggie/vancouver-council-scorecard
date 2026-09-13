@@ -1,4 +1,4 @@
-# Vancouver Council Scorecard — Development Plan
+# Vancouver Council Scorecard - Development Plan
 
 This plan is organized around getting a working, data-backed prototype early,
 then refining the scoring model and visual presentation with real examples.
@@ -27,7 +27,7 @@ GitHub Pages.
 - [ ] Add the initial visual tokens: colours, typography, spacing, and grades.
 - [ ] Add a local development command and production build command.
 - [ ] Add a GitHub Actions workflow for building and deploying to Pages.
-- [ ] Verify the site at the repository’s default Pages URL.
+- [ ] Verify the site at the repository's default Pages URL.
 
 Acceptance criteria:
 
@@ -119,8 +119,8 @@ shown while the grade model is being evaluated.
 
 Goal: make the report card personal and shareable.
 
-- [ ] Allow users to edit each selected vote’s desired outcome.
-- [ ] Allow users to edit each selected vote’s weight.
+- [ ] Allow users to edit each selected vote's desired outcome.
+- [ ] Allow users to edit each selected vote's weight.
 - [ ] Recalculate results immediately after edits.
 - [ ] Add a visible modified-from-defaults indicator.
 - [ ] Add `Reset to Defaults`.
