@@ -1,1 +1,16 @@
-docs/DEVELOPMENT.md
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+coverage/
+
+# Local environment and editor files
+.DS_Store
+.env
+.env.*
+!.env.example
+.vscode/
+
+# Generated browser data
+data/generated/
