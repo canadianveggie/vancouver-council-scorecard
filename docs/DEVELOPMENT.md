@@ -21,18 +21,18 @@ Status: in progress
 Goal: run a minimal static application locally and deploy a placeholder to
 GitHub Pages.
 
-- [ ] Create a React + TypeScript + Vite application.
-- [ ] Add the initial responsive page shell.
-- [ ] Add a simple header, title, introductory text, and About link.
-- [ ] Add the initial visual tokens: colours, typography, spacing, and grades.
-- [ ] Add a local development command and production build command.
-- [ ] Add a GitHub Actions workflow for building and deploying to Pages.
-- [ ] Verify the site at the repository's default Pages URL.
+- [x] Create a React + TypeScript + Vite application.
+- [x] Add the initial responsive page shell.
+- [x] Add a simple header, title, introductory text, and About link.
+- [x] Add the initial visual tokens: colours, typography, spacing, and grades.
+- [x] Add a local development command and production build command.
+- [x] Add a GitHub Actions workflow for building and deploying to Pages.
+- [ ] Verify the site at the repository’s default Pages URL.
 
 Acceptance criteria:
 
-- The app runs locally with one documented command.
-- A clean build succeeds without manual file copying.
+- [x] The app runs locally with one documented command.
+- [x] A clean build succeeds without manual file copying.
 - A push to `main` can publish the site automatically.
 
 ## Phase 2: Data model and validation

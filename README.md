@@ -33,7 +33,21 @@ docs/
 - React, TypeScript, and Vite for the web application
 - CSV as the editable vote source; generated JSON for browser consumption
 
-The application commands will be added when the Vite scaffold is created.
+## Local development
+
+Install dependencies and start the development server:
+
+```bash
+pnpm install
+pnpm dev
+```
+
+Create a production build locally with:
+
+```bash
+pnpm build
+pnpm preview
+```
 
 ## Licensing
 
