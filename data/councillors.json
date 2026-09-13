@@ -1,0 +1,80 @@
+[
+    {
+        "id": "ken-sim",
+        "name": "Ken Sim",
+        "partyId": "abc",
+        "notes": "Mayor"
+    },
+    {
+        "id": "brian-montague",
+        "name": "Brian Montague",
+        "partyId": "abc",
+        "notes": null
+    },
+    {
+        "id": "sarah-kirby-yung",
+        "name": "Sarah Kirby-Yung",
+        "partyId": "abc",
+        "notes": null
+    },
+    {
+        "id": "mike-klassen",
+        "name": "Mike Klassen",
+        "partyId": "abc",
+        "notes": null
+    },
+    {
+        "id": "lenny-zhou",
+        "name": "Lenny Zhou",
+        "partyId": "abc",
+        "notes": null
+    },
+    {
+        "id": "peter-meiszner",
+        "name": "Peter Meiszner",
+        "partyId": "abc",
+        "notes": null
+    },
+    {
+        "id": "lisa-dominato",
+        "name": "Lisa Dominato",
+        "partyId": "abc",
+        "notes": null
+    },
+    {
+        "id": "rebecca-bligh",
+        "name": "Rebecca Bligh",
+        "partyId": "vote-vancouver",
+        "notes": "Kicked out of ABC in 2025"
+    },
+    {
+        "id": "pete-fry",
+        "name": "Pete Fry",
+        "partyId": "green",
+        "notes": null
+    },
+    {
+        "id": "adriane-carr",
+        "name": "Adriane Carr",
+        "partyId": "green",
+        "notes": "Resigned in 2025"
+    },
+    {
+        "id": "christine-boyle",
+        "name": "Christine Boyle",
+        "partyId": "onecity",
+        "notes": "Resigned in 2025"
+    },
+    {
+        "id": "lucy-maloney",
+        "name": "Lucy Maloney",
+        "partyId": "onecity",
+        "notes": "Elected in 2025 by-election"
+    },
+    {
+        "id": "sean-orr",
+        "name": "Sean Orr",
+        "partyId": "cope",
+        "notes": "Elected in 2025 by-election"
+    }
+]

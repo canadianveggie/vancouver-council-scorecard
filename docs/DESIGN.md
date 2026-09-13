@@ -168,8 +168,8 @@ Provisional source files:
 ```text
 data/
   votes.csv
-  councillors.csv
-  parties.csv
+  councillors.json
+  parties.json
 ```
 
 The current collected data is in:

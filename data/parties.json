@@ -1,0 +1,27 @@
+[
+    {
+        "id": "abc",
+        "name": "ABC",
+        "logo": null
+    },
+    {
+        "id": "green",
+        "name": "Green",
+        "logo": null
+    },
+    {
+        "id": "onecity",
+        "name": "OneCity",
+        "logo": null
+    },
+    {
+        "id": "cope",
+        "name": "COPE",
+        "logo": null
+    },
+    {
+        "id": "vote-vancouver",
+        "name": "Vote Vancouver",
+        "logo": null
+    }
+]
