@@ -29,13 +29,12 @@ export type Vote = {
   desiredOutcome: DesiredOutcome
   outcome: string
   outcomeDetails: string | null
-  weight: 1 | 2 | 3
+  weight: number
   sourceUrl: string | null
   councillorVotes: Record<string, RecordedVote | null>
 }
 
 export type ScorecardData = {
-  schemaVersion: 1
   categories: string[]
   parties: Party[]
   councillors: Councillor[]

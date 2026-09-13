@@ -84,18 +84,18 @@ Acceptance criteria:
 
 Goal: implement scoring independently from the user interface.
 
-- [ ] Implement the base vote-value mapping.
-- [ ] Implement desired-outcome inversion for `Pass` and `Fail`.
-- [ ] Apply vote weights.
-- [ ] Treat `Absent` as zero for the initial version.
-- [ ] Treat `null` as not eligible and exclude it from applicable-vote counts.
-- [ ] Calculate councillor vote scores.
-- [ ] Calculate category totals.
-- [ ] Calculate selected-category totals.
-- [ ] Calculate party totals from councillor scores.
-- [ ] Add unit tests for positive, negative, zero, absent, null, and weighted
+- [x] Implement the base vote-value mapping.
+- [x] Implement desired-outcome inversion for `Pass` and `Fail`.
+- [x] Apply vote weights.
+- [x] Treat `Absent` as zero for the initial version.
+- [x] Treat `null` as not eligible and exclude it from applicable-vote counts.
+- [x] Calculate councillor vote scores.
+- [x] Calculate category totals.
+- [x] Calculate selected-category totals.
+- [x] Calculate party totals from councillor scores.
+- [x] Add unit tests for positive, negative, zero, absent, null, and weighted
   cases.
-- [ ] Add test fixtures for party and councillor aggregation.
+- [x] Add test fixtures for party and councillor aggregation.
 
 The engine should accept the default vote settings plus a set of user
 overrides, and return calculated results without depending on React components.

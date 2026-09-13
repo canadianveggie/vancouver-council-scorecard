@@ -9,6 +9,7 @@
     "data:validate": "tsx scripts/build-data.ts",
     "prebuild": "pnpm data:build",
     "build": "tsc -b && vite build",
+    "test": "node --import tsx --test src/scoring/score.test.ts",
     "preview": "vite preview"
   },
   "engines": {

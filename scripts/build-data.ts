@@ -209,7 +209,6 @@ async function build() {
   })
 
   const output: ScorecardData = {
-    schemaVersion: 1,
     categories,
     parties,
     councillors,
