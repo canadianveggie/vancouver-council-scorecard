@@ -1,4 +1,4 @@
-# Vancouver Council Scorecard — Design Notes
+# Vancouver Council Scorecard: Design Notes
 
 Status: early design
 
@@ -10,7 +10,7 @@ be tested against the real voting data before the first public release.
 
 The site will help Vancouver voters compare councillors and political parties
 based on council votes from the previous four years. It is not intended to
-identify the universally “best” councillor. Instead, a user will choose up to
+identify the universally 'best' councillor. Instead, a user will choose up to
 three categories that matter to them and receive a report card for those areas.
 
 The first release will cover everyone who served during the period, including
@@ -82,19 +82,19 @@ The initial vote-value mapping is:
 The score for a vote is:
 
 ```text
-vote score = base value × desired-outcome multiplier × weight
+vote score = base value * desired-outcome multiplier * weight
 ```
 
 The desired-outcome multiplier is:
 
 ```text
-Pass →  1
-Fail  → -1
+Pass ->  1
+Fail  -> -1
 ```
 
 For example, proposing a motion that should pass with weight `2` produces
-`2 × 1 × 2 = +4`. Supporting a motion that should fail with weight `3`
-produces `1 × -1 × 3 = -3`.
+`2 * 1 * 2 = +4`. Supporting a motion that should fail with weight `3`
+produces `1 * -1 * 3 = -3`.
 
 ### Missing and unavailable votes
 
