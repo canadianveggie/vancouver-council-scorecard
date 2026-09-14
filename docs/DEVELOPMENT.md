@@ -104,16 +104,16 @@ overrides, and return calculated results without depending on React components.
 
 Goal: let a user select categories and understand the results.
 
-- [ ] Build category selection limited to three categories.
-- [ ] Display party rows as the primary result.
+- [x] Build category selection limited to three categories.
+- [x] Display party rows as the primary result.
 - [ ] Sort parties by score or grade, with the sorting rule documented.
-- [ ] Expand a party to show councillor records.
-- [ ] Expand a category to show its votes.
-- [ ] Display vote-level scores and recorded vote labels.
-- [ ] Display source links and short explanations when available.
-- [ ] Show raw scores and applicable-vote counts while grades are still being
+- [x] Expand a party to show councillor records.
+- [x] Expand a category to show its votes.
+- [x] Display vote-level scores and recorded vote labels.
+- [x] Display source links and short explanations when available.
+- [x] Show raw scores and applicable-vote counts while grades are still being
   calibrated.
-- [ ] Add empty, incomplete-data, and no-category-selected states.
+- [x] Add empty, incomplete-data, and no-category-selected states.
 
 Acceptance criteria:
 

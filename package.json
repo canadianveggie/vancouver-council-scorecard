@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "predev": "pnpm data:build",
     "data:build": "tsx scripts/build-data.ts",
     "data:validate": "tsx scripts/build-data.ts",
     "prebuild": "pnpm data:build",
