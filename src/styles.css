@@ -56,6 +56,35 @@ h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1; }
 .empty-state { align-items: center; background: var(--panel); border: 1px dashed #b8c0b5; display: flex; flex-direction: column; justify-content: center; min-height: 260px; padding: 2rem; text-align: center; }
 .empty-mark { align-items: center; background: var(--lime); border-radius: 50%; display: flex; font-size: 1.5rem; height: 50px; justify-content: center; margin-bottom: 1rem; width: 50px; }
 .empty-state p { color: var(--muted); margin: 0; }
+.score-table-shell { overflow-x: auto; }
+.score-table { border-collapse: separate; border-spacing: 0; min-width: 720px; width: 100%; }
+.score-table th, .score-table td { border-bottom: 1px solid var(--line); padding: 0; text-align: center; }
+.score-table thead th { background: var(--green); color: #fff; font-family: 'DM Mono', monospace; font-size: .65rem; font-weight: 400; letter-spacing: .04em; text-transform: uppercase; }
+.score-table thead tr:first-child th { border-right: 1px solid #ffffff30; height: 58px; }
+.score-table .party-header { min-width: 170px; padding: 0 1rem; text-align: left; }
+.score-table .total-header { background: #17231f; min-width: 100px; }
+.category-header button { align-items: center; background: transparent; border: 0; color: inherit; cursor: pointer; display: flex; gap: .55rem; height: 100%; justify-content: center; padding: .75rem 1rem; width: 100%; }
+.category-header button:hover, .category-header button:focus-visible { background: #ffffff16; outline: 2px solid var(--lime); outline-offset: -4px; }
+.column-plus, .table-plus { align-items: center; border: 1px solid currentColor; border-radius: 50%; display: inline-flex; font-family: 'DM Sans', sans-serif; font-size: 1rem; height: 21px; justify-content: center; line-height: 1; width: 21px; }
+.vote-header { background: #316052 !important; min-width: 150px; padding: .65rem 1rem !important; text-align: left !important; text-transform: none !important; }
+.vote-header span, .vote-header small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vote-header span { font-family: 'DM Sans', sans-serif; font-size: .75rem; font-weight: 600; letter-spacing: 0; text-transform: none; }
+.vote-header small { color: #d2e0d8; font-family: 'DM Mono', monospace; font-size: .6rem; font-weight: 400; margin-top: .25rem; }
+.party-table-row { background: var(--panel); }
+.party-table-row:hover, .party-table-row.is-expanded { background: #fffef5; }
+.party-table-row th, .councillor-table-row th { font-weight: 500; text-align: left; }
+.row-expander { align-items: center; background: transparent; border: 0; color: var(--ink); cursor: pointer; display: flex; font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; gap: .75rem; padding: 1rem; text-align: left; width: 100%; }
+.row-expander:hover, .row-expander:focus-visible { color: var(--green); outline: 2px solid var(--green); outline-offset: -3px; }
+.table-plus { color: var(--green); flex: 0 0 auto; }
+.party-table-row td, .councillor-table-row td { font-family: 'DM Mono', monospace; font-size: .8rem; height: 58px; min-width: 100px; }
+.party-table-row .total-cell, .councillor-table-row .total-cell { background: #f0f1e7; font-size: .95rem; font-weight: 500; }
+.score-positive { color: var(--green); }
+.score-negative { color: #a24335; }
+.score-muted { color: #9ca69d; }
+.councillor-table-row { background: #ebece4; }
+.councillor-table-row th { color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: .85rem; font-weight: 500; }
+.councillor-indent { display: block; padding: .85rem 1rem .85rem 3.1rem; }
+.councillor-table-row td { font-size: .7rem; height: 44px; }
 .report-card { border-top: 1px solid var(--line); }
 .party-row { border-bottom: 1px solid var(--line); }
 .party-summary { align-items: center; cursor: pointer; display: grid; gap: 1rem; grid-template-columns: 30px 1fr auto auto; list-style: none; padding: 1.25rem .5rem; }
@@ -104,6 +133,7 @@ h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1; }
   .party-summary { gap: .65rem; grid-template-columns: 28px 1fr auto; }
   .party-meta { display: none; }
   .vote-detail { align-items: start; flex-direction: column; gap: 1rem; }
+  .score-table .party-header { min-width: 150px; }
   .footer { flex-direction: column; gap: .75rem; }
 }
 
