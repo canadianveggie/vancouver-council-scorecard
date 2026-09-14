@@ -159,6 +159,17 @@ clarity.
 - [ ] Finalize party colours and available logo assets.
 - [ ] Add grade colour treatments with text labels, not colour alone.
 - [ ] Add responsive table/card layouts for small screens.
+- [ ] Optimize the mobile party column, including compact party-logo treatment
+  where appropriate and line-breaking long party names such as Vote Vancouver.
+- [ ] Reduce the visual jump when expanding vote columns.
+- [ ] Use shorter vote-column labels with accessible, mobile-friendly details or
+  tooltips.
+- [ ] Add a documented councillor sort control or default, such as alphabetical
+  order or score descending.
+- [ ] Revisit the green table headers so they do not compete with the red-green
+  score treatment.
+- [ ] Make positive and negative scores visually clearer using accessible
+  background treatments, text labels, and sufficient contrast.
 - [ ] Add restrained expand/collapse animation.
 - [ ] Respect `prefers-reduced-motion`.
 - [ ] Verify keyboard navigation and focus states.
