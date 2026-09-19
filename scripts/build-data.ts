@@ -18,7 +18,19 @@ const sourcePath = path.join(dataDirectory, 'votes.csv')
 const generatedDirectory = path.join(dataDirectory, 'generated')
 const outputPath = path.join(generatedDirectory, 'scorecard.json')
 
-const metadataHeaders = ['Vote', 'Description', 'Category', 'Date', 'Desired', 'Outcome', 'Outcome Details', 'Weight', 'News Link']
+const metadataHeaders = [
+  'Vote',
+  'Description',
+  'Category',
+  'Date',
+  'Desired',
+  'Outcome',
+  'Outcome Details',
+  'Weight',
+  'News Link',
+  'meetingID',
+  'voteIDs',
+]
 const categories = [
   'Housing',
   'Transportation',
