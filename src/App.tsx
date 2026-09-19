@@ -229,7 +229,7 @@ function App() {
 
       <section className="hero" aria-labelledby="page-title">
         <p className="eyebrow">Vancouver · 2022-2026</p>
-        <h1 id="page-title">Which council votes<br /><em>matter to you?</em></h1>
+        <h1 id="page-title">Vote based on actions<br /><em>not just promises</em></h1>
         <p className="hero-copy">
           Build a personal report card from the issues you care about. Compare
           parties, explore individual councillors, and see the votes behind every result.
