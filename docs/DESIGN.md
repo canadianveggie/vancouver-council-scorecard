@@ -31,11 +31,10 @@ The initial category set is:
 
 - Housing
 - Transportation
-- Cycling (possibly combined with Transportation later)
-- Climate
+- Environment
 - Safety
 - Affordability
-- Governance, including integrity and democracy
+- Governance
 
 Categories may be added or removed if the available four-year voting record
 does not contain enough meaningful votes in a category.
@@ -77,7 +76,7 @@ The initial vote-value mapping is:
 | Abstained | 0 |
 | Absent | 0 |
 | Opposed | -1 |
-| Amended in Opposition | -2 |
+| Amended | -2 |
 
 The score for a vote is:
 
