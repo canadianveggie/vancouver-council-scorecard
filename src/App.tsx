@@ -68,7 +68,7 @@ function ScoreTable({ selectedCategories }: { selectedCategories: string[] }) {
               if (!party) return null
               const expanded = expandedParties.has(party.id)
               return (
-                <th className="party-header" colSpan={expanded ? Math.max(partyScore.councillors.length, 1) : 1} key={party.id} scope="colgroup">
+                <th className={`party-header ${expanded && partyScore.councillors.length > 1 ? 'party-header-expanded' : ''}`} colSpan={expanded ? Math.max(partyScore.councillors.length, 1) : 1} key={party.id} scope="colgroup">
                   <button type="button" onClick={() => toggle(setExpandedParties, party.id)} aria-expanded={expanded}>
                     <span className="column-plus" aria-hidden="true">{expanded ? '−' : '+'}</span>
                     <span>{party.name}</span>
@@ -81,17 +81,17 @@ function ScoreTable({ selectedCategories }: { selectedCategories: string[] }) {
             {results.parties.flatMap((partyScore) => expandedParties.has(partyScore.partyId)
               ? partyScore.councillors.map((councillor) => {
                 const metadata = data.councillors.find((item) => item.id === councillor.councillorId)
-                return metadata ? <th className="councillor-header" key={metadata.id} scope="col">{metadata.name}</th> : null
+                return metadata ? <th className="councillor-header" key={metadata.id} scope="col"><span className="councillor-name">{metadata.name}</span></th> : null
               })
-              : [])}
+              : <th className="party-subheader-spacer" key={`${partyScore.partyId}-spacer`} aria-hidden="true" />)}
           </tr>
         </thead>
         <tbody>
           <tr className="overall-table-row">
             <th scope="row">Overall grade</th>
             {results.parties.flatMap((partyScore) => expandedParties.has(partyScore.partyId)
-              ? partyScore.councillors.map((councillor) => <td className={gradeClass(councillor.letterGrade)} key={councillor.councillorId}>{formatOverallGrade(councillor)}</td>)
-              : <td className={gradeClass(partyScore.letterGrade)} key={partyScore.partyId}>{formatOverallGrade(partyScore)}</td>)}
+              ? partyScore.councillors.map((councillor) => <td className={`${gradeClass(councillor.letterGrade)} councillor-cell`} key={councillor.councillorId}>{formatOverallGrade(councillor)}</td>)
+              : <td className={`${gradeClass(partyScore.letterGrade)} party-cell`} key={partyScore.partyId}>{formatOverallGrade(partyScore)}</td>)}
           </tr>
           {selectedCategories.flatMap((category) => {
             const expanded = expandedCategories.has(category)
@@ -121,13 +121,13 @@ function ScoreTable({ selectedCategories }: { selectedCategories: string[] }) {
                       const councillorCategory = categoryResult(councillor, category)
                       const value = row.voteId ? councillorCategory?.voteScores[row.voteId] ?? null : null
                       const recordedVote = row.voteId ? data.votes.find((vote) => vote.id === row.voteId)?.councillorVotes[councillor.councillorId] : null
-                      return <td className={row.voteId ? scoreClass(value) : gradeClass(councillorCategory?.letterGrade ?? 'D')} key={councillor.councillorId}>
+                      return <td className={`${row.voteId ? scoreClass(value) : gradeClass(councillorCategory?.letterGrade ?? 'D')} councillor-cell`} key={councillor.councillorId}>
                         {row.voteId ? <><span>{formatScore(value)}</span><small className="recorded-vote">{recordedVote ?? 'Not eligible'}</small></> : councillorCategory?.letterGrade}
                       </td>
                     })
                   }
                   const value = row.voteId ? partyCategory?.voteScores[row.voteId] ?? null : null
-                  return <td className={row.voteId ? scoreClass(value) : gradeClass(partyCategory?.letterGrade ?? 'D')} key={partyScore.partyId}>{row.voteId ? formatScore(value) : partyCategory?.letterGrade}</td>
+                  return <td className={`${row.voteId ? scoreClass(value) : gradeClass(partyCategory?.letterGrade ?? 'D')} party-cell`} key={partyScore.partyId}>{row.voteId ? formatScore(value) : partyCategory?.letterGrade}</td>
                 })}
               </tr>
             ))
