@@ -30,6 +30,13 @@ function gradeClass(grade: string) {
   return `grade-${grade.toLowerCase().replace('+', '-plus')}`
 }
 
+function partyGroupClasses(index: number, count: number) {
+  return [
+    index === 0 ? 'party-group-start' : '',
+    index === count - 1 ? 'party-group-end' : '',
+  ].filter(Boolean).join(' ')
+}
+
 function selectedVotesForCategory(category: string) {
   return data.votes.filter((vote) => vote.category === category)
 }
@@ -79,9 +86,9 @@ function ScoreTable({ selectedCategories }: { selectedCategories: string[] }) {
           </tr>
           <tr>
             {results.parties.flatMap((partyScore) => expandedParties.has(partyScore.partyId)
-              ? partyScore.councillors.map((councillor) => {
+              ? partyScore.councillors.map((councillor, index) => {
                 const metadata = data.councillors.find((item) => item.id === councillor.councillorId)
-                return metadata ? <th className="councillor-header" key={metadata.id} scope="col"><span className="councillor-name">{metadata.name}</span></th> : null
+                return metadata ? <th className={`councillor-header ${partyGroupClasses(index, partyScore.councillors.length)}`} key={metadata.id} scope="col"><span className="councillor-name">{metadata.name}</span></th> : null
               })
               : <th className="party-subheader-spacer" key={`${partyScore.partyId}-spacer`} aria-hidden="true" />)}
           </tr>
@@ -90,8 +97,8 @@ function ScoreTable({ selectedCategories }: { selectedCategories: string[] }) {
           <tr className="overall-table-row">
             <th scope="row">Overall grade</th>
             {results.parties.flatMap((partyScore) => expandedParties.has(partyScore.partyId)
-              ? partyScore.councillors.map((councillor) => <td className={`${gradeClass(councillor.letterGrade)} councillor-cell`} key={councillor.councillorId}>{formatOverallGrade(councillor)}</td>)
-              : <td className={`${gradeClass(partyScore.letterGrade)} party-cell`} key={partyScore.partyId}>{formatOverallGrade(partyScore)}</td>)}
+              ? partyScore.councillors.map((councillor, index) => <td className={`${gradeClass(councillor.letterGrade)} councillor-cell ${partyGroupClasses(index, partyScore.councillors.length)}`} key={councillor.councillorId}>{formatOverallGrade(councillor)}</td>)
+              : <td className={`${gradeClass(partyScore.letterGrade)} party-cell party-group-start party-group-end`} key={partyScore.partyId}>{formatOverallGrade(partyScore)}</td>)}
           </tr>
           {selectedCategories.flatMap((category) => {
             const expanded = expandedCategories.has(category)
@@ -117,17 +124,17 @@ function ScoreTable({ selectedCategories }: { selectedCategories: string[] }) {
                 {results.parties.flatMap((partyScore) => {
                   const partyCategory = categoryResult(partyScore, category)
                   if (expandedParties.has(partyScore.partyId)) {
-                    return partyScore.councillors.map((councillor) => {
+                    return partyScore.councillors.map((councillor, index) => {
                       const councillorCategory = categoryResult(councillor, category)
                       const value = row.voteId ? councillorCategory?.voteScores[row.voteId] ?? null : null
                       const recordedVote = row.voteId ? data.votes.find((vote) => vote.id === row.voteId)?.councillorVotes[councillor.councillorId] : null
-                      return <td className={`${row.voteId ? scoreClass(value) : gradeClass(councillorCategory?.letterGrade ?? 'D')} councillor-cell`} key={councillor.councillorId}>
+                      return <td className={`${row.voteId ? scoreClass(value) : gradeClass(councillorCategory?.letterGrade ?? 'D')} councillor-cell ${partyGroupClasses(index, partyScore.councillors.length)}`} key={councillor.councillorId}>
                         {row.voteId ? <><span>{formatScore(value)}</span><small className="recorded-vote">{recordedVote ?? 'Not eligible'}</small></> : councillorCategory?.letterGrade}
                       </td>
                     })
                   }
                   const value = row.voteId ? partyCategory?.voteScores[row.voteId] ?? null : null
-                  return <td className={`${row.voteId ? scoreClass(value) : gradeClass(partyCategory?.letterGrade ?? 'D')} party-cell`} key={partyScore.partyId}>{row.voteId ? formatScore(value) : partyCategory?.letterGrade}</td>
+                  return <td className={`${row.voteId ? scoreClass(value) : gradeClass(partyCategory?.letterGrade ?? 'D')} party-cell party-group-start party-group-end`} key={partyScore.partyId}>{row.voteId ? formatScore(value) : partyCategory?.letterGrade}</td>
                 })}
               </tr>
             ))

@@ -66,6 +66,7 @@ h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1; }
 .score-table thead th { background: var(--blue); color: #fff; font-family: 'DM Mono', monospace; font-size: .65rem; font-weight: 400; letter-spacing: .04em; text-transform: uppercase; }
 .score-table thead tr:first-child th { border-right: 1px solid #ffffff30; height: 58px; }
 .score-table .party-header { min-width: var(--party-column-width); padding: 0; }
+.score-table .party-header { box-shadow: inset -2px 0 #ffffff38; }
 .score-table .party-header-expanded { background: var(--blue-dark); }
 .score-table .party-header button { align-items: center; background: transparent; border: 0; color: inherit; cursor: pointer; display: flex; gap: .55rem; height: 100%; justify-content: center; padding: .75rem 1rem; width: 100%; }
 .score-table .party-header button:hover, .score-table .party-header button:focus-visible { background: #ffffff16; outline: 2px solid var(--blue-light); outline-offset: -4px; }
@@ -83,6 +84,12 @@ h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1; }
 .party-subheader-spacer { background: var(--paper) !important; border-bottom: 0 !important; }
 .party-cell { min-width: var(--party-column-width) !important; width: var(--party-column-width); }
 .councillor-cell { min-width: var(--councillor-column-width) !important; width: var(--councillor-column-width); }
+.party-group-start { box-shadow: inset 2px 0 #17231f2e; }
+.party-group-end { box-shadow: inset -2px 0 #17231f2e; }
+.party-group-start.party-group-end { box-shadow: inset 2px 0 #17231f2e, inset -2px 0 #17231f2e; }
+.councillor-header.party-group-start { box-shadow: inset 2px 0 var(--blue), inset 0 -3px 0 var(--blue); }
+.councillor-header.party-group-end { box-shadow: inset -2px 0 var(--blue), inset 0 -3px 0 var(--blue); }
+.councillor-header.party-group-start.party-group-end { box-shadow: inset 2px 0 var(--blue), inset -2px 0 var(--blue), inset 0 -3px 0 var(--blue); }
 .overall-table-row { background: var(--blue); color: #fff; }
 .overall-table-row th { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; padding: 1rem; text-align: left; }
 .overall-table-row td { font-family: 'DM Mono', monospace; font-size: .72rem; height: 58px; }
