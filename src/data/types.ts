@@ -24,7 +24,7 @@ export type RecordedVote =
 export type Vote = {
   id: string
   title: string
-  categories: string[]
+  category: string
   date: string
   desiredOutcome: Outcome
   outcome: Outcome

@@ -45,9 +45,7 @@ async function summarize() {
 
   const headers = Object.keys(rows[0])
   const councillors = headers.filter((header) => !metadataHeaders.has(header))
-  const categories = rows.flatMap((row) =>
-    row.Category.split(',').map((category) => category.trim()).filter(Boolean),
-  )
+  const categories = rows.map((row) => row.Category.trim()).filter(Boolean)
   const outcomes = countBy(rows, (row) => row.Outcome.trim() || 'Blank')
   const years = countBy(rows, (row) => row.Date.slice(0, 4) || 'Unknown')
   const categoryTotals = countBy(categories, (category) => category)

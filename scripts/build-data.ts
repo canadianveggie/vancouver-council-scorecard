@@ -124,18 +124,11 @@ function parseOutcome(value: string, rowNumber: number): Outcome {
   return desired
 }
 
-function parseCategories(value: string, rowNumber: number) {
-  const rowCategories = value.split(',').map((category) => category.trim()).filter(Boolean)
-  if (rowCategories.length === 0) {
-    error(`Row ${rowNumber}: Category is required`)
+function parseCategory(value: string, rowNumber: number) {
+  if (value && !categories.includes(value)) {
+    error(`Row ${rowNumber}: unknown category ${value}`)
   }
-
-  for (const category of rowCategories) {
-    if (!categories.includes(category)) {
-      error(`Row ${rowNumber}: unknown category ${category}`)
-    }
-  }
-  return [...new Set(rowCategories)]
+  return value
 }
 
 function parseDate(value: string, rowNumber: number) {
@@ -209,7 +202,7 @@ async function build() {
     return {
       id,
       title,
-      categories: parseCategories(required(row, 'Category', rowNumber), rowNumber),
+      category: parseCategory(required(row, 'Category', rowNumber), rowNumber),
       date: parseDate(required(row, 'Date', rowNumber), rowNumber),
       desiredOutcome: parseOutcome(required(row, 'Desired', rowNumber), rowNumber),
       outcome: parseOutcome(required(row, 'Outcome', rowNumber)),

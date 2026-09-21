@@ -18,7 +18,7 @@ const votes: Vote[] = [
   {
     id: 'housing-1',
     title: 'Build homes',
-    categories: ['Housing'],
+    category: 'Housing',
     date: '2024-01-01',
     desiredOutcome: 'pass',
     outcome: 'Passed',
@@ -30,7 +30,7 @@ const votes: Vote[] = [
   {
     id: 'safety-1',
     title: 'Improve safety',
-    categories: ['Safety'],
+    category: 'Safety',
     date: '2024-02-01',
     desiredOutcome: 'fail',
     outcome: 'Failed',

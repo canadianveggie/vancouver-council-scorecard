@@ -185,7 +185,7 @@ produce normalized records similar to:
 ```json
 {
   "id": "housing-001",
-  "category": ["Housing"],
+  "category": "Housing",
   "title": "Example vote",
   "date": "2024-05-01",
   "desiredOutcome": "pass",

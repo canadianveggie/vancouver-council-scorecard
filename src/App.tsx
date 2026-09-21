@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import scorecardJson from '../data/generated/scorecard.json'
-import type { Party, ScorecardData, Vote } from './data/types'
+import type { ScorecardData } from './data/types'
 import { calculateScores, type CouncillorScore, type PartyScore } from './scoring/score'
 
 const data = scorecardJson as ScorecardData
@@ -25,7 +25,7 @@ function scoreClass(score: number | null) {
 }
 
 function selectedVotesForCategory(category: string) {
-  return data.votes.filter((vote) => vote.categories.includes(category))
+  return data.votes.filter((vote) => vote.category === category)
 }
 
 function scoreForVote(score: PartyScore | CouncillorScore, voteId: string) {
@@ -44,67 +44,6 @@ function scoreForCategory(
     return categoryResults.get(category)?.parties.find((party) => party.partyId === score.partyId)?.total ?? 0
   }
   return categoryResults.get(category)?.councillors.find((councillor) => councillor.councillorId === score.councillorId)?.total ?? 0
-}
-
-function TableRow({
-  party,
-  score,
-  expanded,
-  expandedCategories,
-  categoryResults,
-  selectedCategories,
-  onToggleParty,
-}: {
-  party: Party
-  score: PartyScore
-  expanded: boolean
-  expandedCategories: Set<string>
-  categoryResults: Map<string, ReturnType<typeof calculateScores>>
-  selectedCategories: string[]
-  onToggleParty: () => void
-}) {
-  const councillorById = new Map(data.councillors.map((councillor) => [councillor.id, councillor]))
-
-  function renderScoreCells(rowScore: PartyScore | CouncillorScore) {
-    return selectedCategories
-      .flatMap((category) => {
-        if (!expandedCategories.has(category)) {
-          const value = scoreForCategory(rowScore, category, categoryResults)
-          return [<td className={scoreClass(value)} key={category}>{formatScore(value)}</td>]
-        }
-
-        return selectedVotesForCategory(category).map((vote) => {
-          const value = scoreForVote(rowScore, vote.id)
-          return <td className={scoreClass(value)} key={`${category}-${vote.id}`}>{formatScore(value)}</td>
-        })
-      })
-  }
-
-  return (
-    <>
-      <tr className={`party-table-row ${expanded ? 'is-expanded' : ''}`}>
-        <th scope="row">
-          <button className="row-expander" type="button" onClick={onToggleParty} aria-expanded={expanded}>
-            <span className="table-plus" aria-hidden="true">{expanded ? '−' : '+'}</span>
-            <span>{party.name}</span>
-          </button>
-        </th>
-        {renderScoreCells(score)}
-        <td className={`total-cell ${scoreClass(score.total)}`}>{formatScore(score.total)}</td>
-      </tr>
-      {expanded && score.councillorScores.map((councillorScore) => {
-        const councillor = councillorById.get(councillorScore.councillorId)
-        if (!councillor) return null
-        return (
-          <tr className="councillor-table-row" key={councillor.id}>
-            <th scope="row"><span className="councillor-indent">{councillor.name}</span></th>
-            {renderScoreCells(councillorScore)}
-            <td className={`total-cell ${scoreClass(councillorScore.total)}`}>{formatScore(councillorScore.total)}</td>
-          </tr>
-        )
-      })}
-    </>
-  )
 }
 
 function ScoreTable({ selectedCategories }: { selectedCategories: string[] }) {
@@ -153,54 +92,74 @@ function ScoreTable({ selectedCategories }: { selectedCategories: string[] }) {
       <table className="score-table">
         <thead>
           <tr>
-            <th className="party-header" rowSpan={2} scope="col">Party</th>
-            {selectedCategories.map((category) => {
-              const votes = selectedVotesForCategory(category)
-              const expanded = expandedCategories.has(category)
+            <th className="category-header" rowSpan={2} scope="col">Category</th>
+            {sortedPartyScores.map((partyScore) => {
+              const party = data.parties.find((item) => item.id === partyScore.partyId)
+              if (!party) return null
+              const expanded = expandedParties.has(party.id)
               return (
                 <th
-                  className="category-header"
-                  colSpan={expanded ? votes.length : 1}
-                  key={category}
-                  rowSpan={expanded ? 1 : 2}
+                  className="party-header"
+                  colSpan={expanded ? partyScore.councillorScores.length : 1}
+                  key={party.id}
                   scope="colgroup"
                 >
-                  <button type="button" onClick={() => toggleCategory(category)} aria-expanded={expanded} title={categoryDescriptions[category]}>
+                  <button type="button" onClick={() => toggleParty(party.id)} aria-expanded={expanded}>
                     <span className="column-plus" aria-hidden="true">{expanded ? '−' : '+'}</span>
-                    <span>{category}</span>
+                    <span>{party.name}</span>
                   </button>
                 </th>
               )
             })}
-            <th className="total-header" rowSpan={2} scope="col">Total</th>
+            <th className="total-header" rowSpan={2} scope="col">All parties</th>
           </tr>
           <tr>
-            {selectedCategories.flatMap((category) => expandedCategories.has(category)
-              ? selectedVotesForCategory(category).map((vote) => (
-                <th className="vote-header" key={`${category}-${vote.id}`} scope="col" title={vote.outcomeDetails ?? vote.title}>
-                  <span>{vote.title}</span>
-                  <small>{vote.date}</small>
-                </th>
-              ))
+            {sortedPartyScores.flatMap((partyScore) => expandedParties.has(partyScore.partyId)
+              ? partyScore.councillorScores.map((councillorScore) => {
+                const councillor = data.councillors.find((item) => item.id === councillorScore.councillorId)
+                return councillor ? <th className="councillor-header" key={councillor.id} scope="col">{councillor.name}</th> : null
+              })
               : [])}
           </tr>
         </thead>
         <tbody>
-          {sortedPartyScores.map((partyScore) => {
-            const party = data.parties.find((item) => item.id === partyScore.partyId)
-            if (!party) return null
-            return (
-              <TableRow
-                key={party.id}
-                party={party}
-                score={partyScore}
-                expanded={expandedParties.has(party.id)}
-                expandedCategories={expandedCategories}
-                categoryResults={categoryResults}
-                selectedCategories={selectedCategories}
-                onToggleParty={() => toggleParty(party.id)}
-              />
-            )
+          <tr className="overall-table-row">
+            <th scope="row">Overall grade</th>
+            {sortedPartyScores.flatMap((partyScore) => expandedParties.has(partyScore.partyId)
+              ? partyScore.councillorScores.map((councillor) => <td className={scoreClass(councillor.total)} key={councillor.councillorId}>{formatScore(councillor.total)}</td>)
+              : <td className={scoreClass(partyScore.total)} key={partyScore.partyId}>{formatScore(partyScore.total)}</td>)}
+            <td className={`total-cell ${scoreClass(overallResults.councillors.reduce((total, councillor) => total + councillor.total, 0))}`}>
+              {formatScore(overallResults.councillors.reduce((total, councillor) => total + councillor.total, 0))}
+            </td>
+          </tr>
+          {selectedCategories.flatMap((category) => {
+            const expanded = expandedCategories.has(category)
+            const rows = [
+              { id: category, label: category, date: categoryDescriptions[category], voteId: null },
+              ...(expanded ? selectedVotesForCategory(category).map((vote) => ({ id: vote.id, label: vote.title, date: vote.date, voteId: vote.id })) : []),
+            ]
+            return rows.map((row, index) => (
+              <tr className={`category-table-row ${expanded ? 'vote-table-row' : ''}`} key={`${category}-${row.id}`}>
+                <th scope="row">
+                  {index === 0 && (
+                    <button className="row-expander category-expander" type="button" onClick={() => toggleCategory(category)} aria-expanded={expanded} title={categoryDescriptions[category]}>
+                      <span className="table-plus" aria-hidden="true">{expanded ? '−' : '+'}</span>
+                      <span>{category}</span>
+                    </button>
+                  )}
+                  {index > 0 && <span className="vote-row-label">{row.label}<small>{row.date}</small></span>}
+                </th>
+                {sortedPartyScores.flatMap((partyScore) => expandedParties.has(partyScore.partyId)
+                  ? partyScore.councillorScores.map((councillor) => {
+                    const value = row.voteId ? scoreForVote(councillor, row.voteId) : scoreForCategory(councillor, category, categoryResults)
+                    return <td className={scoreClass(value)} key={councillor.councillorId}>{formatScore(value)}</td>
+                  })
+                  : <td className={scoreClass(row.voteId ? scoreForVote(partyScore, row.voteId) : scoreForCategory(partyScore, category, categoryResults))} key={partyScore.partyId}>{formatScore(row.voteId ? scoreForVote(partyScore, row.voteId) : scoreForCategory(partyScore, category, categoryResults))}</td>)}
+                <td className={`total-cell ${scoreClass(row.voteId ? data.councillors.reduce((total, councillor) => total + (scoreForVote(overallResults.councillors.find((score) => score.councillorId === councillor.id)!, row.voteId!) ?? 0), 0) : (categoryResults.get(category)?.councillors.reduce((total, councillor) => total + councillor.total, 0) ?? 0))}`}>
+                  {formatScore(row.voteId ? data.councillors.reduce((total, councillor) => total + (scoreForVote(overallResults.councillors.find((score) => score.councillorId === councillor.id)!, row.voteId!) ?? 0), 0) : (categoryResults.get(category)?.councillors.reduce((total, councillor) => total + councillor.total, 0) ?? 0))}
+                </td>
+              </tr>
+            ))
           })}
         </tbody>
       </table>
@@ -270,7 +229,7 @@ function App() {
         <div className="section-heading">
           <div>
             <p className="eyebrow">Your report card</p>
-            <h2 id="preview-heading">{selectedCategories.length ? 'Party voting totals' : 'The results will appear here'}</h2>
+            <h2 id="preview-heading">{selectedCategories.length ? 'Voting report card' : 'The results will appear here'}</h2>
           </div>
           <span className="status-pill">{selectedCategories.length ? `${selectedCategories.join(' · ')}` : 'Waiting for priorities'}</span>
         </div>

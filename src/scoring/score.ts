@@ -47,7 +47,7 @@ export function scoreRecordedVote(
 
 function selectedVotes(votes: Vote[], selectedCategories: string[]) {
   return votes.filter((vote) =>
-    vote.categories.some((category) => selectedCategories.includes(category)),
+    selectedCategories.includes(vote.category),
   )
 }
 

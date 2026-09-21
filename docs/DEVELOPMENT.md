@@ -40,7 +40,7 @@ Acceptance criteria:
 Goal: make the current files reliable inputs for the application.
 
 - [x] Define the canonical schema for parties, councillors, and votes.
-- [x] Decide to keep vote categories comma-separated in the CSV and split them
+- [x] Validate one category per vote in the CSV
   into an array during transformation.
 - [x] Add stable vote IDs to the source data or generate deterministic IDs.
 - [x] Define the accepted vote-value vocabulary.
