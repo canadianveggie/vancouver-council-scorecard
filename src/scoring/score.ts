@@ -1,54 +1,104 @@
-import type {
-  Councillor,
-  Outcome,
-  Party,
-  RecordedVote,
-  Vote,
-} from '../data/types'
+import type { Councillor, Outcome, Party, RecordedVote, Vote } from '../data/types'
 
 const baseValues: Record<RecordedVote, number> = {
-  Proposed: 2,
-  Supported: 1,
-  Abstained: 0,
-  Absent: 0,
-  Opposed: -1,
-  Amended: -2,
+  Proposed: 2, Supported: 1, Abstained: 0, Absent: 0, Opposed: -1, Amended: -2,
+}
+
+export type CategoryGrade = {
+  category: string
+  letterGrade: string
+  voteScores: Record<string, number | null>
 }
 
 export type CouncillorScore = {
   councillorId: string
   partyId: string
-  total: number
-  applicableVotes: number
-  absentVotes: number
-  voteScores: Record<string, number | null>
+  letterGrade: string
+  categoryGrades: CategoryGrade[]
 }
 
 export type PartyScore = {
   partyId: string
-  total: number
-  councillorScores: CouncillorScore[]
+  letterGrade: string
+  councillors: CouncillorScore[]
+  categoryGrades: CategoryGrade[]
 }
 
 export type ScorecardResults = {
-  selectedVoteIds: string[]
-  councillors: CouncillorScore[]
   parties: PartyScore[]
 }
 
-export function scoreRecordedVote(
-  recordedVote: RecordedVote,
-  desiredOutcome: Outcome,
-  weight: number,
-) {
+export function scoreRecordedVote(recordedVote: RecordedVote, desiredOutcome: Outcome, weight: number) {
   const direction = desiredOutcome === 'pass' ? 1 : -1
   return baseValues[recordedVote] * direction * weight
 }
 
-function selectedVotes(votes: Vote[], selectedCategories: string[]) {
-  return votes.filter((vote) =>
-    selectedCategories.includes(vote.category),
-  )
+export function gradeForScore(averageScore: number) {
+  if (averageScore > 1) return 'A+'
+  if (averageScore > 0.9) return 'A'
+  if (averageScore > 0.75) return 'B'
+  if (averageScore > 0.4) return 'C'
+  if (averageScore >= 0) return 'D'
+  return 'F'
+}
+
+function gradeForVoteScores(voteScores: Record<string, number | null>, votes: Vote[]) {
+  const scoredVotes = votes.filter((vote) => voteScores[vote.id] !== null && voteScores[vote.id] !== undefined)
+  const total = scoredVotes.reduce((sum, vote) => sum + voteScores[vote.id]!, 0)
+  const totalWeight = scoredVotes.reduce((sum, vote) => sum + vote.weight, 0)
+  return gradeForScore(totalWeight === 0 ? 0 : total / totalWeight)
+}
+
+function categoryGrade(category: string, votes: Vote[], voteScores: Record<string, number | null>): CategoryGrade {
+  return { category, letterGrade: gradeForVoteScores(voteScores, votes), voteScores }
+}
+
+function scoreForVote(councillorId: string, vote: Vote) {
+  const recordedVote = vote.councillorVotes[councillorId]
+  return recordedVote ? scoreRecordedVote(recordedVote, vote.desiredOutcome, vote.weight) : null
+}
+
+function scoresForCouncillor(councillor: Councillor, votes: Vote[], categories: string[]): CouncillorScore {
+  const categoryGrades = categories.map((category) => {
+    const categoryVotes = votes.filter((vote) => vote.category === category)
+    const voteScores = Object.fromEntries(categoryVotes.map((vote) => [vote.id, scoreForVote(councillor.id, vote)]))
+    return categoryGrade(category, categoryVotes, voteScores)
+  })
+  const voteScores = Object.fromEntries(votes.map((vote) => [vote.id, scoreForVote(councillor.id, vote)]))
+
+  return {
+    councillorId: councillor.id,
+    partyId: councillor.partyId,
+    letterGrade: gradeForVoteScores(voteScores, votes),
+    categoryGrades,
+  }
+}
+
+function averageVoteScores(councillors: CouncillorScore[], vote: Vote) {
+  const scores = councillors.map((councillor) => {
+    const category = councillor.categoryGrades.find((result) => result.category === vote.category)
+    return category?.voteScores[vote.id]
+  })
+  const recordedScores = scores.filter((score): score is number => score !== null && score !== undefined)
+  return recordedScores.length === 0
+    ? null
+    : recordedScores.reduce((sum, score) => sum + score, 0) / recordedScores.length
+}
+
+function scoresForParty(councillors: CouncillorScore[], votes: Vote[], categories: string[], partyId: string): PartyScore {
+  const categoryGrades = categories.map((category) => {
+    const categoryVotes = votes.filter((vote) => vote.category === category)
+    const voteScores = Object.fromEntries(categoryVotes.map((vote) => [vote.id, averageVoteScores(councillors, vote)]))
+    return categoryGrade(category, categoryVotes, voteScores)
+  })
+  const voteScores = Object.fromEntries(votes.map((vote) => [vote.id, averageVoteScores(councillors, vote)]))
+
+  return {
+    partyId,
+    letterGrade: gradeForVoteScores(voteScores, votes),
+    councillors,
+    categoryGrades,
+  }
 }
 
 export function calculateScores(
@@ -57,51 +107,15 @@ export function calculateScores(
   parties: Party[],
   selectedCategories: string[],
 ): ScorecardResults {
-  const selected = selectedVotes(votes, selectedCategories)
-  const councillorScores = councillors.map((councillor) => {
-    const voteScores: Record<string, number | null> = {}
-    let total = 0
-    let applicableVotes = 0
-    let absentVotes = 0
-
-    for (const vote of selected) {
-      const recordedVote = vote.councillorVotes[councillor.id]
-      if (recordedVote === null || recordedVote === undefined) {
-        voteScores[vote.id] = null
-        continue
-      }
-
-      const score = scoreRecordedVote(recordedVote, vote.desiredOutcome, vote.weight)
-      voteScores[vote.id] = score
-      total += score
-      applicableVotes += 1
-      if (recordedVote === 'Absent') absentVotes += 1
-    }
-
-    return {
-      councillorId: councillor.id,
-      partyId: councillor.partyId,
-      total,
-      applicableVotes,
-      absentVotes,
-      voteScores,
-    }
-  })
-
-  const partyScores = parties.map((party) => {
-    const partyCouncillors = councillorScores.filter(
-      (councillor) => councillor.partyId === party.id,
-    )
-    return {
-      partyId: party.id,
-      total: partyCouncillors.reduce((total, councillor) => total + councillor.total, 0),
-      councillorScores: partyCouncillors,
-    }
-  })
+  const selectedVotes = votes.filter((vote) => selectedCategories.includes(vote.category))
+  const councillorScores = councillors.map((councillor) => scoresForCouncillor(councillor, selectedVotes, selectedCategories))
 
   return {
-    selectedVoteIds: selected.map((vote) => vote.id),
-    councillors: councillorScores,
-    parties: partyScores,
+    parties: parties.map((party) => scoresForParty(
+      councillorScores.filter((councillor) => councillor.partyId === party.id),
+      selectedVotes,
+      selectedCategories,
+      party.id,
+    )),
   }
 }

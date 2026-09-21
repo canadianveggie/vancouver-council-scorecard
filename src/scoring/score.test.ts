@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import type { Councillor, Party, Vote } from '../data/types'
-import { calculateScores, scoreRecordedVote } from './score'
+import { calculateScores, gradeForScore, scoreRecordedVote } from './score'
 
 const parties: Party[] = [
   { id: 'abc', name: 'ABC', logo: null },
@@ -47,26 +47,24 @@ test('scores a vote using direction and weight', () => {
   assert.equal(scoreRecordedVote('Amended', 'fail', 1), 2)
 })
 
-test('calculates councillor and party totals', () => {
+test('calculates councillor and party grades', () => {
   const results = calculateScores(votes, councillors, parties, ['Housing', 'Safety'])
-  const alice = results.councillors.find((councillor) => councillor.councillorId === 'alice')!
-  const bob = results.councillors.find((councillor) => councillor.councillorId === 'bob')!
-  const newcomer = results.councillors.find((councillor) => councillor.councillorId === 'newcomer')!
+  const abc = results.parties.find((party) => party.partyId === 'abc')!
+  const alice = abc.councillors.find((councillor) => councillor.councillorId === 'alice')!
+  const bob = results.parties.find((party) => party.partyId === 'green')!.councillors[0]
+  const newcomer = abc.councillors.find((councillor) => councillor.councillorId === 'newcomer')!
 
-  assert.equal(alice.total, 3)
-  assert.equal(alice.applicableVotes, 2)
-  assert.equal(bob.total, -2)
-  assert.equal(bob.absentVotes, 1)
-  assert.equal(newcomer.total, 0)
-  assert.equal(newcomer.applicableVotes, 1)
-  assert.equal(newcomer.voteScores['housing-1'], null)
+  assert.equal(alice.letterGrade, 'A')
+  assert.equal(alice.categoryGrades.find((category) => category.category === 'Housing')?.letterGrade, 'A+')
+  assert.equal(alice.categoryGrades.find((category) => category.category === 'Housing')?.voteScores['housing-1'], 4)
+  assert.equal(bob.letterGrade, 'F')
+  assert.equal(newcomer.categoryGrades.find((category) => category.category === 'Housing')?.voteScores['housing-1'], null)
 
-  assert.equal(results.parties.find((party) => party.partyId === 'abc')?.total, 3)
-  assert.equal(results.parties.find((party) => party.partyId === 'green')?.total, -2)
+  assert.equal(abc.letterGrade, 'A+')
+  assert.equal(results.parties.find((party) => party.partyId === 'green')?.letterGrade, 'F')
 })
 
 test('only includes votes from selected categories', () => {
   const results = calculateScores(votes, councillors, parties, ['Housing'])
-  assert.deepEqual(results.selectedVoteIds, ['housing-1'])
-  assert.equal(results.councillors.find((councillor) => councillor.councillorId === 'alice')?.total, 4)
+  assert.equal(results.parties.find((party) => party.partyId === 'abc')?.councillors[0].letterGrade, 'A+')
 })
