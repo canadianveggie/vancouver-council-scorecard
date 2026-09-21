@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { Dispatch, SetStateAction } from 'react'
 import scorecardJson from '../data/generated/scorecard.json'
-import type { ScorecardData } from './data/types'
+import type { ScorecardData, Vote } from './data/types'
 import { calculateScores, type CategoryGrade, type CouncillorScore, type PartyScore } from './scoring/score'
 
 const data = scorecardJson as ScorecardData
@@ -52,7 +52,17 @@ function formatOverallGrade(score: PartyScore | CouncillorScore) {
 function ScoreTable({ selectedCategories }: { selectedCategories: string[] }) {
   const [expandedParties, setExpandedParties] = useState<Set<string>>(new Set())
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set())
+  const [selectedVote, setSelectedVote] = useState<Vote | null>(null)
   const results = calculateScores(data.votes, data.councillors, data.parties, selectedCategories)
+
+  useEffect(() => {
+    if (!selectedVote) return
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key === 'Escape') setSelectedVote(null)
+    }
+    document.addEventListener('keydown', closeOnEscape)
+    return () => document.removeEventListener('keydown', closeOnEscape)
+  }, [selectedVote])
 
   function toggle(setter: Dispatch<SetStateAction<Set<string>>>, value: string) {
     setter((current) => {
@@ -114,10 +124,11 @@ function ScoreTable({ selectedCategories }: { selectedCategories: string[] }) {
                     </button>
                   ) : (
                     <span className="vote-row-label">
-                      <span>{votes[index - 1].title}</span>
-                      <small>{votes[index - 1].date} · Desired outcome: {votes[index - 1].desiredOutcome}</small>
-                      {votes[index - 1].outcomeDetails && <small>{votes[index - 1].outcomeDetails}</small>}
-                      {votes[index - 1].sourceUrl && <a className="source-link" href={votes[index - 1].sourceUrl ?? undefined} target="_blank" rel="noreferrer">Source ↗</a>}
+                      <span className="vote-title-row">
+                        <span>{votes[index - 1].title}</span>
+                        <button className="vote-info-button" type="button" aria-label={`More information about ${votes[index - 1].title}`} onClick={() => setSelectedVote(votes[index - 1])}>i</button>
+                      </span>
+                      <small>Desired outcome: {votes[index - 1].desiredOutcome}</small>
                     </span>
                   )}
                 </th>
@@ -141,6 +152,30 @@ function ScoreTable({ selectedCategories }: { selectedCategories: string[] }) {
           })}
         </tbody>
       </table>
+      {selectedVote && (
+        <div className="vote-modal-backdrop" role="presentation" onMouseDown={() => setSelectedVote(null)}>
+          <div className="vote-modal" role="dialog" aria-modal="true" aria-labelledby="vote-modal-title" onMouseDown={(event) => event.stopPropagation()}>
+            <div className="vote-modal-heading">
+              <div>
+                <p className="eyebrow">Vote details</p>
+                <h3 id="vote-modal-title">{selectedVote.title}</h3>
+              </div>
+              <button className="vote-modal-close" type="button" aria-label="Close vote details" autoFocus onClick={() => setSelectedVote(null)}>×</button>
+            </div>
+            <dl className="vote-metadata">
+              <div><dt>Date</dt><dd>{selectedVote.date}</dd></div>
+              <div><dt>Outcome</dt><dd>{selectedVote.outcome}</dd></div>
+            </dl>
+            {selectedVote.outcomeDetails && <p className="vote-modal-details">{selectedVote.outcomeDetails}</p>}
+            {(selectedVote.newsUrl || selectedVote.sourceUrl) && (
+              <div className="vote-modal-links">
+                {selectedVote.newsUrl && <a className="source-link" href={selectedVote.newsUrl} target="_blank" rel="noreferrer">News coverage ↗</a>}
+                {selectedVote.sourceUrl && <a className="source-link" href={selectedVote.sourceUrl} target="_blank" rel="noreferrer">Council minutes ↗</a>}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
