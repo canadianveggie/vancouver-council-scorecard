@@ -115,7 +115,7 @@ async function main() {
       output.push({
         ...blank,
         'Row Type': 'CouncilVote',
-        Vote: `${councilVote['Meeting ID'] ?? ''}:${councilVote['Vote Number'] ?? ''}`,
+        Vote: `${councilVote['Meeting ID'] ?? ''} : ${councilVote['Vote Number'] ?? ''}`,
         Description: councilVote['Agenda Description'] ?? '',
         Date: councilVote['Vote Date'] ?? '',
         Decision: councilVote['Vote Decision'] ?? '',

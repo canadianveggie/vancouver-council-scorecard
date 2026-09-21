@@ -11,7 +11,7 @@ export type Councillor = {
   notes?: string | null
 }
 
-export type DesiredOutcome = 'pass' | 'fail'
+export type Outcome = 'pass' | 'fail'
 
 export type RecordedVote =
   | 'Proposed'
@@ -19,17 +19,18 @@ export type RecordedVote =
   | 'Abstained'
   | 'Absent'
   | 'Opposed'
-  | 'Amended in Opposition'
+  | 'Amended'
 
 export type Vote = {
   id: string
   title: string
   categories: string[]
   date: string
-  desiredOutcome: DesiredOutcome
-  outcome: string
+  desiredOutcome: Outcome
+  outcome: Outcome
   outcomeDetails: string | null
   weight: number
+  newsUrl: string | null
   sourceUrl: string | null
   councillorVotes: Record<string, RecordedVote | null>
 }

@@ -3,7 +3,7 @@ import path from 'node:path'
 import { parse } from 'csv-parse/sync'
 import type {
   Councillor,
-  DesiredOutcome,
+  Outcome,
   Party,
   RecordedVote,
   ScorecardData,
@@ -28,14 +28,14 @@ const metadataHeaders = [
   'Outcome Details',
   'Weight',
   'News Link',
+  'Meeting Minutes',
   'meetingID',
   'voteIDs',
 ]
 const categories = [
   'Housing',
   'Transportation',
-  'Cycling',
-  'Climate',
+  'Environment',
   'Safety',
   'Affordability',
   'Governance',
@@ -46,7 +46,7 @@ const acceptedVoteValues = new Set<RecordedVote>([
   'Abstained',
   'Absent',
   'Opposed',
-  'Amended in Opposition',
+  'Amended',
 ])
 const datePattern = new RegExp(`^(\\d{4}-\\d{2}-\\d{2})$`)
 
@@ -115,10 +115,10 @@ function parseWeight(value: string, rowNumber: number): 1 | 2 | 3 {
   return weight as 1 | 2 | 3
 }
 
-function parseDesiredOutcome(value: string, rowNumber: number): DesiredOutcome {
+function parseOutcome(value: string, rowNumber: number): Outcome {
   const desired = value.toLowerCase()
   if (desired !== 'pass' && desired !== 'fail') {
-    error(`Row ${rowNumber}: Desired must be Pass or Fail`)
+    error(`Row ${rowNumber}: Outcome must be Pass or Fail`)
     return 'pass'
   }
   return desired
@@ -211,11 +211,12 @@ async function build() {
       title,
       categories: parseCategories(required(row, 'Category', rowNumber), rowNumber),
       date: parseDate(required(row, 'Date', rowNumber), rowNumber),
-      desiredOutcome: parseDesiredOutcome(required(row, 'Desired', rowNumber), rowNumber),
-      outcome: required(row, 'Outcome', rowNumber),
+      desiredOutcome: parseOutcome(required(row, 'Desired', rowNumber), rowNumber),
+      outcome: parseOutcome(required(row, 'Outcome', rowNumber)),
       outcomeDetails: row['Outcome Details']?.trim() || null,
       weight: parseWeight(row.Weight?.trim() ?? '', rowNumber),
-      sourceUrl: parseSourceUrl(row['News Link']?.trim() ?? '', rowNumber),
+      newsUrl: parseSourceUrl(row['News Link']?.trim() ?? '', rowNumber),
+      sourceUrl: parseSourceUrl(row['Meeting Minutes']?.trim() ?? '', rowNumber),
       councillorVotes,
     }
   })

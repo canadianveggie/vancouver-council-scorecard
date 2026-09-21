@@ -44,7 +44,7 @@ const votes: Vote[] = [
 test('scores a vote using direction and weight', () => {
   assert.equal(scoreRecordedVote('Proposed', 'pass', 2), 4)
   assert.equal(scoreRecordedVote('Supported', 'fail', 3), -3)
-  assert.equal(scoreRecordedVote('Amended in Opposition', 'fail', 1), 2)
+  assert.equal(scoreRecordedVote('Amended', 'fail', 1), 2)
 })
 
 test('calculates councillor and party totals', () => {

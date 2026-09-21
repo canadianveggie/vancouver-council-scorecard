@@ -1,6 +1,6 @@
 import type {
   Councillor,
-  DesiredOutcome,
+  Outcome,
   Party,
   RecordedVote,
   Vote,
@@ -12,7 +12,7 @@ const baseValues: Record<RecordedVote, number> = {
   Abstained: 0,
   Absent: 0,
   Opposed: -1,
-  'Amended in Opposition': -2,
+  Amended: -2,
 }
 
 export type CouncillorScore = {
@@ -38,7 +38,7 @@ export type ScorecardResults = {
 
 export function scoreRecordedVote(
   recordedVote: RecordedVote,
-  desiredOutcome: DesiredOutcome,
+  desiredOutcome: Outcome,
   weight: number,
 ) {
   const direction = desiredOutcome === 'pass' ? 1 : -1

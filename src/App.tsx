@@ -8,8 +8,7 @@ const data = scorecardJson as ScorecardData
 const categoryDescriptions: Record<string, string> = {
   Housing: 'Homes, density, and neighbourhood plans.',
   Transportation: 'How people move around the city.',
-  Cycling: 'Safe and convenient cycling infrastructure.',
-  Climate: 'Climate action and resilient communities.',
+  Environment: 'Climate action and resilient communities.',
   Safety: 'Vision Zero and public safety.',
   Affordability: 'The cost of living in Vancouver.',
   Governance: 'Integrity, accountability, and democracy.',

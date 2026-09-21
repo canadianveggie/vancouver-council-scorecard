@@ -51,7 +51,7 @@ async function summarize() {
   const outcomes = countBy(rows, (row) => row.Outcome.trim() || 'Blank')
   const years = countBy(rows, (row) => row.Date.slice(0, 4) || 'Unknown')
   const categoryTotals = countBy(categories, (category) => category)
-  const recordedVoteValues = new Set(['Supported', 'Opposed', 'Abstained', 'Absent', 'Proposed', 'Amended in Opposition'])
+  const recordedVoteValues = new Set(['Supported', 'Opposed', 'Abstained', 'Absent', 'Proposed', 'Amended'])
   const knownVotes = rows.flatMap((row) => councillors.map((name) => row[name]?.trim()).filter(Boolean))
   const votesByValue = countBy(knownVotes, (value) => value)
   const missingSources = rows.filter((row) => !row['News Link']?.trim()).length
