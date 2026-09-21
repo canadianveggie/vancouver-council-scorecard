@@ -106,7 +106,7 @@ Goal: let a user select categories and understand the results.
 
 - [x] Build category selection limited to three categories.
 - [x] Display party rows as the primary result.
-- [ ] Sort parties by score or grade, with the sorting rule documented.
+- [x] Sort parties by average score descending, then party ID alphabetically.
 - [x] Expand a party to show councillor records.
 - [x] Expand a category to show its votes.
 - [x] Display vote-level scores and recorded vote labels.
@@ -125,14 +125,19 @@ Acceptance criteria:
 
 Goal: choose a grade model based on observed data rather than assumptions.
 
-- [ ] Generate a report showing raw score ranges by category and party.
-- [ ] Compare fixed grade thresholds with normalized scores.
-- [ ] Test the effect of scoring absences as zero.
-- [ ] Test party totals against averaged and normalized alternatives.
-- [ ] Inspect the effect of party size and councillor turnover.
-- [ ] Choose initial fixed grade thresholds.
-- [ ] Document the grade calculation in the design document.
-- [ ] Add tests for grade boundaries.
+- [x] Generate a report showing raw score ranges by category and party.
+- [x] Compare fixed grade thresholds with normalized scores.
+- [x] Test the effect of scoring absences as zero.
+- [x] Test party totals against averaged and normalized alternatives.
+- [x] Inspect the effect of party size and councillor turnover.
+- [x] Choose initial fixed grade thresholds.
+- [x] Document the grade calculation in the design document.
+- [x] Add tests for grade boundaries.
+
+Run `pnpm grades:report` to reproduce the Phase 5 comparison against the current
+generated dataset. The initial UI uses weighted average score rather than party
+rank: each recorded vote contributes its score divided by the total applicable
+vote weight. `Absent` remains an applicable zero, while `null` is excluded.
 
 This phase should not block the first interactive prototype. Raw scores can be
 shown while the grade model is being evaluated.

@@ -68,3 +68,18 @@ test('only includes votes from selected categories', () => {
   const results = calculateScores(votes, councillors, parties, ['Housing'])
   assert.equal(results.parties.find((party) => party.partyId === 'abc')?.councillors[0].letterGrade, 'A+')
 })
+
+test('ranks parties and councillors by average score', () => {
+  const results = calculateScores(votes, councillors, parties, ['Housing', 'Safety'])
+  assert.deepEqual(results.parties.map((party) => party.partyId), ['abc', 'green'])
+  assert.deepEqual(results.parties[0].councillors.map((councillor) => councillor.councillorId), ['alice', 'newcomer'])
+})
+
+test('uses documented fixed grade boundaries', () => {
+  assert.equal(gradeForScore(1.01), 'A+')
+  assert.equal(gradeForScore(1), 'A')
+  assert.equal(gradeForScore(0.9), 'B')
+  assert.equal(gradeForScore(0.75), 'C')
+  assert.equal(gradeForScore(0.4), 'D')
+  assert.equal(gradeForScore(-0.01), 'F')
+})

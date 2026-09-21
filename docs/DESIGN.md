@@ -127,10 +127,13 @@ The report card will show a colour-coded grade for:
 - each selected category;
 - individual councillors when a party row is expanded.
 
-The first implementation will calculate raw scores and expose enough data to
-compare possible fixed grade ranges. Fixed grade thresholds are preferred over
-ranking parties against one another, but the thresholds are **TBD** until the
-real data is available.
+The initial implementation uses weighted average score for display and sorting.
+Fixed thresholds are: A+ above `1`, A above `0.9`, B above `0.75`, C above
+`0.4`, D from `0` through `0.4`, and F below `0`. The report card also shows
+the raw weighted total and applicable-vote count so readers can see the sample
+size behind each grade. `pnpm grades:report` compares relative normalization,
+absence exclusion, and party-size effects; relative normalization is not used
+because it makes a party's grade depend on who else is included.
 
 ## User customization and sharing
 

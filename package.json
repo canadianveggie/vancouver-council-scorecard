@@ -9,6 +9,7 @@
     "data:build": "tsx scripts/build-data.ts",
     "data:validate": "tsx scripts/build-data.ts",
     "data:summary": "tsx scripts/summarize-votes.ts",
+    "grades:report": "tsx scripts/analyze-grades.ts",
     "agenda:speakers": "tsx scripts/scrape-meeting-speakers.ts",
     "council:metadata": "pnpm council:filter && tsx scripts/extract-council-vote-metadata.ts",
     "council:match": "tsx scripts/match-scorecard-votes.ts",

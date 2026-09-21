@@ -40,12 +40,12 @@ function categoryResult(score: PartyScore | CouncillorScore, category: string): 
 
 function formatCategoryGrade(result: CategoryGrade | undefined) {
   if (!result) return 'D'
-  const scoredVotes = data.votes.filter((vote) => result.voteScores[vote.id] !== null && result.voteScores[vote.id] !== undefined)
-  const total = scoredVotes.reduce((sum, vote) => sum + result.voteScores[vote.id]!, 0)
-  const totalWeight = scoredVotes.reduce((sum, vote) => sum + vote.weight, 0)
-  const average = totalWeight === 0 ? 0 : total / totalWeight
-  const formattedAverage = average.toFixed(2).replace(/\.?(0+)$/, '')
-  return `${result.letterGrade} (${formattedAverage})`
+  const formattedAverage = result.averageScore.toFixed(2).replace(/\.?(0+)$/, '')
+  return `${result.letterGrade} (${formattedAverage}) · ${formatScore(result.totalScore)} / ${result.applicableVoteCount} votes`
+}
+
+function formatOverallGrade(score: PartyScore | CouncillorScore) {
+  return `${score.letterGrade} · ${formatScore(score.totalScore)} / ${score.applicableVoteCount} votes`
 }
 
 function ScoreTable({ selectedCategories }: { selectedCategories: string[] }) {
@@ -65,6 +65,7 @@ function ScoreTable({ selectedCategories }: { selectedCategories: string[] }) {
   return (
     <div className="score-table-shell">
       <table className="score-table">
+        <caption className="sr-only">Voting report card. Parties are sorted by average score, highest first.</caption>
         <thead>
           <tr>
             <th className="category-header" rowSpan={2} scope="col">Category</th>
@@ -95,8 +96,8 @@ function ScoreTable({ selectedCategories }: { selectedCategories: string[] }) {
           <tr className="overall-table-row">
             <th scope="row">Overall grade</th>
             {results.parties.flatMap((partyScore) => expandedParties.has(partyScore.partyId)
-              ? partyScore.councillors.map((councillor) => <td className={gradeClass(councillor.letterGrade)} key={councillor.councillorId}>{councillor.letterGrade}</td>)
-              : <td className={gradeClass(partyScore.letterGrade)} key={partyScore.partyId}>{partyScore.letterGrade}</td>)}
+              ? partyScore.councillors.map((councillor) => <td className={gradeClass(councillor.letterGrade)} key={councillor.councillorId}>{formatOverallGrade(councillor)}</td>)
+              : <td className={gradeClass(partyScore.letterGrade)} key={partyScore.partyId}>{formatOverallGrade(partyScore)}</td>)}
           </tr>
           {selectedCategories.flatMap((category) => {
             const expanded = expandedCategories.has(category)
@@ -107,11 +108,16 @@ function ScoreTable({ selectedCategories }: { selectedCategories: string[] }) {
                 <th scope="row">
                   {index === 0 ? (
                     <button className="row-expander category-expander" type="button" onClick={() => toggle(setExpandedCategories, category)} aria-expanded={expanded} title={categoryDescriptions[category]}>
-                      <span className="table-plus" aria-hidden="true">{expanded ? '−' : '+'}</span>
+                      <span className="table-plus" aria-hidden="true">{expanded ? '-' : '+'}</span>
                       <span>{category}</span>
                     </button>
                   ) : (
-                    <span className="vote-row-label">{votes[index - 1].title}<small>{votes[index - 1].date}</small></span>
+                    <span className="vote-row-label">
+                      <span>{votes[index - 1].title}</span>
+                      <small>{votes[index - 1].date} · Desired outcome: {votes[index - 1].desiredOutcome}</small>
+                      {votes[index - 1].outcomeDetails && <small>{votes[index - 1].outcomeDetails}</small>}
+                      {votes[index - 1].sourceUrl && <a className="source-link" href={votes[index - 1].sourceUrl ?? undefined} target="_blank" rel="noreferrer">Source ↗</a>}
+                    </span>
                   )}
                 </th>
                 {results.parties.flatMap((partyScore) => {
@@ -120,7 +126,10 @@ function ScoreTable({ selectedCategories }: { selectedCategories: string[] }) {
                     return partyScore.councillors.map((councillor) => {
                       const councillorCategory = categoryResult(councillor, category)
                       const value = row.voteId ? councillorCategory?.voteScores[row.voteId] ?? null : null
-                      return <td className={row.voteId ? scoreClass(value) : gradeClass(councillorCategory?.letterGrade ?? 'D')} key={councillor.councillorId}>{row.voteId ? formatScore(value) : expanded ? formatCategoryGrade(councillorCategory) : councillorCategory?.letterGrade}</td>
+                      const recordedVote = row.voteId ? data.votes.find((vote) => vote.id === row.voteId)?.councillorVotes[councillor.councillorId] : null
+                      return <td className={row.voteId ? scoreClass(value) : gradeClass(councillorCategory?.letterGrade ?? 'D')} key={councillor.councillorId}>
+                        {row.voteId ? <><span>{formatScore(value)}</span><small className="recorded-vote">{recordedVote ?? 'Not eligible'}</small></> : expanded ? formatCategoryGrade(councillorCategory) : councillorCategory?.letterGrade}
+                      </td>
                     })
                   }
                   const value = row.voteId ? partyCategory?.voteScores[row.voteId] ?? null : null
@@ -181,7 +190,6 @@ function App() {
       <section className="preview-panel" aria-labelledby="preview-heading">
         <div className="section-heading">
           <div><p className="eyebrow">Your report card</p><h2 id="preview-heading">{selectedCategories.length ? 'Voting report card' : 'The results will appear here'}</h2></div>
-          <span className="status-pill">{selectedCategories.length ? selectedCategories.join(' · ') : 'Waiting for priorities'}</span>
         </div>
         {!selectedCategories.length ? <div className="empty-state"><div className="empty-mark" aria-hidden="true">✦</div><p>Choose at least one category to compare the voting records.</p></div> : <ScoreTable selectedCategories={selectedCategories} />}
       </section>
