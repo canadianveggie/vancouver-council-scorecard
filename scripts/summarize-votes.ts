@@ -16,6 +16,8 @@ const metadataHeaders = new Set([
   'Outcome Details',
   'Weight',
   'News Link',
+  'Meeting Minutes',
+  'voteId',
 ])
 
 function countBy<T>(items: T[], getKey: (item: T) => string) {
@@ -86,11 +88,13 @@ async function summarize() {
 
   const councillorRows = councillors.map((name) => {
     const values = rows.map((row) => row[name]?.trim()).filter(Boolean)
+    const proposed = values.filter((value) => value === 'Proposed').length
     const supported = values.filter((value) => value === 'Supported').length
     const opposed = values.filter((value) => value === 'Opposed').length
+    const amended = values.filter((value) => value === 'Amended').length
     const absent = values.filter((value) => value === 'Absent').length
     const recorded = values.filter((value) => recordedVoteValues.has(value)).length
-    return [name, `${recorded} recorded; ${supported} supported; ${opposed} opposed; ${absent} absent`] as [string, string]
+    return [name, `${recorded} recorded; ${proposed} proposed; ${supported} supported; ${opposed} opposed; ${amended} amended; ${absent} absent`] as [string, string]
   })
   printTable('Councillor coverage and positions', councillorRows)
 }
