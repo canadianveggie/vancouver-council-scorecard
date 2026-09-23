@@ -1,31 +1,19 @@
 Row Type,Vote,Description,Date,Outcome,NewsLink,Ken Sim,Brian Montague,Sarah Kirby-Yung,Mike Klassen,Lenny Zhou,Peter Meiszner,Lisa Dominato,Rebecca Bligh,Pete Fry,Adriane Carr,Christine Boyle,Lucy Maloney,Sean Orr
 Vote,2023 operating budget,"Sets the city's tax, policing, service, and infrastructure priorities for the year.",2023-02-28,Pass,https://www.cbc.ca/news/canada/british-columbia/vancouver-budget-property-tax-increase-1.6763926,Supported,Supported,Supported,Supported,Supported,Supported,Supported,Supported,Supported,Supported,Opposed,,
-CouncilVote,9054,1. 2023 Draft Operating Budget - Amendment to the amendment,2023-02-28,,,In Opposition,In Opposition,In Opposition,In Opposition,In Opposition,In Opposition,In Opposition,In Opposition,In Favour,In Favour,In Favour,,
-CouncilVote,9055,1. 2023 Draft Operating Budget - Amendment - Clause 4,2023-02-28,,,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Opposition,In Favour,In Favour,,
-CouncilVote,9056,1. 2023 Draft Operating Budget - Amendment - Clause 13(d)(f),2023-02-28,,,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,,
-CouncilVote,9057,1. 2023 Draft Operating Budget - Amendment - Clause 13 (a)(b)(c)(e)(g)(h),2023-02-28,,,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Opposition,In Opposition,In Opposition,,
-CouncilVote,9058,"1. 2023 Draft Operating Budget - Amendment - Clause 1 to 3, 5 to 12 and 14 to 20",2023-02-28,,,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,,
-CouncilVote,9059,1. 2023 Draft Operating Budget - Amendment,2023-02-28,,,In Opposition,In Opposition,In Opposition,In Opposition,In Opposition,In Opposition,In Opposition,In Opposition,In Favour,In Favour,In Favour,,
-CouncilVote,9060,1. 2023 Draft Operating Budget - Amendment,2023-02-28,,,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,,
-CouncilVote,9061,1. 2023 Draft Operating Budget - Amendment,2023-02-28,,,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,,
 CouncilVote,9062,1. 2023 Draft Operating Budget - Final motion - Clause A(a),2023-02-28,,,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Opposition,In Opposition,In Opposition,,
 CouncilVote,9063,1. 2023 Draft Operating Budget - Final motion - Clause A(b)(c)(d)(e)(f),2023-02-28,,,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Opposition,,
 CouncilVote,9064,1. 2023 Draft Operating Budget - Final motion - Clause B to J,2023-02-28,,,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,,
 ,,,,,,,,,,,,,,,,,,
-Vote,2025 operating budget,"Sets the city's tax rate, service levels, police funding, and capital priorities for 2025.",2024-12-10,Pass,https://globalnews.ca/news/10910982/vancouver-budget-3-9-tax-hike/,,,,,,,,,,,,,
-CouncilVote,10377,R1f) 2025 Draft Operating and Capital Budget - Amendment,2024-12-10,,,In Opposition,In Opposition,In Opposition,In Opposition,In Opposition,In Favour,Absent,Absent,In Favour,In Favour,Absent,,
-CouncilVote,10378,R1f) 2025 Draft Operating and Capital Budget - Amendment,2024-12-10,,,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,Absent,In Favour,In Favour,In Favour,Absent,,
-CouncilVote,10379,R1f) 2025 Draft Operating and Capital Budget - Amendment,2024-12-10,,,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,Absent,In Favour,In Opposition,In Opposition,Absent,,
-CouncilVote,10380,R1f) A(d) 2025 Draft Operating and Capital Budget,2024-12-10,,,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,Absent,In Favour,Abstain,Abstain,Absent,,
-CouncilVote,10381,R1f) K(THAT) 2025 Draft Operating and Capital Budget,2024-12-10,,,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,Absent,In Favour,In Opposition,In Opposition,Absent,,
-CouncilVote,10382,R1f) K (FURTHER THAT) 2025 Draft Operating and Capital Budget,2024-12-10,,,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,Absent,In Favour,Abstain,In Favour,Absent,,
+Vote,2025 operating budget,"Sets the city's tax rate, service levels, police funding, and capital priorities for 2025.",2024-12-10,Pass,https://globalnews.ca/news/10910982/vancouver-budget-3-9-tax-hike/,Supported,Supported,Supported,Supported,Supported,Supported,Absent,Supported,Supported,Supported,Absent,,
 CouncilVote,10383,"R1f) A (THAT, a, b, c, and FURTHER THAT), and B through J - 2025 Draft Operating and Capital Budget",2024-12-10,,,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,Absent,In Favour,In Favour,In Favour,Absent,,
 ,,,,,,,,,,,,,,,,,,
-Vote,2026 Zero-Means-Zero Budget,Directs staff to prepare a 2026 budget with no property-tax increase.,2025-11-25,Pass,https://globalnews.ca/news/11469811/vancouver-council-property-tax-freeze/,Proposed,Supported,Supported,Supported,Supported,Supported,Supported,Opposed,Opposed,,,Opposed,Opposed
+Vote,2026 Zero-Means-Zero Budget,Directs staff to prepare a 2026 budget with no property-tax increase.,2025-11-25,Pass,https://globalnews.ca/news/11469811/vancouver-council-property-tax-freeze/,Supported,Supported,Supported,Supported,Supported,Supported,Supported,Opposed,Opposed,,,Opposed,Opposed
+CouncilVote,11164,Proposed 2026 Operating and Capital Budget - Final motion as amended,2025-11-25,,,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Opposition,In Opposition,,,In Opposition,In Opposition
 ,,,,,,,,,,,,,,,,,,
-Vote,Low-income transit pass,"$25 a month transit pass for those earning less than $40,000.",2026-05-13,Pass,https://www.cbc.ca/news/canada/british-columbia/low-income-transit-pass-vancouver-9.7222730,Supported,Supported,Supported,Absent,Amended,Absent,Supported,Supported,Supported,,,Supported,Proposed
+Vote,Low-income transit pass,"Calls for a $25-a-month transit pass for people earning less than $40,000.",2026-06-03,Pass,https://www.cbc.ca/news/canada/british-columbia/low-income-transit-pass-vancouver-9.7222730,Supported,Supported,Supported,Absent,Supported,Absent,Supported,Supported,Supported,,,Supported,Supported
 ,,,,,,,,,,,,,,,,,,
-Vote,Empty Homes Tax Frozen,The plan was to increase the tax from 3% to 5% but ABC proposed freezing it.,2023-05-10,Pass,https://www.cbc.ca/news/canada/british-columbia/vancouver-empty-home-tax-increases-1.6839316,Supported,Supported,Supported,Supported,Supported,Supported,Proposed,Absent,Opposed,Opposed,Amended,,
+Vote,Empty Homes Tax Frozen,Keeps the Empty Homes Tax at 3% rather than increasing it to 5%.,2023-05-10,Pass,https://www.cbc.ca/news/canada/british-columbia/vancouver-empty-home-tax-increases-1.6839316,Absent,Supported,Supported,Supported,Supported,Supported,Supported,Supported,Supported,Supported,Supported,,
+CouncilVote,9263,2. REPORT BACK - Increasing the Empty Homes Tax to Five Percent and Improving Compliance,2023-05-10,,,Absent,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,,
 ,,,,,,,,,,,,,,,,,,
 Vote,Accelerated Climate Measures,"Direction to staff to accelerate climate measures, including supporting active transportation, EVs, heat pumps",2023-06-14,Pass,https://vancouver.ca/news-calendar/new-actions-help-vancouver-get-closer-to-its-climate-goals.aspx,Supported,Supported,Supported,Supported,Supported,Supported,Supported,Supported,Supported,Supported,Supported,,
 CouncilVote,9330,R1. Climate Emergency Action Plan - Additional and Accelerated Climate Measures,2023-06-14,,,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,,
@@ -223,4 +211,19 @@ CouncilVote,11255,Motion 7. Supporting a Fare-Free Transit Route Pilot in Vancou
 ,,,,,,,,,,,,,,,,,,
 Vote,Right-turn-on-red safety study,Directs staff to study restricting right turns on red where they conflict with pedestrian and cycling movements.,2025-12-10,Pass,https://council.vancouver.ca/20251210/documents/cfscA4.pdf,Supported,Supported,Supported,Supported,Supported,Supported,Supported,Absent,Supported,Absent,,Supported,Supported
 CouncilVote,11256,Motion 8. Assessing Motor Vehicle Speeding Risk at Vancouver's Most Dangerous Intersections,2025-12-10,,,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,Absent,In Favour,,,In Favour,In Favour
+,,,,,,,,,,,,,,,,,,
+Vote,Single-use cup fee repeal,"Repeals Vancouver's 25-cent single-use beverage cup fee, reducing a direct cost for customers.",2023-02-15,Pass,https://vancouver.citynews.ca/2023/02/15/vancouver-cup-fee-repealed-2/,,Supported,Supported,Supported,Supported,Supported,Absent,Supported,Supported,Supported,Supported,,
+CouncilVote,9044,Repealing Vancouver's Single-Use Beverage Cup Fee - Final Motion Clause 3,2023-02-15,,,Declared Conflict,In Favour,In Favour,In Favour,In Favour,In Favour,Absent,In Favour,In Favour,In Favour,In Favour,,
+,,,,,,,,,,,,,,,,,,
+Vote,Middle-income housing on City land,Directs the City to use its land and housing office to deliver more middle-income housing.,2023-11-15,Pass,https://vancouver.ca/news-calendar/city-council-business-nov-13-2023.aspx,Supported,Supported,Supported,Supported,Supported,Absent,Supported,Absent,Supported,Supported,Supported,,
+CouncilVote,9655,A5. Delivering a New Supply of Middle-Income Housing in Vancouver,2023-11-15,,,In Favour,In Favour,In Favour,In Favour,In Favour,Absent,In Favour,Absent,In Favour,In Favour,In Favour,,
+,,,,,,,,,,,,,,,,,,
+Vote,Tenant Advocacy Office,Establishes a Tenant Advocacy Office to help renters understand and exercise their rights.,2025-06-04,Fail,https://vancouver.citynews.ca/2025/06/04/renter-office-motion-rejected/,Absent,Opposed,Opposed,Absent,Opposed,Opposed,Absent,Supported,Supported,,,Supported,Supported
+CouncilVote,10761,Motion 2. Protecting Renters by Establishing a Tenant Advocacy Office,2025-06-04,,,Absent,In Opposition,In Opposition,Absent,In Opposition,In Opposition,Absent,In Favour,In Favour,,,In Favour,In Favour
+,,,,,,,,,,,,,,,,,,
+Vote,Jumpstarting rental housing,Calls for measures to restart rental-housing construction and improve project viability during a difficult market.,2025-06-18,Fail,https://vancouver.ca/news-calendar/rental-strata-housing-projects-challenging-market-june-2025.aspx,Opposed,Opposed,Opposed,Opposed,Opposed,Opposed,Opposed,Supported,Supported,,,Supported,Supported
+CouncilVote,10789,Motion 1. Jumpstarting Rental Housing: Bold Action to Boost Rental Housing Construction in Tough Economic Times - Main Motion,2025-06-18,,,In Opposition,In Opposition,In Opposition,In Opposition,In Opposition,In Opposition,In Opposition,In Favour,In Favour,,,In Favour,In Favour
+,,,,,,,,,,,,,,,,,,
+Vote,$10-a-day childcare,Calls on senior governments to recommit to affordable $10-a-day childcare.,2026-02-25,Pass,https://vancouver.ca/news-calendar/roundup-of-business-council-february-23-2026.aspx,Supported,Supported,Supported,Supported,Supported,Supported,Absent,Supported,Absent,,,Supported,Supported
+CouncilVote,11416,Motion6. Recommitting to $10 a Day Childcare,2026-02-25,,,In Favour,In Favour,In Favour,In Favour,In Favour,In Favour,Absent,In Favour,Absent,,,In Favour,In Favour
 ,,,,,,,,,,,,,,,,,,
