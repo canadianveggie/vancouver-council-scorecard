@@ -38,6 +38,7 @@ const categories = [
   'Safety',
   'Affordability',
   'Governance',
+  'Urbanism',
 ]
 const acceptedVoteValues = new Set<RecordedVote>([
   'Proposed',
