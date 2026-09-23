@@ -186,7 +186,9 @@ async function build() {
   const votes: Vote[] = sourceRows.map((row, index) => {
     const rowNumber = index + 2
     const title = required(row, 'Vote', rowNumber)
-    const baseId = slugify(title)
+    const category = parseCategory(required(row, 'Category', rowNumber), rowNumber)
+
+    const baseId = `${category.toLowerCase()}-${slugify(title)}`
     const id = baseId || `vote-${index + 1}`
     if (usedVoteIds.has(id)) error(`Row ${rowNumber}: duplicate generated vote id ${id}`)
     usedVoteIds.add(id)
@@ -201,10 +203,11 @@ async function build() {
     return {
       id,
       title,
-      category: parseCategory(required(row, 'Category', rowNumber), rowNumber),
+      category,
+      description: required(row, 'Description', rowNumber),
       date: parseDate(required(row, 'Date', rowNumber), rowNumber),
       desiredOutcome: parseOutcome(required(row, 'Desired', rowNumber), rowNumber),
-      outcome: parseOutcome(required(row, 'Outcome', rowNumber)),
+      outcome: parseOutcome(required(row, 'Outcome', rowNumber), rowNumber),
       outcomeDetails: row['Outcome Details']?.trim() || null,
       weight: parseWeight(row.Weight?.trim() ?? '', rowNumber),
       newsUrl: parseSourceUrl(row['News Link']?.trim() ?? '', rowNumber),

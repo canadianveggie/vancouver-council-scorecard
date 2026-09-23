@@ -166,7 +166,8 @@ function ScoreTable({ selectedCategories }: { selectedCategories: string[] }) {
               <div><dt>Date</dt><dd>{selectedVote.date}</dd></div>
               <div><dt>Outcome</dt><dd>{selectedVote.outcome}</dd></div>
             </dl>
-            {selectedVote.outcomeDetails && <p className="vote-modal-details">{selectedVote.outcomeDetails}</p>}
+            {selectedVote.description && <p className="vote-modal-paragraph">{selectedVote.description}</p>}
+            {selectedVote.outcomeDetails && <p className="vote-modal-paragraph">{selectedVote.outcomeDetails}</p>}
             {(selectedVote.newsUrl || selectedVote.sourceUrl) && (
               <div className="vote-modal-links">
                 {selectedVote.newsUrl && <a className="source-link" href={selectedVote.newsUrl} target="_blank" rel="noreferrer">News coverage ↗</a>}

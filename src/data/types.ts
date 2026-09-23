@@ -25,6 +25,7 @@ export type Vote = {
   id: string
   title: string
   category: string
+  description: string
   date: string
   desiredOutcome: Outcome
   outcome: Outcome

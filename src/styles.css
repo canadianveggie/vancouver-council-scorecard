@@ -174,7 +174,7 @@ h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1; }
 .vote-metadata div { display: flex; flex-direction: column; gap: .2rem; }
 .vote-metadata dt { color: var(--muted); font-family: 'DM Mono', monospace; font-size: .62rem; text-transform: uppercase; }
 .vote-metadata dd { margin: 0; text-transform: capitalize; }
-.vote-modal-details { line-height: 1.6; margin: 1.25rem 0 0; }
+.vote-modal-paragraph { line-height: 1.6; margin: 1.25rem 0 0; }
 .vote-modal-links { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; }
 .footer { border-top: 1px solid var(--line); color: var(--muted); display: flex; font-family: 'DM Mono', monospace; font-size: .65rem; justify-content: space-between; padding: 1.5rem 0 2rem; text-transform: uppercase; }
 
