@@ -9,7 +9,7 @@ When gathering data for votes, follow these general principles:
 * Desired: Defaults to 'pass' until overritten
 * Outcome Detail: 'pass'/'fail' depending on the vote result. If there are several amendments leading to multiple votes, it can be left blank for manual entering.
 * Weight: Defaults to 1 until overritten
-* News Link: Good soures include CBC, Global, CTV, and Vancouver Sun.
+* News Link: Prefer independent reporting from CBC, Global, CTV, or the Vancouver Sun. Daily Hive is acceptable when stronger coverage is unavailable or less precise. Do not use Vancouver.ca announcements or CityHallWatch as news links.
 * Meeting Minutes: Valid PDF hosted at https://council.vancouver.ca/
 * voteId: referenced in the PDF and in council-votes.csv; use the unique vote ID only
 * For votes from councillors like Pete Fry and Lucy Maloney, run `pnpm council:reconcile` after updating votes.csv with vote ids.
