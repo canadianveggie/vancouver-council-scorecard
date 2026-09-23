@@ -81,5 +81,6 @@ test('uses documented fixed grade boundaries', () => {
   assert.equal(gradeForScore(0.9), 'B')
   assert.equal(gradeForScore(0.75), 'C')
   assert.equal(gradeForScore(0.4), 'D')
-  assert.equal(gradeForScore(-0.01), 'F')
+  assert.equal(gradeForScore(-0.01), 'D')
+  assert.equal(gradeForScore(-0.21), 'F')
 })

@@ -47,7 +47,7 @@ export function gradeForScore(averageScore: number) {
   if (averageScore > 0.9) return 'A'
   if (averageScore > 0.75) return 'B'
   if (averageScore > 0.4) return 'C'
-  if (averageScore >= 0) return 'D'
+  if (averageScore >= -0.2) return 'D'
   return 'F'
 }
 
