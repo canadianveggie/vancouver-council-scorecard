@@ -116,7 +116,7 @@ async function main() {
   }))
 
   const headers = Object.keys(scorecard[0] ?? {})
-  const outputHeaders = [...headers.filter((header) => !['meetingID', 'voteIDs'].includes(header)), 'meetingID', 'voteIDs']
+  const outputHeaders = [...headers.filter((header) => header !== 'voteId'), 'voteId']
   const unmatched: string[] = []
   const ambiguous: Array<{ title: string; candidates: string[] }> = []
   const output = scorecard.map((row) => {
@@ -129,11 +129,10 @@ async function main() {
       .sort((a, b) => b.score - a.score)
     const close = scored.filter(({ item, score }) => score >= (scored[0]?.score ?? 0) - 15 && daysBetween(scorecardDate, item.date) <= 1460)
     const selected = close.slice(0, 20)
-    const meetingIds = [...new Set(selected.map(({ item }) => item['Meeting ID']))]
     const voteIds = [...new Set(selected.map(({ item }) => item['Vote Number']))]
     if (selected.length === 0) unmatched.push(row.Vote)
     if (selected.length > 1) ambiguous.push({ title: row.Vote, candidates: voteIds })
-    return { ...row, meetingID: meetingIds.join('|'), voteIDs: voteIds.join('|') }
+    return { ...row, voteId: voteIds.join('|') }
   })
 
   console.log(`Matched ${output.length - unmatched.length} of ${output.length} scorecard votes`)

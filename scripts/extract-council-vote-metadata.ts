@@ -4,7 +4,6 @@ import { parse } from 'csv-parse/sync'
 
 type RecordRow = Record<string, string>
 type MetadataRow = {
-  meetingId: string
   meetingType: string
   voteDate: string
   voteNumber: string
@@ -34,7 +33,6 @@ async function main() {
   const metadata: MetadataRow[] = []
   for (const row of rows) {
     const item: MetadataRow = {
-      meetingId: row['Meeting ID'] ?? '',
       meetingType: row['Meeting Type'] ?? '',
       voteDate: row['Vote Date'] ?? '',
       voteNumber: row['Vote Number'] ?? '',
@@ -43,7 +41,6 @@ async function main() {
       voteDecision: row.Decision ?? '',
     }
     const key = [
-      item.meetingId,
       item.meetingType,
       item.voteDate,
       item.voteNumber,
@@ -57,13 +54,12 @@ async function main() {
   }
 
   metadata.sort((a, b) =>
-    `${a.voteDate} ${a.voteStartDateTime} ${a.meetingId} ${a.voteNumber}`.localeCompare(
-      `${b.voteDate} ${b.voteStartDateTime} ${b.meetingId} ${b.voteNumber}`,
+    `${a.voteDate} ${a.voteStartDateTime} ${a.voteNumber}`.localeCompare(
+      `${b.voteDate} ${b.voteStartDateTime} ${b.voteNumber}`,
     ),
   )
 
   const headers = [
-    'Meeting ID',
     'Meeting Type',
     'Vote Date',
     'Vote Number',
@@ -72,7 +68,6 @@ async function main() {
     'Vote Decision',
   ]
   const fields: Array<keyof MetadataRow> = [
-    'meetingId',
     'meetingType',
     'voteDate',
     'voteNumber',

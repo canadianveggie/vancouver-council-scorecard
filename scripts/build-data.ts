@@ -29,8 +29,7 @@ const metadataHeaders = [
   'Weight',
   'News Link',
   'Meeting Minutes',
-  'meetingID',
-  'voteIDs',
+  'voteId',
 ]
 const categories = [
   'Housing',

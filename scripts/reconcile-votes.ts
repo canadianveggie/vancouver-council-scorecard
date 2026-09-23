@@ -82,7 +82,7 @@ async function main() {
 
   const recordsByVote = new Map<string, Row[]>()
   for (const row of records) {
-    const key = `${row['Meeting ID']}|${row['Vote Number']}`
+    const key = row['Vote Number']
     const existing = recordsByVote.get(key) ?? []
     existing.push(row)
     recordsByVote.set(key, existing)
@@ -105,17 +105,17 @@ async function main() {
       ...Object.fromEntries(councillors.map((name) => [name, vote[name] ?? ''])),
     })
 
-    const voteNumbers = (vote.voteIDs ?? '').split('|').map((id) => id.trim()).filter(Boolean)
+    const voteNumbers = (vote.voteId ?? '').split('|').map((id) => id.trim()).filter(Boolean)
     const matchedCouncilVotes = voteNumbers.flatMap((number) => councilVotesByNumber.get(number) ?? [])
     if (matchedCouncilVotes.length > 0) matchedVotes += 1
 
     for (const councilVote of matchedCouncilVotes) {
-      const key = `${councilVote['Meeting ID']}|${councilVote['Vote Number']}`
+      const key = councilVote['Vote Number']
       const matchingRecords = recordsByVote.get(key) ?? []
       output.push({
         ...blank,
         'Row Type': 'CouncilVote',
-        Vote: `${councilVote['Meeting ID'] ?? ''} : ${councilVote['Vote Number'] ?? ''}`,
+        Vote: councilVote['Vote Number'] ?? '',
         Description: councilVote['Agenda Description'] ?? '',
         Date: councilVote['Vote Date'] ?? '',
         Decision: councilVote['Vote Decision'] ?? '',
