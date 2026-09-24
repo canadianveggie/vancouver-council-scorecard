@@ -15,8 +15,9 @@
     "council:match": "tsx scripts/match-scorecard-votes.ts",
     "council:reconcile": "tsx scripts/reconcile-votes.ts",
     "prebuild": "pnpm data:build",
-    "build": "tsc -b && vite build",
+    "build": "pnpm exec biome ci && tsc -b && vite build",
     "lint": "biome lint .",
+    "lint:fix": "biome format --write .",
     "test": "node --import tsx --test src/scoring/score.test.ts",
     "preview": "vite preview"
   },
