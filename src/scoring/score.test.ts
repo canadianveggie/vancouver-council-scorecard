@@ -100,6 +100,29 @@ test("only includes votes from selected categories", () => {
 	)
 })
 
+test("applies desired outcome and weight overrides", () => {
+	const results = calculateScores(votes, councillors, parties, ["Housing"], {
+		"housing-1": { desiredOutcome: "fail", weight: 3 },
+	})
+	const alice = results.parties
+		.find((party) => party.partyId === "abc")!
+		.councillors.find((councillor) => councillor.councillorId === "alice")!
+
+	assert.equal(alice.categoryGrades[0].voteScores["housing-1"], -6)
+})
+
+test("ignores overridden votes", () => {
+	const results = calculateScores(votes, councillors, parties, ["Housing"], {
+		"housing-1": { ignored: true },
+	})
+	const alice = results.parties
+		.find((party) => party.partyId === "abc")!
+		.councillors.find((councillor) => councillor.councillorId === "alice")!
+
+	assert.equal(alice.applicableVoteCount, 0)
+	assert.equal(alice.categoryGrades[0].voteScores["housing-1"], undefined)
+})
+
 test("ranks parties and councillors by average score", () => {
 	const results = calculateScores(votes, councillors, parties, [
 		"Housing",

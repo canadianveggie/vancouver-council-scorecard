@@ -1,7 +1,12 @@
 import type { Dispatch, SetStateAction } from "react"
 import { useEffect, useState } from "react"
 import scorecardJson from "../data/generated/scorecard.json"
-import type { ScorecardData, Vote } from "./data/types"
+import type {
+	ScorecardData,
+	Vote,
+	VoteOverride,
+	VoteOverrides,
+} from "./data/types"
 import {
 	type CategoryGrade,
 	type CouncillorScore,
@@ -59,7 +64,114 @@ function formatOverallGrade(score: PartyScore | CouncillorScore) {
 	return score.letterGrade
 }
 
-function ScoreTable({ selectedCategories }: { selectedCategories: string[] }) {
+const overrideOptions: Array<{
+	label: string
+	description: string
+	override: VoteOverride
+}> = [
+	{
+		label: "-3",
+		description: "Want this vote to fail, weight 3",
+		override: { desiredOutcome: "fail", weight: 3 },
+	},
+	{
+		label: "-2",
+		description: "Want this vote to fail, weight 2",
+		override: { desiredOutcome: "fail", weight: 2 },
+	},
+	{
+		label: "👎",
+		description: "Want this vote to fail, weight 1",
+		override: { desiredOutcome: "fail", weight: 1 },
+	},
+	{ label: "🚫", description: "Ignore this vote", override: { ignored: true } },
+	{
+		label: "👍",
+		description: "Want this vote to pass, weight 1",
+		override: { desiredOutcome: "pass", weight: 1 },
+	},
+	{
+		label: "+2",
+		description: "Want this vote to pass, weight 2",
+		override: { desiredOutcome: "pass", weight: 2 },
+	},
+	{
+		label: "+3",
+		description: "Want this vote to pass, weight 3",
+		override: { desiredOutcome: "pass", weight: 3 },
+	},
+]
+
+function overridesMatch(left: VoteOverride, right: VoteOverride) {
+	if ("ignored" in left || "ignored" in right) {
+		return "ignored" in left && "ignored" in right
+	}
+	return (
+		left.desiredOutcome === right.desiredOutcome && left.weight === right.weight
+	)
+}
+
+function VoteOverrideControl({
+	vote,
+	overrides,
+	setOverrides,
+}: {
+	vote: Vote
+	overrides: VoteOverrides
+	setOverrides: Dispatch<SetStateAction<VoteOverrides>>
+}) {
+	const activeOverride = overrides[vote.id]
+	const defaultOverride: VoteOverride = {
+		desiredOutcome: vote.desiredOutcome,
+		weight: vote.weight,
+	}
+
+	function selectOverride(nextOverride: VoteOverride) {
+		setOverrides((current) => {
+			const next = { ...current }
+			if (overridesMatch(nextOverride, defaultOverride)) delete next[vote.id]
+			else next[vote.id] = nextOverride
+			return next
+		})
+	}
+
+	return (
+		<div
+			aria-label={`Set preference for ${vote.title}`}
+			className="vote-override"
+			role="radiogroup"
+		>
+			{overrideOptions.map((option) => {
+				const selected = activeOverride
+					? overridesMatch(activeOverride, option.override)
+					: overridesMatch(defaultOverride, option.override)
+				return (
+					<button
+						aria-pressed={selected}
+						aria-label={option.description}
+						className={`vote-override-option ${selected ? "selected" : ""} ${selected && activeOverride ? "overridden" : ""}`}
+						key={option.label}
+						onClick={() => selectOverride(option.override)}
+						title={option.description}
+						type="button"
+					>
+						{option.label}
+					</button>
+				)
+			})}
+		</div>
+	)
+}
+
+function ScoreTable({
+	selectedCategories,
+	overrides,
+	setOverrides,
+}: {
+	selectedCategories: string[]
+	overrides: VoteOverrides
+	setOverrides: Dispatch<SetStateAction<VoteOverrides>>
+}) {
 	const [expandedParties, setExpandedParties] = useState<Set<string>>(new Set())
 	const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
 		new Set(),
@@ -70,6 +182,7 @@ function ScoreTable({ selectedCategories }: { selectedCategories: string[] }) {
 		data.councillors,
 		data.parties,
 		selectedCategories,
+		overrides,
 	)
 
 	useEffect(() => {
@@ -126,7 +239,7 @@ function ScoreTable({ selectedCategories }: { selectedCategories: string[] }) {
 										aria-expanded={expanded}
 									>
 										<span className="column-plus" aria-hidden="true">
-											{expanded ? "−" : "+"}
+											{expanded ? "-" : "+"}
 										</span>
 										<span>{party.name}</span>
 									</button>
@@ -223,10 +336,12 @@ function ScoreTable({ selectedCategories }: { selectedCategories: string[] }) {
 												>
 													i
 												</button>
+												<VoteOverrideControl
+													vote={votes[index - 1]}
+													overrides={overrides}
+													setOverrides={setOverrides}
+												/>
 											</span>
-											<small>
-												Desired outcome: {votes[index - 1].desiredOutcome}
-											</small>
 										</span>
 									)}
 								</th>
@@ -356,6 +471,7 @@ function ScoreTable({ selectedCategories }: { selectedCategories: string[] }) {
 
 function App() {
 	const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+	const [overrides, setOverrides] = useState<VoteOverrides>({})
 
 	function toggleCategory(category: string) {
 		setSelectedCategories((current) => {
@@ -454,7 +570,11 @@ function App() {
 						<p>Choose at least one category to compare the voting records.</p>
 					</div>
 				) : (
-					<ScoreTable selectedCategories={selectedCategories} />
+					<ScoreTable
+						selectedCategories={selectedCategories}
+						overrides={overrides}
+						setOverrides={setOverrides}
+					/>
 				)}
 			</section>
 

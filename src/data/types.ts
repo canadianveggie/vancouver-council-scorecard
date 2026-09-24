@@ -13,6 +13,17 @@ export type Councillor = {
 
 export type Outcome = "pass" | "fail"
 
+export type VoteOverride =
+	| {
+			desiredOutcome: Outcome
+			weight: number
+	  }
+	| {
+			ignored: true
+	  }
+
+export type VoteOverrides = Record<string, VoteOverride>
+
 export type RecordedVote =
 	| "Proposed"
 	| "Supported"

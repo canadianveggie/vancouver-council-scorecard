@@ -16,6 +16,7 @@
   --party-column-width: 75px;
   --councillor-column-width: 75px;
   --line: #d9ddd3;
+  --vote-override-overridden: #511972;
 }
 
 * { box-sizing: border-box; }
@@ -100,8 +101,15 @@ h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1; }
 .category-expander { padding: 1rem; }
 .vote-table-row { background: #ebece4; }
 .vote-row-label { display: block; padding: .75rem 1rem .75rem 3.1rem; }
-.vote-title-row { align-items: center; display: flex; gap: .6rem; justify-content: space-between; }
-.vote-info-button { align-items: center; background: var(--panel); border: 1px solid var(--blue); border-radius: 50%; color: var(--blue); cursor: pointer; display: inline-flex; flex: 0 0 auto; font-family: 'DM Mono', monospace; font-size: .7rem; height: 20px; justify-content: center; line-height: 1; padding: 0; width: 20px; }
+.vote-title-row { align-items: center; display: flex; gap: .6rem; justify-content: flex-start; }
+.vote-override { align-items: center; display: inline-flex; flex: 0 0 auto; gap: 1px; }
+.vote-override-option { background: var(--panel); border: 1px solid var(--line); color: var(--muted); cursor: pointer; font-family: 'DM Mono', monospace; font-size: .8rem; height: 25px; min-width: 25px; padding: 0 .25rem; }
+.vote-override-option:first-child { border-radius: 4px 0 0 4px; }
+.vote-override-option:last-child { border-radius: 0 4px 4px 0; }
+.vote-override-option:hover, .vote-override-option:focus-visible { border-color: var(--blue); color: var(--blue); outline: 2px solid var(--blue-light); outline-offset: 1px; position: relative; z-index: 1; }
+.vote-override-option.selected { background: var(--blue); border-color: var(--blue); color: #fff; }
+.vote-override-option.selected.overridden { background: var(--vote-override-overridden); border-color: var(--vote-override-overridden); }
+.vote-info-button { align-items: center; background: var(--panel); border: 1px solid var(--blue); border-radius: 50%; color: var(--blue); cursor: pointer; display: inline-flex; flex: 0 0 auto; font-family: 'DM Mono', monospace; font-size: .7rem; height: 20px; justify-content: center; line-height: 1; margin-left: auto; padding: 0; width: 20px; }
 .vote-info-button:hover, .vote-info-button:focus-visible { background: var(--blue); color: #fff; outline: 2px solid var(--blue-light); outline-offset: 2px; }
 .vote-row-label small { color: var(--muted); display: block; font-family: 'DM Mono', monospace; font-size: .6rem; font-weight: 400; margin-top: .2rem; white-space: normal; }
 .vote-row-label .source-link { display: inline-block; margin-top: .35rem; }

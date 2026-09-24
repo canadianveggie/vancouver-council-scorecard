@@ -4,6 +4,7 @@ import type {
 	Party,
 	RecordedVote,
 	Vote,
+	VoteOverrides,
 } from "../data/types"
 
 const baseValues: Record<RecordedVote, number> = {
@@ -106,6 +107,21 @@ function scoreForVote(councillorId: string, vote: Vote) {
 		: null
 }
 
+function votesWithOverrides(votes: Vote[], overrides: VoteOverrides) {
+	return votes.flatMap((vote) => {
+		const override = overrides[vote.id]
+		if (override && "ignored" in override) return []
+		if (!override) return [vote]
+		return [
+			{
+				...vote,
+				desiredOutcome: override.desiredOutcome,
+				weight: override.weight,
+			},
+		]
+	})
+}
+
 function scoresForCouncillor(
 	councillor: Councillor,
 	votes: Vote[],
@@ -187,9 +203,11 @@ export function calculateScores(
 	councillors: Councillor[],
 	parties: Party[],
 	selectedCategories: string[],
+	overrides: VoteOverrides = {},
 ): ScorecardResults {
-	const selectedVotes = votes.filter((vote) =>
-		selectedCategories.includes(vote.category),
+	const selectedVotes = votesWithOverrides(
+		votes.filter((vote) => selectedCategories.includes(vote.category)),
+		overrides,
 	)
 	const councillorScores = councillors.map((councillor) =>
 		scoresForCouncillor(councillor, selectedVotes, selectedCategories),

@@ -27,7 +27,8 @@ GitHub Pages.
 - [x] Add the initial visual tokens: colours, typography, spacing, and grades.
 - [x] Add a local development command and production build command.
 - [x] Add a GitHub Actions workflow for building and deploying to Pages.
-- [ ] Verify the site at the repository’s default Pages URL.
+- [x] Verify the site at the repository’s default Pages URL:
+  https://canadianveggie.github.io/vancouver-council-scorecard/
 
 Acceptance criteria:
 
@@ -146,9 +147,10 @@ shown while the grade model is being evaluated.
 
 Goal: make the report card personal and shareable.
 
-- [ ] Allow users to edit each selected vote's desired outcome.
-- [ ] Allow users to edit each selected vote's weight.
-- [ ] Recalculate results immediately after edits.
+- [x] Allow users to edit each selected vote's desired outcome.
+- [x] Allow users to edit each selected vote's weight.
+- [x] Allow users to ignore a selected vote.
+- [x] Recalculate results immediately after edits.
 - [ ] Add a visible modified-from-defaults indicator.
 - [ ] Add `Reset to Defaults`.
 - [ ] Encode selected categories and vote overrides in the URL.

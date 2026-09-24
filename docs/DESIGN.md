@@ -141,6 +141,7 @@ The defaults for each vote will be stored with the data. Users may adjust:
 
 - the desired outcome;
 - the vote weight;
+- whether a vote is included in their report card;
 - potentially the vote-value mapping, if later testing shows that should be
   configurable.
 
