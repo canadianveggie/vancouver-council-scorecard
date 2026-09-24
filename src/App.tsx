@@ -33,7 +33,9 @@ function formatScore(score: number | null) {
 
 function scoreClass(score: number | null) {
 	if (score === null) return "score-muted"
-	return score >= 0 ? "score-positive" : "score-negative"
+	if (score === 0) return "score-zero"
+	const level = Math.min(6, Math.max(1, Math.ceil(Math.abs(score))))
+	return `${score > 0 ? "score-positive" : "score-negative"} score-level-${level}`
 }
 
 function gradeClass(grade: string) {

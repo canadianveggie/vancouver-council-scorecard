@@ -65,6 +65,7 @@ h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1; }
 .sr-only { height: 1px; margin: -1px; overflow: hidden; position: absolute; width: 1px; clip: rect(0, 0, 0, 0); }
 .score-table { border-collapse: separate; border-spacing: 0; min-width: 811px; width: 100%; }
 .score-table th, .score-table td { border-bottom: 1px solid var(--line); padding: 0; text-align: center; }
+.score-table td { transition: background-color 1.0s ease, color 1.0s ease; }
 .score-table thead th { background: var(--blue); color: #fff; font-family: 'DM Mono', monospace; font-size: .65rem; font-weight: 400; letter-spacing: .04em; text-transform: uppercase; }
 .score-table thead tr:first-child th { border-right: 1px solid #ffffff30; height: 58px; }
 .score-table .party-header { min-width: var(--party-column-width); padding: 0; }
@@ -132,8 +133,22 @@ h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1; }
 .table-plus { color: var(--blue); flex: 0 0 auto; }
 .party-table-row td, .councillor-table-row td { font-family: 'DM Mono', monospace; font-size: .8rem; height: 58px; min-width: 100px; }
 .party-table-row .total-cell, .councillor-table-row .total-cell { background: #f0f1e7; font-size: .95rem; font-weight: 500; }
-.score-positive { background: #b7dda0; color: var(--ink); }
-.score-negative { background: #efb09d; color: var(--ink); }
+.score-positive, .score-negative, .score-zero { color: var(--ink); }
+.score-positive { background: #b7dda0; }
+.score-negative { background: #efb09d; }
+.score-zero { background: #d9ddd3; }
+.score-positive.score-level-1 { background: #dff0cf; }
+.score-positive.score-level-2 { background: #cbe7b7; }
+.score-positive.score-level-3 { background: #b7dda0; }
+.score-positive.score-level-4 { background: #92cd8e; }
+.score-positive.score-level-5 { background: #68be7a; }
+.score-positive.score-level-6 { background: #45b978; }
+.score-negative.score-level-1 { background: #f8d8ce; }
+.score-negative.score-level-2 { background: #f1c2b4; }
+.score-negative.score-level-3 { background: #efb09d; }
+.score-negative.score-level-4 { background: #e79883; }
+.score-negative.score-level-5 { background: #d97867; }
+.score-negative.score-level-6 { background: #c65a4d; }
 .score-muted { color: #9ca69d; }
 .grade-f { background: #e88973; color: var(--ink); }
 .grade-d { background: #f2c57e; color: var(--ink); }
