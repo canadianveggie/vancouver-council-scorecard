@@ -2,26 +2,26 @@
     {
         "id": "abc",
         "name": "ABC",
-        "logo": null
+        "logo": "party/abc.jpg"
     },
     {
         "id": "green",
         "name": "Green",
-        "logo": null
+        "logo": "party/greens.webp"
     },
     {
         "id": "onecity",
         "name": "OneCity",
-        "logo": null
+        "logo": "party/onecity.webp"
     },
     {
         "id": "cope",
         "name": "COPE",
-        "logo": null
+        "logo": "party/cope.webp"
     },
     {
         "id": "vote-vancouver",
         "name": "Vote Vancouver",
-        "logo": null
+        "logo": "party/vote_vancouver.jpg"
     }
 ]

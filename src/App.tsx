@@ -64,6 +64,15 @@ function formatOverallGrade(score: PartyScore | CouncillorScore) {
 	return score.letterGrade
 }
 
+function councillorInitials(name: string) {
+	return name
+		.split(/\s+/)
+		.filter(Boolean)
+		.map((part) => part[0])
+		.join("")
+		.toUpperCase()
+}
+
 const overrideOptions: Array<{
 	label: string
 	description: string
@@ -173,6 +182,9 @@ function ScoreTable({
 	setOverrides: Dispatch<SetStateAction<VoteOverrides>>
 }) {
 	const [expandedParties, setExpandedParties] = useState<Set<string>>(new Set())
+	const [revealedPartyNames, setRevealedPartyNames] = useState<Set<string>>(
+		new Set(),
+	)
 	const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
 		new Set(),
 	)
@@ -206,8 +218,20 @@ function ScoreTable({
 		})
 	}
 
+	function toggleParty(partyId: string) {
+		toggle(setExpandedParties, partyId)
+		setRevealedPartyNames((current) => {
+			const next = new Set(current)
+			if (next.has(partyId)) next.delete(partyId)
+			else next.add(partyId)
+			return next
+		})
+	}
+
 	return (
-		<div className="score-table-shell">
+		<div
+			className={`score-table-shell ${expandedParties.size ? "has-expanded-party" : ""}`}
+		>
 			<table className="score-table">
 				<caption className="sr-only">
 					Voting report card. Parties are sorted by average score, highest
@@ -226,7 +250,7 @@ function ScoreTable({
 							const expanded = expandedParties.has(party.id)
 							return (
 								<th
-									className={`party-header ${expanded && partyScore.councillors.length > 1 ? "party-header-expanded" : ""}`}
+									className={`party-header ${expanded && partyScore.councillors.length > 1 ? "party-header-expanded" : ""} ${revealedPartyNames.has(party.id) ? "party-name-revealed" : ""}`}
 									colSpan={
 										expanded ? Math.max(partyScore.councillors.length, 1) : 1
 									}
@@ -234,14 +258,19 @@ function ScoreTable({
 									scope="colgroup"
 								>
 									<button
+										aria-label={party.name}
 										type="button"
-										onClick={() => toggle(setExpandedParties, party.id)}
+										onClick={() => toggleParty(party.id)}
 										aria-expanded={expanded}
 									>
-										<span className="column-plus" aria-hidden="true">
-											{expanded ? "-" : "+"}
-										</span>
-										<span>{party.name}</span>
+										{party.logo && (
+											<img
+												alt=""
+												className="party-logo"
+												src={`${import.meta.env.BASE_URL}${party.logo}`}
+											/>
+										)}
+										<span className="party-name-label">{party.name}</span>
 									</button>
 								</th>
 							)
@@ -259,8 +288,17 @@ function ScoreTable({
 											className={`councillor-header ${partyGroupClasses(index, partyScore.councillors.length)}`}
 											key={metadata.id}
 											scope="col"
+											title={metadata.name}
 										>
-											<span className="councillor-name">{metadata.name}</span>
+											<span className="councillor-name-full">
+												{metadata.name}
+											</span>
+											<span
+												className="councillor-name-initials"
+												aria-hidden="true"
+											>
+												{councillorInitials(metadata.name)}
+											</span>
 										</th>
 									) : null
 								})
