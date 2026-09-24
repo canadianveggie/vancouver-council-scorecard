@@ -190,7 +190,7 @@ clarity.
 - [ ] Add a clear methodology and data-source section.
 - [ ] Add a custom 404 page if needed for GitHub Pages.
 - [ ] Add social sharing metadata: icon, media preview, title, and description.
-- [ ] Automatically scroll to the report card when the third category is chosen.
+- [x] Automatically scroll to the report card when the third category is chosen.
 - [ ] Clean up the introductory text.
 - [ ] Clean up the footer text.
 - [ ] Add a real About section with methodology, feedback instructions, and a

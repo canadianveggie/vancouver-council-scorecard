@@ -527,6 +527,18 @@ function App() {
 	const [selectedCategories, setSelectedCategories] = useState<string[]>([])
 	const [overrides, setOverrides] = useState<VoteOverrides>({})
 
+	useEffect(() => {
+		if (selectedCategories.length !== 3) return
+		const reportCard = document.getElementById("report-card")
+		if (!reportCard) return
+		reportCard.scrollIntoView({
+			behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+				? "auto"
+				: "smooth",
+			block: "start",
+		})
+	}, [selectedCategories.length])
+
 	function toggleCategory(category: string) {
 		setSelectedCategories((current) => {
 			if (current.includes(category))
@@ -605,7 +617,11 @@ function App() {
 				</div>
 			</section>
 
-			<section className="preview-panel" aria-labelledby="preview-heading">
+			<section
+				className="preview-panel"
+				id="report-card"
+				aria-labelledby="preview-heading"
+			>
 				<div className="section-heading">
 					<div>
 						<p className="eyebrow">Your report card</p>

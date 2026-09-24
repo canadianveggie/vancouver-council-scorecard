@@ -42,6 +42,7 @@ h1 em { color: var(--blue); font-style: normal; }
 .primary-button:hover { background: var(--blue-dark); transform: translateY(-2px); }
 
 .selection-panel, .preview-panel { padding: 5rem 0; }
+.preview-panel { scroll-margin-top: 1.5rem; }
 .preview-panel { border-top: 1px solid var(--line); }
 .section-heading { align-items: end; display: flex; justify-content: space-between; margin-bottom: 2rem; }
 h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1; }
