@@ -13,6 +13,7 @@ import {
 	calculateScores,
 	type PartyScore,
 } from "./scoring/score"
+import { parseVoteOverrides, serializeVoteOverrides } from "./sharing/url"
 
 const data = scorecardJson as ScorecardData
 
@@ -542,8 +543,14 @@ function ScoreTable({
 function App() {
 	const [selectedCategories, setSelectedCategories] =
 		useState<string[]>(categoriesFromUrl)
-	const [overrides, setOverrides] = useState<VoteOverrides>({})
+	const [overrides, setOverrides] = useState<VoteOverrides>(() =>
+		parseVoteOverrides(
+			data.votes,
+			new URLSearchParams(window.location.search).get("overrides"),
+		),
+	)
 	const hasMounted = useRef(false)
+	const hasMountedCategories = useRef(false)
 
 	useEffect(() => {
 		const isInitialRender = !hasMounted.current
@@ -554,12 +561,23 @@ function App() {
 		} else {
 			url.searchParams.delete("categories")
 		}
+		const serializedOverrides = serializeVoteOverrides(data.votes, overrides)
+		if (serializedOverrides) {
+			url.searchParams.set("overrides", serializedOverrides)
+		} else {
+			url.searchParams.delete("overrides")
+		}
 		if (selectedCategories.length === 3 && !isInitialRender) {
 			url.hash = "report-card"
 		} else if (selectedCategories.length !== 3 && url.hash === "#report-card") {
 			url.hash = ""
 		}
 		window.history.replaceState(null, "", url)
+	}, [selectedCategories, overrides])
+
+	useEffect(() => {
+		const isInitialRender = !hasMountedCategories.current
+		hasMountedCategories.current = true
 		if (selectedCategories.length !== 3 || isInitialRender) return
 		const reportCard = document.getElementById("report-card")
 		if (!reportCard) return
@@ -569,7 +587,7 @@ function App() {
 				: "smooth",
 			block: "start",
 		})
-	}, [selectedCategories])
+	}, [selectedCategories.length])
 
 	function toggleCategory(category: string) {
 		setSelectedCategories((current) => {
