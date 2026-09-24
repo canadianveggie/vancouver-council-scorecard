@@ -630,7 +630,7 @@ function App() {
 			</nav>
 
 			<section className="hero" aria-labelledby="page-title">
-				<p className="eyebrow">Vancouver · 2022-2026</p>
+				<p className="eyebrow">Vancouver City Council· 2022-2026</p>
 				<h1 id="page-title">
 					Vote based on actions
 					<br />
@@ -720,7 +720,7 @@ function App() {
 
 			<footer id="about" className="footer">
 				<span>Vancouver Council Scorecard</span>
-				<span>Independent project · Data and methodology coming soon</span>
+				<span>Made by <a href="https://canadianveggie.com" target="_blank" rel="noopener">@canadianveggie</a></span>
 			</footer>
 		</main>
 	)
