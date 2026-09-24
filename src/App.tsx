@@ -141,13 +141,16 @@ function VoteOverrideControl({
 	vote,
 	overrides,
 	setOverrides,
+	isOpen,
+	setIsOpen,
 }: {
 	vote: Vote
 	overrides: VoteOverrides
 	setOverrides: Dispatch<SetStateAction<VoteOverrides>>
+	isOpen: boolean
+	setIsOpen: (open: boolean) => void
 }) {
 	const activeOverride = overrides[vote.id]
-	const [open, setOpen] = useState(false)
 	const defaultOverride: VoteOverride = {
 		desiredOutcome: vote.desiredOutcome,
 		weight: vote.weight,
@@ -165,20 +168,20 @@ function VoteOverrideControl({
 			else next[vote.id] = nextOverride
 			return next
 		})
-		setOpen(false)
+		setIsOpen(false)
 	}
 
 	return (
 		<div
 			aria-label={`Set preference for ${vote.title}`}
-			className={`vote-override ${open ? "is-open" : ""}`}
+			className={`vote-override ${isOpen ? "is-open" : ""}`}
 			role="radiogroup"
 		>
 			<button
-				aria-expanded={open}
+				aria-expanded={isOpen}
 				aria-label={`${selectedOption.description}. Click to change.`}
 				className={`vote-override-current ${activeOverride ? "overridden" : ""}`}
-				onClick={() => setOpen((current) => !current)}
+				onClick={() => setIsOpen(!isOpen)}
 				type="button"
 			>
 				{selectedOption.label}
@@ -220,6 +223,9 @@ function ScoreTable({
 	)
 	const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
 		new Set(),
+	)
+	const [openOverrideVoteId, setOpenOverrideVoteId] = useState<string | null>(
+		null,
 	)
 	const [selectedVote, setSelectedVote] = useState<Vote | null>(null)
 	const results = calculateScores(
@@ -411,6 +417,12 @@ function ScoreTable({
 													vote={votes[index - 1]}
 													overrides={overrides}
 													setOverrides={setOverrides}
+													isOpen={openOverrideVoteId === votes[index - 1].id}
+													setIsOpen={(open) =>
+														setOpenOverrideVoteId(
+															open ? votes[index - 1].id : null,
+														)
+													}
 												/>
 											</span>
 										</span>
