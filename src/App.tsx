@@ -1,5 +1,5 @@
 import type { Dispatch, SetStateAction } from "react"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import scorecardJson from "../data/generated/scorecard.json"
 import type {
 	ScorecardData,
@@ -15,6 +15,20 @@ import {
 } from "./scoring/score"
 
 const data = scorecardJson as ScorecardData
+
+function categoriesFromUrl() {
+	if (typeof window === "undefined") return []
+	const value = new URLSearchParams(window.location.search).get("categories")
+	if (!value) return []
+	return value
+		.split(",")
+		.filter(
+			(category, index, categories) =>
+				data.categories.includes(category) &&
+				categories.indexOf(category) === index,
+		)
+		.slice(0, 3)
+}
 
 const categoryDescriptions: Record<string, string> = {
 	Housing: "Homes, density, and neighbourhood plans.",
@@ -526,11 +540,27 @@ function ScoreTable({
 }
 
 function App() {
-	const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+	const [selectedCategories, setSelectedCategories] =
+		useState<string[]>(categoriesFromUrl)
 	const [overrides, setOverrides] = useState<VoteOverrides>({})
+	const hasMounted = useRef(false)
 
 	useEffect(() => {
-		if (selectedCategories.length !== 3) return
+		const isInitialRender = !hasMounted.current
+		hasMounted.current = true
+		const url = new URL(window.location.href)
+		if (selectedCategories.length) {
+			url.searchParams.set("categories", selectedCategories.join(","))
+		} else {
+			url.searchParams.delete("categories")
+		}
+		if (selectedCategories.length === 3 && !isInitialRender) {
+			url.hash = "report-card"
+		} else if (selectedCategories.length !== 3 && url.hash === "#report-card") {
+			url.hash = ""
+		}
+		window.history.replaceState(null, "", url)
+		if (selectedCategories.length !== 3 || isInitialRender) return
 		const reportCard = document.getElementById("report-card")
 		if (!reportCard) return
 		reportCard.scrollIntoView({
@@ -539,7 +569,7 @@ function App() {
 				: "smooth",
 			block: "start",
 		})
-	}, [selectedCategories.length])
+	}, [selectedCategories])
 
 	function toggleCategory(category: string) {
 		setSelectedCategories((current) => {

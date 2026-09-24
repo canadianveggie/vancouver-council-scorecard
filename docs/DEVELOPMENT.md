@@ -156,7 +156,8 @@ Goal: make the report card personal and shareable.
 - [x] Recalculate results immediately after edits.
 - [ ] Add a visible modified-from-defaults indicator.
 - [ ] Add `Reset to Defaults`.
-- [ ] Encode selected categories and vote overrides in deep links.
+- [x] Encode selected categories in deep links.
+- [ ] Encode vote overrides in deep links.
 - [ ] Add a `Share` button using the Clipboard API with a fallback.
 - [ ] Version the URL format for future compatibility.
 - [ ] Add tests for parsing, serializing, and invalid shared URLs.
