@@ -46,8 +46,7 @@ h1 em { color: var(--blue); font-style: normal; }
 .preview-panel { border-top: 1px solid var(--line); }
 .section-heading { align-items: end; display: flex; justify-content: space-between; margin-bottom: 2rem; }
 h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1; }
-.selection-count, .status-pill { color: var(--muted); font-family: 'DM Mono', monospace; font-size: .7rem; }
-.status-pill { border: 1px solid var(--line); border-radius: 999px; padding: .45rem .7rem; }
+.selection-count { color: var(--muted); font-family: 'DM Mono', monospace; font-size: .7rem; }
 .category-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); }
 .category-card { background: var(--panel); border: 1px solid var(--line); border-radius: 4px; color: var(--ink); cursor: pointer; display: flex; flex-direction: column; min-height: 160px; padding: 1.25rem; text-align: left; transition: border-color .2s, box-shadow .2s, transform .2s; }
 .category-card:hover, .category-card:focus-visible, .category-card.selected { border-color: var(--blue); box-shadow: 0 10px 24px #245a9a14; outline: none; transform: translateY(-3px); }

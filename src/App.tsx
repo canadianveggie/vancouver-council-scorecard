@@ -591,8 +591,16 @@ function App() {
 
 	function toggleCategory(category: string) {
 		setSelectedCategories((current) => {
-			if (current.includes(category))
+			if (current.includes(category)) {
+				setOverrides((currentOverrides) => {
+					const next = { ...currentOverrides }
+					for (const vote of data.votes) {
+						if (vote.category === category) delete next[vote.id]
+					}
+					return next
+				})
 				return current.filter((item) => item !== category)
+			}
 			if (current.length >= 3) return current
 			return [...current, category]
 		})

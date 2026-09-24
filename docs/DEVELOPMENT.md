@@ -154,8 +154,7 @@ Goal: make the report card personal and shareable.
 - [x] Allow users to edit each selected vote's weight.
 - [x] Allow users to ignore a selected vote.
 - [x] Recalculate results immediately after edits.
-- [ ] Add a visible modified-from-defaults indicator.
-- [ ] Add `Reset to Defaults`.
+- [x] Use category deselection to clear overrides for its votes.
 - [x] Encode selected categories in deep links.
 - [x] Encode vote overrides in compact deep links.
 - [ ] Add a `Share` button using the Clipboard API with a fallback.
