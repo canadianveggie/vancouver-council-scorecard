@@ -134,6 +134,9 @@ Goal: choose a grade model based on observed data rather than assumptions.
 - [x] Choose initial fixed grade thresholds.
 - [x] Document the grade calculation in the design document.
 - [x] Add tests for grade boundaries.
+- [ ] Decide whether `Absent` should remain a zero or become `null`. If it
+  remains zero, change Christine Boyle's provincial-election-period absences
+  to `null` where appropriate.
 
 Run `pnpm grades:report` to reproduce the Phase 5 comparison against the current
 generated dataset. The initial UI uses weighted average score rather than party
@@ -153,7 +156,7 @@ Goal: make the report card personal and shareable.
 - [x] Recalculate results immediately after edits.
 - [ ] Add a visible modified-from-defaults indicator.
 - [ ] Add `Reset to Defaults`.
-- [ ] Encode selected categories and vote overrides in the URL.
+- [ ] Encode selected categories and vote overrides in deep links.
 - [ ] Add a `Share` button using the Clipboard API with a fallback.
 - [ ] Version the URL format for future compatibility.
 - [ ] Add tests for parsing, serializing, and invalid shared URLs.
@@ -165,14 +168,17 @@ clarity.
 
 - [ ] Finalize party colours and available logo assets.
 - [ ] Add grade colour treatments with text labels, not colour alone.
-- [ ] Add responsive table/card layouts for small screens.
-- [ ] Optimize the mobile party column, including compact party-logo treatment
+- [ ] Make zero-point votes visually neutral rather than light green.
+- [ ] Remove the separate visual state for zero or `null` scores; only the
+  vote name should change colour.
+- [x] Add responsive table/card layouts for small screens.
+- [x] Optimize the mobile party column, including compact party-logo treatment
   where appropriate and line-breaking long party names such as Vote Vancouver.
 - [ ] Reduce the visual jump when expanding vote columns.
 - [ ] Use shorter vote-column labels with accessible, mobile-friendly details or
   tooltips.
-- [ ] Add a documented councillor sort control or default, such as alphabetical
-  order or score descending.
+- [x] Add a documented councillor sort default: score descending, then
+  councillor ID alphabetically.
 - [ ] Revisit the green table headers so they do not compete with the red-green
   score treatment.
 - [ ] Make positive and negative scores visually clearer using accessible
@@ -183,16 +189,30 @@ clarity.
 - [ ] Check colour contrast.
 - [ ] Add a clear methodology and data-source section.
 - [ ] Add a custom 404 page if needed for GitHub Pages.
+- [ ] Add social sharing metadata: icon, media preview, title, and description.
+- [ ] Automatically scroll to the report card when the third category is chosen.
+- [ ] Clean up the introductory text.
+- [ ] Clean up the footer text.
+- [ ] Add a real About section with methodology, feedback instructions, and a
+  link to canadianveggie.com.
 
 ## Phase 8: Data expansion and release
 
 Goal: prepare the first public release.
 
 - [ ] Add more votes across the viable categories.
+- [ ] Review outcomes for strike-and-replace amendments so each outcome makes
+  sense.
+- [ ] Decide whether to split Transportation, move some votes to Urbanism, or
+  remove weak examples such as headlight-related votes.
+- [ ] Review every news link; null links that are not genuine news sources
+  rather than redirecting users to vancouver.ca.
+- [ ] Track who proposed each motion and decide how proposer credit affects
+  scoring, including the proposed double-points treatment.
 - [ ] Review every vote’s desired outcome, weight, and source.
 - [ ] Resolve spelling, amendment, and outcome inconsistencies.
 - [ ] Confirm councillor service periods and party affiliations.
-- [ ] Add or replace party logos where usage is appropriate.
+- [x] Add or replace party logos where usage is appropriate.
 - [ ] Review the report card for misleading comparisons.
 - [ ] Add a release checklist and data timestamp.
 - [ ] Add the custom domain when ready.
@@ -201,13 +221,12 @@ Goal: prepare the first public release.
 
 The next implementation tasks should be:
 
-1. Commit the current data and documentation changes.
-2. Scaffold the Vite application.
-3. Define and validate the transformed data model.
-4. Implement and test the scoring engine.
-5. Render the first basic party/category report card.
-6. Use the real output to choose grade normalization and thresholds.
+1. Add modified-state and reset controls for vote overrides.
+2. Add versioned deep links and the share button.
+3. Fix the remaining score and responsive styling details.
+4. Add social metadata, content, and the About/methodology section.
+5. Review and clean the source data before the public release.
 
-The first milestone should be a plain but functional report card. Branding,
-logos, animation, and URL sharing can follow once the data and scoring behavior
-are visible and testable.
+The first functional report-card milestone is complete. The remaining work is
+focused on personalization and sharing, presentation polish, site content, and
+data review.
