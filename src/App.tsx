@@ -130,10 +130,16 @@ function VoteOverrideControl({
 	setOverrides: Dispatch<SetStateAction<VoteOverrides>>
 }) {
 	const activeOverride = overrides[vote.id]
+	const [open, setOpen] = useState(false)
 	const defaultOverride: VoteOverride = {
 		desiredOutcome: vote.desiredOutcome,
 		weight: vote.weight,
 	}
+	const selectedOverride = activeOverride ?? defaultOverride
+	const selectedOption =
+		overrideOptions.find((option) =>
+			overridesMatch(selectedOverride, option.override),
+		) ?? overrideOptions[3]
 
 	function selectOverride(nextOverride: VoteOverride) {
 		setOverrides((current) => {
@@ -142,32 +148,42 @@ function VoteOverrideControl({
 			else next[vote.id] = nextOverride
 			return next
 		})
+		setOpen(false)
 	}
 
 	return (
 		<div
 			aria-label={`Set preference for ${vote.title}`}
-			className="vote-override"
+			className={`vote-override ${open ? "is-open" : ""}`}
 			role="radiogroup"
 		>
-			{overrideOptions.map((option) => {
-				const selected = activeOverride
-					? overridesMatch(activeOverride, option.override)
-					: overridesMatch(defaultOverride, option.override)
-				return (
-					<button
-						aria-pressed={selected}
-						aria-label={option.description}
-						className={`vote-override-option ${selected ? "selected" : ""} ${selected && activeOverride ? "overridden" : ""}`}
-						key={option.label}
-						onClick={() => selectOverride(option.override)}
-						title={option.description}
-						type="button"
-					>
-						{option.label}
-					</button>
-				)
-			})}
+			<button
+				aria-expanded={open}
+				aria-label={`${selectedOption.description}. Click to change.`}
+				className={`vote-override-current ${activeOverride ? "overridden" : ""}`}
+				onClick={() => setOpen((current) => !current)}
+				type="button"
+			>
+				{selectedOption.label}
+			</button>
+			<div className="vote-override-options">
+				{overrideOptions.map((option) => {
+					const selected = overridesMatch(selectedOverride, option.override)
+					return (
+						<button
+							aria-pressed={selected}
+							aria-label={option.description}
+							className={`vote-override-option ${selected ? "selected" : ""} ${selected && activeOverride ? "overridden" : ""}`}
+							key={option.label}
+							onClick={() => selectOverride(option.override)}
+							title={option.description}
+							type="button"
+						>
+							{option.label}
+						</button>
+					)
+				})}
+			</div>
 		</div>
 	)
 }

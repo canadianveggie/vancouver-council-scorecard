@@ -106,7 +106,12 @@ h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1; }
 .vote-row-label { display: block; padding: .75rem 1rem .75rem 3.1rem; }
 .vote-title-row { align-items: flex-start; display: flex; gap: .6rem; justify-content: flex-start; }
 .vote-title-row > span:first-child { flex: 1 1 auto; min-width: 0; }
-.vote-override { align-items: center; display: inline-flex; flex: 0 0 auto; gap: 1px; }
+.vote-override { align-items: center; display: inline-flex; flex: 0 0 auto; gap: 1px; position: relative; }
+.vote-override-current { background: var(--panel); border: 1px solid var(--line); border-radius: 4px; color: var(--muted); cursor: pointer; font-family: 'DM Mono', monospace; font-size: .8rem; height: 25px; min-width: 30px; padding: 0 .3rem; }
+.vote-override-current:hover, .vote-override-current:focus-visible { border-color: var(--blue); color: var(--blue); outline: 2px solid var(--blue-light); outline-offset: 1px; }
+.vote-override-current.overridden { background: var(--vote-override-overridden); border-color: var(--vote-override-overridden); color: #fff; }
+.vote-override-options { background: var(--panel); border: 1px solid var(--line); box-shadow: 0 8px 18px #17231f26; display: none; gap: 1px; left: 0; padding: 2px; position: absolute; top: calc(100% + .3rem); z-index: 3; }
+.vote-override.is-open .vote-override-options { display: inline-flex; }
 .vote-override-option { background: var(--panel); border: 1px solid var(--line); color: var(--muted); cursor: pointer; font-family: 'DM Mono', monospace; font-size: .8rem; height: 25px; min-width: 25px; padding: 0 .25rem; }
 .vote-override-option:first-child { border-radius: 4px 0 0 4px; }
 .vote-override-option:last-child { border-radius: 0 4px 4px 0; }
@@ -217,10 +222,6 @@ h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1; }
   .score-table-shell.has-expanded-party .councillor-header,
   .score-table-shell.has-expanded-party .councillor-cell { min-width: 25px !important; width: 25px; }
   .footer { flex-direction: column; gap: .75rem; }
-  .vote-title-row { align-items: start; display: grid; grid-template-columns: minmax(0, 1fr) auto; }
-  .vote-title-row > span:first-child { min-width: 0; }
-  .vote-info-button { margin-left: 0; }
-  .vote-override { grid-column: 1 / -1; margin-left: 0; }
 }
 
 @media (max-width: 420px) {
