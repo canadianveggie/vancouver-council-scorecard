@@ -38,7 +38,7 @@ const categoryDescriptions: Record<string, string> = {
 	Safety: "Vision Zero and public safety.",
 	Affordability: "The cost of living in Vancouver.",
 	Governance: "Integrity, accountability, and democracy.",
-  Urbanism: "Land use, planning, and public spaces.",
+	Urbanism: "Land use, planning, and public spaces.",
 }
 
 function formatScore(score: number | null) {
@@ -89,6 +89,28 @@ function councillorInitials(name: string) {
 		.map((part) => part[0])
 		.join("")
 		.toUpperCase()
+}
+
+async function copyText(text: string) {
+	if (navigator.clipboard) {
+		try {
+			await navigator.clipboard.writeText(text)
+			return true
+		} catch {
+			// Fall through to the legacy copy method for restricted clipboard access.
+		}
+	}
+
+	const input = document.createElement("textarea")
+	input.value = text
+	input.setAttribute("readonly", "")
+	input.style.position = "fixed"
+	input.style.opacity = "0"
+	document.body.appendChild(input)
+	input.select()
+	const copied = document.execCommand("copy")
+	document.body.removeChild(input)
+	return copied
 }
 
 const overrideOptions: Array<{
@@ -562,8 +584,12 @@ function App() {
 			new URLSearchParams(window.location.search).get("overrides"),
 		),
 	)
+	const [shareStatus, setShareStatus] = useState<"idle" | "copied" | "failed">(
+		"idle",
+	)
 	const hasMounted = useRef(false)
 	const hasMountedCategories = useRef(false)
+	const hasOverrides = Object.keys(overrides).length > 0
 
 	useEffect(() => {
 		const isInitialRender = !hasMounted.current
@@ -617,6 +643,12 @@ function App() {
 			if (current.length >= 3) return current
 			return [...current, category]
 		})
+	}
+
+	async function shareReport() {
+		const copied = await copyText(window.location.href)
+		setShareStatus(copied ? "copied" : "failed")
+		window.setTimeout(() => setShareStatus("idle"), 2500)
 	}
 
 	return (
@@ -702,6 +734,33 @@ function App() {
 								: "The results will appear here"}
 						</h2>
 					</div>
+					{selectedCategories.length > 0 && (
+						<div className="report-actions">
+							{hasOverrides && (
+								<button
+									className="secondary-button"
+									type="button"
+									onClick={() => setOverrides({})}
+								>
+									Reset to Defaults
+								</button>
+							)}
+							<button
+								className="secondary-button"
+								type="button"
+								onClick={shareReport}
+							>
+								{shareStatus === "copied" ? "Copied!" : "Share"}
+							</button>
+							<span className="sr-only" aria-live="polite">
+								{shareStatus === "copied"
+									? "Share link copied to clipboard."
+									: shareStatus === "failed"
+										? "Unable to copy the share link."
+										: ""}
+							</span>
+						</div>
+					)}
 				</div>
 				{!selectedCategories.length ? (
 					<div className="empty-state">

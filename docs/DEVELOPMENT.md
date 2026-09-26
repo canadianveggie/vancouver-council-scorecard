@@ -159,9 +159,12 @@ Goal: make the report card personal and shareable.
 - [x] Use category deselection to clear overrides for its votes.
 - [x] Encode selected categories in deep links.
 - [x] Encode vote overrides in compact deep links.
-- [ ] Add a `Share` button using the Clipboard API with a fallback.
+- [ ] Show when the report card has user overrides.
+- [X] Add a `Reset to Defaults` control for vote overrides.
+- [X] Add a `Share` button using the Clipboard API with a fallback.
 - [ ] Version the URL format for future compatibility.
-- [ ] Add tests for parsing, serializing, and invalid shared URLs.
+- [x] Add tests for parsing and serializing shared URLs.
+- [ ] Add tests for invalid and unsupported shared URLs.
 
 ## Phase 7: Visual refinement and accessibility
 
@@ -219,16 +222,33 @@ Goal: prepare the first public release.
 - [ ] Add a release checklist and data timestamp.
 - [ ] Add the custom domain when ready.
 
+## Current status
+
+The first functional report-card milestone is complete. The data pipeline,
+scoring engine, category selection, party and councillor drill-downs, vote
+details, responsive layouts, and URL-synchronized overrides are working.
+
+The current dataset is good enough to support the next product milestones. Data
+review remains part of release readiness, but it should not block finishing the
+personalization and sharing workflow or polishing the public-facing experience.
+
 ## Recommended immediate sequence
 
-The next implementation tasks should be:
+Work through the remaining items in this order:
 
-1. Add modified-state and reset controls for vote overrides.
-2. Add versioned deep links and the share button.
-3. Fix the remaining score and responsive styling details.
-4. Add social metadata, content, and the About/methodology section.
-5. Review and clean the source data before the public release.
+1. Complete personalization and sharing: modified-state feedback, reset, the
+   share button, URL versioning, and invalid-link handling.
+2. Finish the high-impact presentation and accessibility pass: score contrast,
+   neutral zero scores, table-header hierarchy, expanded-column behaviour,
+   shorter vote labels, keyboard/focus states, and reduced-motion behaviour.
+3. Add the public explanation layer: About/methodology content, data-source
+   links, a data timestamp, cleaned introductory and footer copy, and social
+   sharing metadata.
+4. Perform release validation: review misleading comparisons, confirm the
+   remaining service-period and affiliation details, run the data/build/test
+   checks, and add a release checklist.
+5. Expand the dataset and add the custom domain when the initial public release
+   is ready.
 
-The first functional report-card milestone is complete. The remaining work is
-focused on personalization and sharing, presentation polish, site content, and
-data review.
+This sequence treats the current data as a usable foundation while keeping a
+final editorial and consistency review before publication.
