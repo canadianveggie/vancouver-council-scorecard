@@ -720,7 +720,12 @@ function App() {
 
 			<footer id="about" className="footer">
 				<span>Vancouver Council Scorecard</span>
-				<span>Made by <a href="https://canadianveggie.com" target="_blank" rel="noopener">@canadianveggie</a></span>
+				<span>
+					Made by{" "}
+					<a href="https://canadianveggie.com" target="_blank" rel="noopener">
+						@canadianveggie
+					</a>
+				</span>
 			</footer>
 		</main>
 	)
