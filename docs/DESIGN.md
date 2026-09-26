@@ -203,6 +203,9 @@ produce normalized records similar to:
 }
 ```
 
+The source may include editorial reconciliation fields that are not part of the browser data: `reconciled` records whether a human has reviewed a row, while `strike-and-replace` marks a strike-and-replace interpretation.
+`pnpm council:reconcile` uses the latter flag to flip `Supported` and `Opposed` in the scorecard-side comparison; the review flag is otherwise ignored.
+
 The build step should report malformed categories, unknown vote values,
 duplicate identifiers, missing councillors, invalid dates, and invalid weights
 before the site is deployed.

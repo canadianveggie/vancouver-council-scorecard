@@ -52,6 +52,8 @@ Goal: make the current files reliable inputs for the application.
 - [x] Produce browser-friendly JSON in a generated directory.
 - [x] Fail the build when the source data is invalid.
 
+The source CSV may also contain editorial reconciliation columns. The parser ignores `reconciled` for application data. The reconciliation command uses the flag to invert `Supported` and `Opposed` when comparing the scorecard row with council records. Other vote values are left unchanged.
+
 The source CSV uses strict `YYYY-MM-DD` dates and the vote-value vocabulary is:
 
 ```text

@@ -74,6 +74,29 @@ function values(rows: Row[], field: string) {
 	].join(" | ")
 }
 
+function isTrue(value: string | undefined) {
+	return ["true", "1", "yes"].includes((value ?? "").trim().toLowerCase())
+}
+
+export function formatRecordedVote(value: string, shouldFlip: boolean) {
+	if (value === "In Favour") {
+		value = "Supported"
+	}
+	if (value === "In Opposition") {
+		value = "Opposed"
+	}
+	if (!shouldFlip) {
+		return value
+	}
+	if (value === "Supported") {
+		return "Opposed"
+	}
+	if (value === "Opposed") {
+		return "Supported"
+	}
+	return value
+}
+
 function expectedMinutesLink(meetingType: string, date: string) {
 	const code = meetingTypeCodes[meetingType]
 	if (!code || !/^\d{4}-\d{2}-\d{2}$/.test(date)) return ""
@@ -130,6 +153,7 @@ async function main() {
 	}> = []
 
 	for (const vote of votes) {
+		const strikeAndReplace = isTrue(vote["strike-and-replace"])
 		output.push({
 			...blank,
 			"Row Type": "Vote",
@@ -206,12 +230,15 @@ async function main() {
 				...Object.fromEntries(
 					councillors.map((name) => [
 						name,
-						values(
-							matchingRecords.filter(
-								(record) =>
-									record["Council Member"] === councilMemberNames[name],
+						formatRecordedVote(
+							values(
+								matchingRecords.filter(
+									(record) =>
+										record["Council Member"] === councilMemberNames[name],
+								),
+								"Vote",
 							),
-							"Vote",
+							strikeAndReplace,
 						),
 					]),
 				),

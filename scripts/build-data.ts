@@ -18,7 +18,7 @@ const sourcePath = path.join(dataDirectory, "votes.csv")
 const generatedDirectory = path.join(dataDirectory, "generated")
 const outputPath = path.join(generatedDirectory, "scorecard.json")
 
-const metadataHeaders = [
+const requiredMetadataHeaders = [
 	"Vote",
 	"Description",
 	"Category",
@@ -30,6 +30,11 @@ const metadataHeaders = [
 	"News Link",
 	"Meeting Minutes",
 	"voteId",
+]
+const editorialMetadataHeaders = ["strike-and-replace", "reconciled"]
+const metadataHeaders = [
+	...requiredMetadataHeaders,
+	...editorialMetadataHeaders,
 ]
 const categories = [
 	"Housing",
@@ -188,7 +193,7 @@ async function build() {
 		councillors.map((councillor) => [councillor.name, councillor]),
 	)
 
-	for (const header of metadataHeaders) {
+	for (const header of requiredMetadataHeaders) {
 		if (!sourceHeaders.includes(header))
 			error(`CSV is missing required column ${header}`)
 	}
