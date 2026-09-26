@@ -78,7 +78,7 @@ h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1; }
 .party-logo { background: #fff; border: 2px solid transparent; border-radius: 50%; height: 30px; object-fit: contain; width: 30px; }
 .party-name-label { display: inline; }
 .score-table-shell.has-expanded-party .score-table .party-header button { gap: 0; padding: .5rem .15rem; }
-.score-table-shell.has-expanded-party .score-table .party-header .party-logo { display: block }
+.score-table-shell.has-expanded-party .score-table .party-header .party-logo { display: block; height: 22px; width: 22px; }
 .score-table-shell.has-expanded-party .score-table .party-header .party-name-label { display: none; }
 .score-table .category-header { min-width: 190px; padding: 0 1rem; text-align: left; }
 .score-table .total-header { background: #17231f; min-width: 100px; }
@@ -238,7 +238,7 @@ h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1; }
   .score-table .party-header.party-name-revealed .party-name-label { display: inline; overflow-wrap: anywhere; }
   .councillor-name-full { display: none; }
   .councillor-name-initials { display: inline; }
-  .score-table-shell.has-expanded-party .score-table { min-width: 0; table-layout: auto; width: max-content; }
+  .score-table-shell.has-expanded-party .score-table { min-width: 100%; table-layout: auto; width: max-content; }
   .score-table-shell.has-expanded-party .score-table .category-header,
   .score-table-shell.has-expanded-party .score-table tbody th { min-width: 250px; width: 250px; }
   .score-table-shell.has-expanded-party .councillor-header,
