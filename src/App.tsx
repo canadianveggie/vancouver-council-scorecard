@@ -38,6 +38,7 @@ const categoryDescriptions: Record<string, string> = {
 	Safety: "Vision Zero and public safety.",
 	Affordability: "The cost of living in Vancouver.",
 	Governance: "Integrity, accountability, and democracy.",
+  Urbanism: "Land use, planning, and public spaces.",
 }
 
 function formatScore(score: number | null) {
