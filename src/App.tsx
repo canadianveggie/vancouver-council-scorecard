@@ -923,6 +923,13 @@ function App() {
 					</a>
 					.
 				</p>
+				<h3>More details</h3>
+        <p className="methodology-copy">
+          Clicking on a category will show the votes that make up the score.<br/>
+          Each vote has details with links to news coverage and teh council minutes.<br/>
+          Clicking on a party will show the individual councillors and their scores.
+        </p>
+
 				<h3>Scoring</h3>
 				<ul className="scoring-list">
 					<li>
@@ -983,9 +990,11 @@ function App() {
 					>
 						meeting minutes
 					</a>
-					, and cross-referenced with online news articles. The most influential
-					and news-worthy votes from the past 4 years are featured here.
+					, and cross-referenced with online news articles.<br/>
+          Not every vote is featured, but I tried to highlight the most influential
+					and news-worthy ones from the past 4 years.
 				</p>
+				<h3>Feedback</h3>
 				<p className="methodology-copy">
 					If I messed up encoding any of the data, please let me know at{" "}
 					<a href="https://canadianveggie.com" target="_blank" rel="noreferrer">
