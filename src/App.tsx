@@ -251,6 +251,7 @@ function ScoreTable({
 		null,
 	)
 	const [selectedVote, setSelectedVote] = useState<Vote | null>(null)
+	const scoreTableShellRef = useRef<HTMLDivElement>(null)
 	const results = calculateScores(
 		data.votes,
 		data.councillors,
@@ -258,6 +259,11 @@ function ScoreTable({
 		selectedCategories,
 		overrides,
 	)
+	const tableLayoutKey = JSON.stringify({
+		expandedParties: [...expandedParties],
+		overrides,
+		selectedCategories,
+	})
 
 	useEffect(() => {
 		if (!selectedVote) return
@@ -267,6 +273,64 @@ function ScoreTable({
 		document.addEventListener("keydown", closeOnEscape)
 		return () => document.removeEventListener("keydown", closeOnEscape)
 	}, [selectedVote])
+
+	useEffect(() => {
+		const shell = scoreTableShellRef.current
+		const table = shell?.querySelector(".score-table")
+		const tableHead = table?.querySelector("thead")
+		if (!shell || !table || !tableHead) return
+		const shellElement = shell
+		const tableElement = table
+		const tableHeadElement = tableHead
+
+		const stickyHeader = document.createElement("div")
+		stickyHeader.className = `score-table-sticky-header ${shellElement.className}`
+		stickyHeader.setAttribute("aria-hidden", "true")
+		stickyHeader.dataset.layoutKey = tableLayoutKey
+		const stickyTable = table.cloneNode(false) as HTMLTableElement
+		const sourceRow = table.querySelector("tbody tr")
+		const sourceCells = sourceRow ? [...sourceRow.children] : []
+		const columnGroup = document.createElement("colgroup")
+		for (let index = 0; index < sourceCells.length; index += 1) {
+			const column = document.createElement("col")
+			columnGroup.appendChild(column)
+		}
+		stickyTable.appendChild(columnGroup)
+		stickyTable.appendChild(tableHeadElement.cloneNode(true))
+		stickyHeader.appendChild(stickyTable)
+		document.body.appendChild(stickyHeader)
+
+		function updateStickyHeader() {
+			const shellRect = shellElement.getBoundingClientRect()
+			const tableRect = tableElement.getBoundingClientRect()
+			const headerHeight = tableHeadElement.getBoundingClientRect().height
+			const isVisible = shellRect.top < 0 && shellRect.bottom > headerHeight
+
+			stickyHeader.style.display = isVisible ? "block" : "none"
+			if (!isVisible) return
+
+			stickyHeader.style.left = `${shellRect.left}px`
+			stickyHeader.style.width = `${shellRect.width}px`
+			stickyTable.style.tableLayout = "fixed"
+			stickyTable.style.width = `${tableRect.width}px`
+			for (const [index, sourceCell] of sourceCells.entries()) {
+				const column = columnGroup.children[index] as HTMLTableColElement
+				column.style.width = `${sourceCell.getBoundingClientRect().width}px`
+			}
+			stickyHeader.scrollLeft = shellElement.scrollLeft
+		}
+
+		updateStickyHeader()
+		shellElement.addEventListener("scroll", updateStickyHeader)
+		window.addEventListener("scroll", updateStickyHeader)
+		window.addEventListener("resize", updateStickyHeader)
+		return () => {
+			shellElement.removeEventListener("scroll", updateStickyHeader)
+			window.removeEventListener("scroll", updateStickyHeader)
+			window.removeEventListener("resize", updateStickyHeader)
+			stickyHeader.remove()
+		}
+	}, [tableLayoutKey])
 
 	function toggle(
 		setter: Dispatch<SetStateAction<Set<string>>>,
@@ -292,6 +356,7 @@ function ScoreTable({
 
 	return (
 		<div
+			ref={scoreTableShellRef}
 			className={`score-table-shell ${expandedParties.size ? "has-expanded-party" : ""}`}
 		>
 			<table className="score-table">
