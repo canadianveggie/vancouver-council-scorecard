@@ -86,7 +86,7 @@ function formatGradeSummary(
 	score: CategoryGrade | PartyScore | CouncillorScore,
 	denominator: number,
 ) {
-	return `(${Math.round(score.totalScore)}/${denominator})`
+	return `(${Math.round(score.totalScore)} / ${denominator})`
 }
 
 function councillorInitials(name: string) {
