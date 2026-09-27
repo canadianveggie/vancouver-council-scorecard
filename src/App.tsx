@@ -305,7 +305,23 @@ function ScoreTable({
 		stickyTable.appendChild(columnGroup)
 		stickyTable.appendChild(tableHeadElement.cloneNode(true))
 		stickyHeader.appendChild(stickyTable)
+		for (const button of stickyHeader.querySelectorAll("button")) {
+			button.tabIndex = -1
+		}
 		document.body.appendChild(stickyHeader)
+
+		function handleStickyClick(event: MouseEvent) {
+			if (!(event.target instanceof Element)) return
+			const stickyButton = event.target.closest("button")
+			if (!stickyButton) return
+			const label = stickyButton.getAttribute("aria-label")
+			const originalButton = [
+				...tableElement.querySelectorAll("thead button"),
+			].find((button) => button.getAttribute("aria-label") === label) as
+				| HTMLButtonElement
+				| undefined
+			originalButton?.click()
+		}
 
 		function updateStickyHeader() {
 			const shellRect = shellElement.getBoundingClientRect()
@@ -328,10 +344,12 @@ function ScoreTable({
 		}
 
 		updateStickyHeader()
+		stickyHeader.addEventListener("click", handleStickyClick)
 		shellElement.addEventListener("scroll", updateStickyHeader)
 		window.addEventListener("scroll", updateStickyHeader)
 		window.addEventListener("resize", updateStickyHeader)
 		return () => {
+			stickyHeader.removeEventListener("click", handleStickyClick)
 			shellElement.removeEventListener("scroll", updateStickyHeader)
 			window.removeEventListener("scroll", updateStickyHeader)
 			window.removeEventListener("resize", updateStickyHeader)

@@ -64,7 +64,7 @@ h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1; }
 .empty-mark { align-items: center; background: var(--blue-light); border-radius: 50%; display: flex; font-size: 1.5rem; height: 50px; justify-content: center; margin-bottom: 1rem; width: 50px; }
 .empty-state p { color: var(--muted); margin: 0; }
 .score-table-shell { overflow-x: auto; overflow-y: clip; }
-.score-table-sticky-header { background: var(--paper); display: none; overflow: hidden; pointer-events: none; position: fixed; top: 0; z-index: 10; }
+.score-table-sticky-header { background: var(--paper); display: none; overflow: hidden; position: fixed; top: 0; z-index: 10; }
 .score-table-sticky-header .score-table { margin: 0; }
 .sr-only { height: 1px; margin: -1px; overflow: hidden; position: absolute; width: 1px; clip: rect(0, 0, 0, 0); }
 .score-table { border-collapse: separate; border-spacing: 0; min-width: 811px; width: 100%; }
