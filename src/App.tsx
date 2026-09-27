@@ -843,7 +843,86 @@ function App() {
 				)}
 			</section>
 
-			<footer id="about" className="footer">
+			<section
+				className="methodology-section"
+				id="about"
+				aria-labelledby="about-heading"
+			>
+				<p className="eyebrow">About this project</p>
+				<h2 id="about-heading">How it works</h2>
+				<p className="methodology-copy">
+					This scorecard was inspired by the excellent{" "}
+					<a
+						href="https://visionzerovancouver.ca/2026/09/16/vancouver-council-full-term-report/"
+						target="_blank"
+						rel="noreferrer"
+					>
+						Vision Zero Vancouver full-term report
+					</a>
+					.
+				</p>
+				<h3>Scoring</h3>
+				<ul className="scoring-list">
+					<li>
+						<strong>+1</strong>
+						<span>for a positive vote</span>
+					</li>
+					<li>
+						<strong>-1</strong>
+						<span>for a negative vote</span>
+					</li>
+					<li>
+						<strong>0</strong>
+						<span>for abstaining</span>
+					</li>
+					<li>
+						<strong>n/a</strong>
+						<span>for being absent</span>
+					</li>
+					<li>
+						<strong>+2</strong>
+						<span>for proposing a positive vote</span>
+					</li>
+					<li>
+						<strong>-2</strong>
+						<span>for amending a positive vote to try and kill it</span>
+					</li>
+				</ul>
+				<p className="methodology-copy">
+					Grades are averages across the councillors and weighted for each vote.
+					If you don't like the weighting or desired outcome for any vote, you
+					can change it or ignore that vote completely.
+				</p>
+				<h3>Data sources</h3>
+				<p className="methodology-copy">
+					The data was sourced from the City of Vancouver&apos;s{" "}
+					<a
+						href="https://opendata.vancouver.ca/explore/dataset/council-voting-records/information"
+						target="_blank"
+						rel="noreferrer"
+					>
+						Council Voting Records
+					</a>{" "}
+					open data source, correlated with{" "}
+					<a
+						href="https://app.vancouver.ca/CouncilMeetingPublic/"
+						target="_blank"
+						rel="noreferrer"
+					>
+						meeting minutes
+					</a>
+					, and cross-referenced with online news articles.
+				</p>
+				<p className="methodology-copy">
+					If I messed up encoding any of the data, please let me know at{" "}
+					<a href="https://canadianveggie.com" target="_blank" rel="noreferrer">
+						canadianveggie.com
+					</a>
+					.
+				</p>
+			</section>
+
+			<footer className="footer">
 				<span>Vancouver Council Scorecard</span>
 				<span>
 					Made by{" "}

@@ -217,6 +217,14 @@ h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1; }
 .vote-metadata dd { margin: 0; text-transform: capitalize; }
 .vote-modal-paragraph { line-height: 1.6; margin: 1.25rem 0 0; }
 .vote-modal-links { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; }
+.methodology-section { border-top: 1px solid var(--line); max-width: 760px; padding: 5rem 0; }
+.methodology-section h2 { margin-bottom: 1.5rem; }
+.methodology-section h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; margin: 2.5rem 0 1rem; }
+.methodology-copy { color: var(--muted); line-height: 1.6; margin: 1rem 0 0; }
+.methodology-copy a { color: var(--blue); }
+.scoring-list { display: grid; gap: .7rem; list-style: none; margin: 0; padding: 0; }
+.scoring-list li { align-items: baseline; display: flex; gap: 1rem; }
+.scoring-list strong { color: var(--blue); flex: 0 0 2.5rem; font-family: 'DM Mono', monospace; font-size: .85rem; }
 .footer { border-top: 1px solid var(--line); color: var(--muted); display: flex; font-family: 'DM Mono', monospace; font-size: .65rem; justify-content: space-between; padding: 1.5rem 0 2rem; text-transform: uppercase; }
 
 @media (max-width: 850px) {

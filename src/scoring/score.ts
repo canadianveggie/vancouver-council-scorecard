@@ -11,7 +11,7 @@ const baseValues: Record<RecordedVote, number> = {
 	Proposed: 2,
 	Supported: 1,
 	Abstained: 0,
-	Absent: 0,
+	Absent: NaN,
 	Opposed: -1,
 	Amended: -2,
 }
@@ -55,7 +55,11 @@ export function scoreRecordedVote(
 	weight: number,
 ) {
 	const direction = desiredOutcome === "pass" ? 1 : -1
-	return baseValues[recordedVote] * direction * weight
+	const weighted = baseValues[recordedVote] * direction * weight
+	if (isNaN(weighted)) {
+		return null
+	}
+	return weighted
 }
 
 export function gradeForScore(averageScore: number) {
