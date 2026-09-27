@@ -170,6 +170,17 @@ const overrideOptions: Array<{
 	},
 ]
 
+const WEIGHT_TIP_STORAGE_KEY = "vancouver-scorecard-weight-tip-dismissed"
+
+function weightTipWasDismissed() {
+	if (typeof window === "undefined") return false
+	try {
+		return window.localStorage.getItem(WEIGHT_TIP_STORAGE_KEY) === "true"
+	} catch {
+		return false
+	}
+}
+
 function overridesMatch(left: VoteOverride, right: VoteOverride) {
 	if ("ignored" in left || "ignored" in right) {
 		return "ignored" in left && "ignored" in right
@@ -185,12 +196,14 @@ function VoteOverrideControl({
 	setOverrides,
 	isOpen,
 	setIsOpen,
+	onInteract,
 }: {
 	vote: Vote
 	overrides: VoteOverrides
 	setOverrides: Dispatch<SetStateAction<VoteOverrides>>
 	isOpen: boolean
 	setIsOpen: (open: boolean) => void
+	onInteract?: () => void
 }) {
 	const activeOverride = overrides[vote.id]
 	const defaultOverride: VoteOverride = {
@@ -204,6 +217,7 @@ function VoteOverrideControl({
 		) ?? overrideOptions[3]
 
 	function selectOverride(nextOverride: VoteOverride) {
+		onInteract?.()
 		setOverrides((current) => {
 			const next = { ...current }
 			if (overridesMatch(nextOverride, defaultOverride)) delete next[vote.id]
@@ -223,7 +237,10 @@ function VoteOverrideControl({
 				aria-expanded={isOpen}
 				aria-label={`${selectedOption.description}. Click to change.`}
 				className={`vote-override-current ${activeOverride ? "overridden" : ""}`}
-				onClick={() => setIsOpen(!isOpen)}
+				onClick={() => {
+					onInteract?.()
+					setIsOpen(!isOpen)
+				}}
 				type="button"
 			>
 				{selectedOption.label}
@@ -273,6 +290,11 @@ function ScoreTable({
 		null,
 	)
 	const [selectedVote, setSelectedVote] = useState<Vote | null>(null)
+	const [weightTipDismissed, setWeightTipDismissed] = useState(
+		weightTipWasDismissed,
+	)
+	const [showWeightTip, setShowWeightTip] = useState(false)
+	const hasShownWeightTip = useRef(false)
 	const scoreTableShellRef = useRef<HTMLDivElement>(null)
 	const results = calculateScores(
 		data.votes,
@@ -286,6 +308,20 @@ function ScoreTable({
 		overrides,
 		selectedCategories,
 	})
+
+	useEffect(() => {
+		const hasExpandedVoteCategory = [...expandedCategories].some(
+			(category) => selectedVotesForCategory(category).length > 0,
+		)
+		if (
+			hasExpandedVoteCategory &&
+			!weightTipDismissed &&
+			!hasShownWeightTip.current
+		) {
+			hasShownWeightTip.current = true
+			setShowWeightTip(true)
+		}
+	}, [expandedCategories, weightTipDismissed])
 
 	useEffect(() => {
 		if (!selectedVote) return
@@ -393,6 +429,22 @@ function ScoreTable({
 			return next
 		})
 	}
+
+	function dismissWeightTip() {
+		setShowWeightTip(false)
+		setWeightTipDismissed(true)
+		try {
+			window.localStorage.setItem(WEIGHT_TIP_STORAGE_KEY, "true")
+		} catch {
+			// The tip remains dismissed for this render if storage is unavailable.
+		}
+	}
+
+	const firstExpandedCategory = selectedCategories.find(
+		(category) =>
+			expandedCategories.has(category) &&
+			selectedVotesForCategory(category).length > 0,
+	)
 
 	return (
 		<div
@@ -541,17 +593,47 @@ function ScoreTable({
 												>
 													i
 												</button>
-												<VoteOverrideControl
-													vote={votes[index - 1]}
-													overrides={overrides}
-													setOverrides={setOverrides}
-													isOpen={openOverrideVoteId === votes[index - 1].id}
-													setIsOpen={(open) =>
-														setOpenOverrideVoteId(
-															open ? votes[index - 1].id : null,
-														)
-													}
-												/>
+												<span className="weight-control-tip">
+													<VoteOverrideControl
+														vote={votes[index - 1]}
+														overrides={overrides}
+														setOverrides={setOverrides}
+														isOpen={openOverrideVoteId === votes[index - 1].id}
+														setIsOpen={(open) =>
+															setOpenOverrideVoteId(
+																open ? votes[index - 1].id : null,
+															)
+														}
+														onInteract={
+															showWeightTip &&
+															firstExpandedCategory === category &&
+															index === 1
+																? dismissWeightTip
+																: undefined
+														}
+													/>
+													{showWeightTip &&
+														firstExpandedCategory === category &&
+														index === 1 && (
+															<div className="weight-tip" role="status">
+																<button
+																	aria-label="Dismiss weight tip"
+																	className="weight-tip-dismiss"
+																	onClick={dismissWeightTip}
+																	type="button"
+																>
+																	×
+																</button>
+																<strong>Make the weighting your own</strong>
+																<span>
+																	The emojis show how strongly you feel: 😡/❤️ =
+																	3, ☹️/🙂 = 2, and 👎/👍 = 1. Tap the emoji to
+																	change this vote&apos;s preference, or ignore
+																	it.
+																</span>
+															</div>
+														)}
+												</span>
 											</span>
 										</span>
 									)}

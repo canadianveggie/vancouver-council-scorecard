@@ -119,6 +119,12 @@ h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1; }
 .vote-title-row { align-items: flex-start; display: flex; gap: .6rem; justify-content: flex-start; }
 .vote-title-row > span:first-child { flex: 1 1 auto; min-width: 0; }
 .vote-override { align-items: center; display: inline-flex; flex: 0 0 auto; gap: 1px; position: relative; }
+.weight-control-tip { display: inline-flex; flex: 0 0 auto; position: relative; }
+.weight-tip { background: var(--ink); box-shadow: 0 8px 18px #17231f40; color: #fff; display: flex; flex-direction: column; font-size: .72rem; gap: .35rem; left: 0; line-height: 1.35; padding: .75rem 2rem .75rem .85rem; position: absolute; text-align: left; top: calc(100% + .55rem); width: 255px; z-index: 5; }
+.weight-tip strong { color: #fff; font-size: .75rem; }
+.weight-tip span { color: #d4e1ef; }
+.weight-tip-dismiss { align-items: center; background: transparent; border: 0; color: #d4e1ef; cursor: pointer; display: flex; font-size: 1.15rem; height: 24px; justify-content: center; line-height: 1; padding: 0; position: absolute; right: .35rem; top: .35rem; width: 24px; }
+.weight-tip-dismiss:hover, .weight-tip-dismiss:focus-visible { color: #fff; outline: 2px solid var(--blue-light); outline-offset: 1px; }
 .vote-override-current { background: var(--panel); border: 1px solid var(--line); border-radius: 4px; color: var(--muted); cursor: pointer; font-family: 'DM Mono', monospace; font-size: .8rem; height: 25px; min-width: 30px; padding: 0 .3rem; }
 .vote-override-current:hover, .vote-override-current:focus-visible { border-color: var(--blue); color: var(--blue); outline: 2px solid var(--blue-light); outline-offset: 1px; }
 .vote-override-current.overridden { background: var(--vote-override-overridden); border-color: var(--vote-override-overridden); color: #fff; }
