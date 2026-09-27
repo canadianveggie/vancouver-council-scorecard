@@ -82,6 +82,13 @@ function formatOverallGrade(score: PartyScore | CouncillorScore) {
 	return score.letterGrade
 }
 
+function formatGradeSummary(
+	score: CategoryGrade | PartyScore | CouncillorScore,
+	denominator: number,
+) {
+	return "(" + Math.round(score.totalScore) + "/" + denominator + ")"
+}
+
 function councillorInitials(name: string) {
 	return name
 		.split(/\s+/)
@@ -544,7 +551,17 @@ function ScoreTable({
 															</small>
 														</>
 													) : (
-														councillorCategory?.letterGrade
+														<>
+															<span>{councillorCategory?.letterGrade}</span>
+															{expanded && councillorCategory && (
+																<small className="grade-summary">
+																	{formatGradeSummary(
+																		councillorCategory,
+																		councillorCategory.applicableVoteCount,
+																	)}
+																</small>
+															)}
+														</>
 													)}
 												</td>
 											)
@@ -560,7 +577,19 @@ function ScoreTable({
 										>
 											{row.voteId
 												? formatScore(value)
-												: partyCategory?.letterGrade}
+												: partyCategory && (
+														<>
+															<span>{partyCategory.letterGrade}</span>
+															{expanded && (
+																<small className="grade-summary">
+																	{formatGradeSummary(
+																		partyCategory,
+																		partyCategory.totalWeight,
+																	)}
+																</small>
+															)}
+														</>
+													)}
 										</td>
 									)
 								})}
@@ -728,9 +757,7 @@ function App() {
 			</nav>
 
 			<section className="hero" aria-labelledby="page-title">
-				<p className="eyebrow">
-					Vancouver City Council Voting Record· 2022-2026
-				</p>
+				<p className="eyebrow">Vancouver City Council Voting Record</p>
 				<h1 id="page-title">
 					Vote based on actions
 					<br />
@@ -895,10 +922,15 @@ function App() {
 				</p>
 				<h3>Customization</h3>
 				<p className="methodology-copy">
-					Customize the report card to reflect your priorities.<br/>
-          Choose the three categories that matter most to you.<br/>
-          For each vote, you can change the desired outcome, adjust its weight, or ignore it entirely.<br/>
-          Results update immediately, and your customizations are saved when you share your report card.
+					Customize the report card to reflect your priorities.
+					<br />
+					Choose the three categories that matter most to you.
+					<br />
+					For each vote, you can change the desired outcome, adjust its weight,
+					or ignore it entirely.
+					<br />
+					Results update immediately, and your customizations are saved when you
+					share your report card.
 				</p>
 				<h3>Data sources</h3>
 				<p className="methodology-copy">

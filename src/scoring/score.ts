@@ -19,6 +19,7 @@ const baseValues: Record<RecordedVote, number> = {
 export type CategoryGrade = {
 	category: string
 	totalScore: number
+	totalWeight: number
 	applicableVoteCount: number
 	averageScore: number
 	letterGrade: string
@@ -29,6 +30,7 @@ export type CouncillorScore = {
 	councillorId: string
 	partyId: string
 	totalScore: number
+	totalWeight: number
 	applicableVoteCount: number
 	averageScore: number
 	letterGrade: string
@@ -38,6 +40,7 @@ export type CouncillorScore = {
 export type PartyScore = {
 	partyId: string
 	totalScore: number
+	totalWeight: number
 	applicableVoteCount: number
 	averageScore: number
 	letterGrade: string
@@ -56,7 +59,7 @@ export function scoreRecordedVote(
 ) {
 	const direction = desiredOutcome === "pass" ? 1 : -1
 	const weighted = baseValues[recordedVote] * direction * weight
-	if (isNaN(weighted)) {
+	if (Number.isNaN(weighted)) {
 		return null
 	}
 	return weighted
@@ -85,6 +88,7 @@ function scoreSummary(
 	const totalWeight = scoredVotes.reduce((sum, vote) => sum + vote.weight, 0)
 	return {
 		totalScore,
+		totalWeight,
 		applicableVoteCount: scoredVotes.length,
 		averageScore: totalWeight === 0 ? 0 : totalScore / totalWeight,
 	}

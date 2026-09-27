@@ -107,6 +107,7 @@ h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1; }
 .overall-table-row { background: var(--blue); color: #fff; }
 .overall-table-row th { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; padding: 1rem; text-align: left; }
 .overall-table-row td { font-family: 'DM Mono', monospace; font-size: 1.15rem; height: 58px; }
+.grade-summary { display: block; font-size: .62rem; font-weight: 400; line-height: 1.2; opacity: .8; }
 .category-table-row { background: var(--panel); }
 .category-table-row:hover { background: #fffef5; }
 .category-table-row th { font-weight: 500; text-align: left; }
