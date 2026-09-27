@@ -159,7 +159,6 @@ Goal: make the report card personal and shareable.
 - [x] Use category deselection to clear overrides for its votes.
 - [x] Encode selected categories in deep links.
 - [x] Encode vote overrides in compact deep links.
-- [ ] Show when the report card has user overrides.
 - [X] Add a `Reset to Defaults` control for vote overrides.
 - [X] Add a `Share` button using the Clipboard API with a fallback.
 - [ ] Version the URL format for future compatibility.
@@ -171,7 +170,7 @@ Goal: make the report card personal and shareable.
 Goal: make the tool feel like a polished report card without sacrificing
 clarity.
 
-- [ ] Finalize party colours and available logo assets.
+- [X] Finalize party colours and available logo assets.
 - [ ] Add grade colour treatments with text labels, not colour alone.
 - [ ] Make zero-point votes visually neutral rather than light green.
 - [ ] Remove the separate visual state for zero or `null` scores; only the

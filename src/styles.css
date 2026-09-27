@@ -154,7 +154,7 @@ h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1; }
 .score-negative.score-level-4 { background: #e79883; }
 .score-negative.score-level-5 { background: #d97867; }
 .score-negative.score-level-6 { background: #c65a4d; }
-.score-muted { color: #9ca69d; }
+.score-muted { color: #9ca69d; background: #ebece4; }
 .grade-f { background: #e88973; color: var(--ink); }
 .grade-d { background: #f2c57e; color: var(--ink); }
 .grade-c { background: #dfe39a; color: var(--ink); }
