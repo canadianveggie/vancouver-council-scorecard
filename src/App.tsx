@@ -122,37 +122,49 @@ async function copyText(text: string) {
 
 const overrideOptions: Array<{
 	label: string
+	textLabel: string
 	description: string
 	override: VoteOverride
 }> = [
 	{
-		label: "-3",
+		label: "😡",
+		textLabel: "-3",
 		description: "Want this vote to fail, weight 3",
 		override: { desiredOutcome: "fail", weight: 3 },
 	},
 	{
-		label: "-2",
+		label: "☹️",
+		textLabel: "-2",
 		description: "Want this vote to fail, weight 2",
 		override: { desiredOutcome: "fail", weight: 2 },
 	},
 	{
 		label: "👎",
+		textLabel: "-1",
 		description: "Want this vote to fail, weight 1",
 		override: { desiredOutcome: "fail", weight: 1 },
 	},
-	{ label: "🚫", description: "Ignore this vote", override: { ignored: true } },
+	{
+		label: "🚫",
+		textLabel: "0",
+		description: "Ignore this vote",
+		override: { ignored: true },
+	},
 	{
 		label: "👍",
+		textLabel: "+1",
 		description: "Want this vote to pass, weight 1",
 		override: { desiredOutcome: "pass", weight: 1 },
 	},
 	{
-		label: "+2",
+		label: "🙂",
+		textLabel: "+2",
 		description: "Want this vote to pass, weight 2",
 		override: { desiredOutcome: "pass", weight: 2 },
 	},
 	{
-		label: "+3",
+		label: "❤️",
+		textLabel: "+3",
 		description: "Want this vote to pass, weight 3",
 		override: { desiredOutcome: "pass", weight: 3 },
 	},
@@ -229,7 +241,10 @@ function VoteOverrideControl({
 							title={option.description}
 							type="button"
 						>
-							{option.label}
+							<span aria-hidden="true">{option.label}</span>
+							<span className="vote-override-option-label">
+								{option.textLabel}
+							</span>
 						</button>
 					)
 				})}
