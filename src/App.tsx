@@ -728,7 +728,9 @@ function App() {
 			</nav>
 
 			<section className="hero" aria-labelledby="page-title">
-				<p className="eyebrow">Vancouver City Council· 2022-2026</p>
+				<p className="eyebrow">
+					Vancouver City Council Voting Record· 2022-2026
+				</p>
 				<h1 id="page-title">
 					Vote based on actions
 					<br />
@@ -890,8 +892,13 @@ function App() {
 				</ul>
 				<p className="methodology-copy">
 					Grades are averages across the councillors and weighted for each vote.
-					If you don't like the weighting or desired outcome for any vote, you
-					can change it or ignore that vote completely.
+				</p>
+				<h3>Customization</h3>
+				<p className="methodology-copy">
+					Customize the report card to reflect your priorities.<br/>
+          Choose the three categories that matter most to you.<br/>
+          For each vote, you can change the desired outcome, adjust its weight, or ignore it entirely.<br/>
+          Results update immediately, and your customizations are saved when you share your report card.
 				</p>
 				<h3>Data sources</h3>
 				<p className="methodology-copy">
@@ -911,7 +918,8 @@ function App() {
 					>
 						meeting minutes
 					</a>
-					, and cross-referenced with online news articles.
+					, and cross-referenced with online news articles. The most influential
+					and news-worthy votes from the past 4 years are featured here.
 				</p>
 				<p className="methodology-copy">
 					If I messed up encoding any of the data, please let me know at{" "}
