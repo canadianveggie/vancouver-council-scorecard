@@ -813,7 +813,7 @@ function App() {
 			>
 				<div className="section-heading">
 					<div>
-						<p className="eyebrow">Step 01</p>
+						<p className="eyebrow">Categories</p>
 						<h2 id="category-heading">Choose up to three priorities</h2>
 					</div>
 					<span className="selection-count">
@@ -924,11 +924,15 @@ function App() {
 					.
 				</p>
 				<h3>More details</h3>
-        <p className="methodology-copy">
-          Clicking on a category will show the votes that make up the score.<br/>
-          Each vote has details with links to news coverage and teh council minutes.<br/>
-          Clicking on a party will show the individual councillors and their scores.
-        </p>
+				<p className="methodology-copy">
+					Clicking on a category will show the votes that make up the score.
+					<br />
+					Each vote has details with links to news coverage and the council
+					minutes.
+					<br />
+					Clicking on a party will show the individual councillors and their
+					scores.
+				</p>
 
 				<h3>Scoring</h3>
 				<ul className="scoring-list">
@@ -990,9 +994,10 @@ function App() {
 					>
 						meeting minutes
 					</a>
-					, and cross-referenced with online news articles.<br/>
-          Not every vote is featured, but I tried to highlight the most influential
-					and news-worthy ones from the past 4 years.
+					, and cross-referenced with online news articles.
+					<br />
+					Not every vote is featured, but I tried to highlight the most
+					influential and news-worthy ones from the past 4 years.
 				</p>
 				<h3>Feedback</h3>
 				<p className="methodology-copy">
