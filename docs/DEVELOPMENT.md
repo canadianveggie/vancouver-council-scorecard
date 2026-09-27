@@ -5,7 +5,7 @@ then refining the scoring model and visual presentation with real examples.
 
 ## Phase 0: Repository and conventions
 
-Status: in progress
+Status: complete
 
 - [x] Initialize the Git repository.
 - [x] Connect the repository to GitHub over SSH.
@@ -34,7 +34,7 @@ Acceptance criteria:
 
 - [x] The app runs locally with one documented command.
 - [x] A clean build succeeds without manual file copying.
-- A push to `main` can publish the site automatically.
+- [x] A push to `main` can publish the site automatically.
 
 ## Phase 2: Data model and validation
 
@@ -90,7 +90,8 @@ Goal: implement scoring independently from the user interface.
 - [x] Implement the base vote-value mapping.
 - [x] Implement desired-outcome inversion for `Pass` and `Fail`.
 - [x] Apply vote weights.
-- [x] Treat `Absent` as zero for the initial version.
+- [x] Treat `Absent` as not applicable and exclude it from the initial
+  version's applicable-vote counts.
 - [x] Treat `null` as not eligible and exclude it from applicable-vote counts.
 - [x] Calculate councillor vote scores.
 - [x] Calculate category totals.
@@ -136,14 +137,14 @@ Goal: choose a grade model based on observed data rather than assumptions.
 - [x] Choose initial fixed grade thresholds.
 - [x] Document the grade calculation in the design document.
 - [x] Add tests for grade boundaries.
-- [ ] Decide whether `Absent` should remain a zero or become `null`. If it
-  remains zero, change Christine Boyle's provincial-election-period absences
-  to `null` where appropriate.
+- [x] Decide whether `Absent` should remain a zero or become `null`: absences
+  are represented as `null` and excluded from applicable-vote counts.
 
 Run `pnpm grades:report` to reproduce the Phase 5 comparison against the current
 generated dataset. The initial UI uses weighted average score rather than party
 rank: each recorded vote contributes its score divided by the total applicable
-vote weight. `Absent` remains an applicable zero, while `null` is excluded.
+vote weight. `Absent` is represented as `null` and excluded, while abstentions
+remain applicable zeroes.
 
 This phase should not block the first interactive prototype. Raw scores can be
 shown while the grade model is being evaluated.
@@ -159,8 +160,8 @@ Goal: make the report card personal and shareable.
 - [x] Use category deselection to clear overrides for its votes.
 - [x] Encode selected categories in deep links.
 - [x] Encode vote overrides in compact deep links.
-- [X] Add a `Reset to Defaults` control for vote overrides.
-- [X] Add a `Share` button using the Clipboard API with a fallback.
+- [x] Add a `Reset to Defaults` control for vote overrides.
+- [x] Add a `Share` button using the Clipboard API with a fallback.
 - [ ] Version the URL format for future compatibility.
 - [x] Add tests for parsing and serializing shared URLs.
 - [ ] Add tests for invalid and unsupported shared URLs.
@@ -170,9 +171,9 @@ Goal: make the report card personal and shareable.
 Goal: make the tool feel like a polished report card without sacrificing
 clarity.
 
-- [X] Finalize party colours and available logo assets.
-- [ ] Add grade colour treatments with text labels, not colour alone.
-- [ ] Make zero-point votes visually neutral rather than light green.
+- [x] Finalize party colours and available logo assets.
+- [x] Add grade colour treatments with text labels, not colour alone.
+- [x] Make zero-point votes visually neutral rather than light green.
 - [ ] Remove the separate visual state for zero or `null` scores; only the
   vote name should change colour.
 - [x] Add responsive table/card layouts for small screens.
@@ -183,21 +184,22 @@ clarity.
   tooltips.
 - [x] Add a documented councillor sort default: score descending, then
   councillor ID alphabetically.
-- [ ] Revisit the green table headers so they do not compete with the red-green
+- [x] Revisit the green table headers so they do not compete with the red-green
   score treatment.
 - [ ] Make positive and negative scores visually clearer using accessible
   background treatments, text labels, and sufficient contrast.
 - [ ] Add restrained expand/collapse animation.
-- [ ] Respect `prefers-reduced-motion`.
+- [x] Respect `prefers-reduced-motion`.
 - [ ] Verify keyboard navigation and focus states.
 - [ ] Check colour contrast.
-- [ ] Add a clear methodology and data-source section.
+- [x] Add a clear methodology and data-source section.
 - [ ] Add a custom 404 page if needed for GitHub Pages.
-- [ ] Add social sharing metadata: icon, media preview, title, and description.
+- [x] Add social sharing metadata: favicon, 1200x630 media preview, title, and
+  description.
 - [x] Automatically scroll to the report card when the third category is chosen.
-- [ ] Clean up the introductory text.
-- [ ] Clean up the footer text.
-- [ ] Add a real About section with methodology, feedback instructions, and a
+- [x] Clean up the introductory text.
+- [x] Clean up the footer text.
+- [x] Add a real About section with methodology, feedback instructions, and a
   link to canadianveggie.com.
 
 ## Phase 8: Data expansion and release
@@ -223,29 +225,30 @@ Goal: prepare the first public release.
 
 ## Current status
 
-The first functional report-card milestone is complete. The data pipeline,
-scoring engine, category selection, party and councillor drill-downs, vote
-details, responsive layouts, and URL-synchronized overrides are working.
+The first functional report-card milestone and the initial personalization and
+sharing workflow are complete. The data pipeline, scoring engine, category
+selection, party and councillor drill-downs, vote details, responsive layouts,
+URL-synchronized overrides, reset/share controls, methodology content, and
+social preview assets are working.
 
-The current dataset is good enough to support the next product milestones. Data
-review remains part of release readiness, but it should not block finishing the
-personalization and sharing workflow or polishing the public-facing experience.
+The current dataset is good enough to support a public beta. Data review and a
+small accessibility/presentation pass remain before calling the release ready.
 
 ## Recommended immediate sequence
 
 Work through the remaining items in this order:
 
-1. Complete personalization and sharing: modified-state feedback, reset, the
-   share button, URL versioning, and invalid-link handling.
-2. Finish the high-impact presentation and accessibility pass: score contrast,
-   neutral zero scores, table-header hierarchy, expanded-column behaviour,
-   shorter vote labels, keyboard/focus states, and reduced-motion behaviour.
-3. Add the public explanation layer: About/methodology content, data-source
-   links, a data timestamp, cleaned introductory and footer copy, and social
-   sharing metadata.
-4. Perform release validation: review misleading comparisons, confirm the
-   remaining service-period and affiliation details, run the data/build/test
-   checks, and add a release checklist.
+1. Finish URL robustness: version the URL format and add tests/handling for
+   malformed, unsupported, or stale shared URLs.
+2. Finish the high-impact presentation and accessibility pass: remove the
+   remaining zero/null visual distinction, reduce the visual jump when columns
+   expand, shorten vote-column labels, verify keyboard/focus behaviour and
+   colour contrast, and improve positive/negative score clarity.
+3. Add release metadata and validation: a data timestamp, custom 404 page if
+   needed, and a release checklist covering build, tests, links, and data.
+4. Complete editorial review: assess misleading comparisons, verify service
+   periods and affiliations, review every vote's outcome/weight/source, and
+   resolve remaining spelling and amendment inconsistencies.
 5. Expand the dataset and add the custom domain when the initial public release
    is ready.
 
