@@ -86,7 +86,7 @@ function formatGradeSummary(
 	score: CategoryGrade | PartyScore | CouncillorScore,
 	denominator: number,
 ) {
-	return "(" + Math.round(score.totalScore) + "/" + denominator + ")"
+	return `(${Math.round(score.totalScore)}/${denominator})`
 }
 
 function councillorInitials(name: string) {
@@ -638,6 +638,9 @@ function ScoreTable({
 								×
 							</button>
 						</div>
+						{selectedVote.description && (
+							<p className="vote-modal-paragraph">{selectedVote.description}</p>
+						)}
 						<dl className="vote-metadata">
 							<div>
 								<dt>Date</dt>
@@ -648,9 +651,6 @@ function ScoreTable({
 								<dd>{selectedVote.outcome}</dd>
 							</div>
 						</dl>
-						{selectedVote.description && (
-							<p className="vote-modal-paragraph">{selectedVote.description}</p>
-						)}
 						{selectedVote.outcomeDetails && (
 							<p className="vote-modal-paragraph">
 								{selectedVote.outcomeDetails}
