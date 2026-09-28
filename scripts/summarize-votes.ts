@@ -17,7 +17,7 @@ const metadataHeaders = new Set([
 	"Weight",
 	"News Link",
 	"Meeting Minutes",
-	"voteId",
+	"voteNumber",
 ])
 
 function countBy<T>(items: T[], getKey: (item: T) => string) {

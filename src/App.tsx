@@ -747,6 +747,10 @@ function ScoreTable({
 								<dt>Outcome</dt>
 								<dd>{selectedVote.outcome}</dd>
 							</div>
+							<div>
+								<dt>Vote No.</dt>
+								<dd>{selectedVote.voteNumber}</dd>
+							</div>
 						</dl>
 						{selectedVote.outcomeDetails && (
 							<p className="vote-modal-paragraph">

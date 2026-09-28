@@ -167,13 +167,10 @@ async function main() {
 			),
 		})
 
-		const voteNumbers = (vote.voteId ?? "")
-			.split("|")
-			.map((id) => id.trim())
-			.filter(Boolean)
-		const matchedCouncilVotes = voteNumbers.flatMap(
-			(number) => councilVotesByNumber.get(number) ?? [],
-		)
+		const voteNumber = (vote.voteNumber ?? "").trim()
+		const matchedCouncilVotes = voteNumber
+			? (councilVotesByNumber.get(voteNumber) ?? [])
+			: []
 		if (matchedCouncilVotes.length > 0) matchedVotes += 1
 
 		const meetingType = values(matchedCouncilVotes, "Meeting Type")

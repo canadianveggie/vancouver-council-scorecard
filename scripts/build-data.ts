@@ -29,7 +29,7 @@ const requiredMetadataHeaders = [
 	"Weight",
 	"News Link",
 	"Meeting Minutes",
-	"voteId",
+	"voteNumber",
 ]
 const editorialMetadataHeaders = ["strike-and-replace", "reconciled"]
 const metadataHeaders = [
@@ -147,6 +147,13 @@ function parseDate(value: string, rowNumber: number) {
 	return value
 }
 
+function parseVoteId(value: string, rowNumber: number) {
+	if (!/^[1-9]\d*$/.test(value)) {
+		error(`Row ${rowNumber}: voteNumber must be a single positive integer`)
+	}
+	return value
+}
+
 function parseSourceUrl(value: string, rowNumber: number) {
 	if (!value) return null
 	try {
@@ -210,6 +217,10 @@ async function build() {
 	const usedVoteIds = new Set<string>()
 	const votes: Vote[] = sourceRows.map((row, index) => {
 		const rowNumber = index + 2
+		const voteNumber = parseVoteId(
+			required(row, "voteNumber", rowNumber),
+			rowNumber,
+		)
 		const title = required(row, "Vote", rowNumber)
 		const category = parseCategory(
 			required(row, "Category", rowNumber),
@@ -235,6 +246,7 @@ async function build() {
 
 		return {
 			id,
+			voteNumber,
 			title,
 			category,
 			description: required(row, "Description", rowNumber),

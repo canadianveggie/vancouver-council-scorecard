@@ -140,8 +140,8 @@ async function main() {
 
 	const headers = Object.keys(scorecard[0] ?? {})
 	const outputHeaders = [
-		...headers.filter((header) => header !== "voteId"),
-		"voteId",
+		...headers.filter((header) => header !== "voteNumber"),
+		"voteNumber",
 	]
 	const unmatched: string[] = []
 	const ambiguous: Array<{ title: string; candidates: string[] }> = []
@@ -165,7 +165,10 @@ async function main() {
 		if (selected.length === 0) unmatched.push(row.Vote)
 		if (selected.length > 1)
 			ambiguous.push({ title: row.Vote, candidates: voteIds })
-		return { ...row, voteId: voteIds.join("|") }
+		return {
+			...row,
+			voteNumber: voteIds.length === 1 ? voteIds[0] : "",
+		}
 	})
 
 	console.log(
