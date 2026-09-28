@@ -98,6 +98,14 @@ function councillorInitials(name: string) {
 		.toUpperCase()
 }
 
+function formatCategoryList(categories: string[]) {
+	if (categories.length < 2) {
+		return categories[0] ?? "the issues that matter to me"
+	}
+	if (categories.length === 2) return categories.join(" and ")
+	return `${categories.slice(0, -1).join(", ")}, and ${categories.at(-1)}`
+}
+
 async function copyText(text: string) {
 	if (navigator.clipboard) {
 		try {
@@ -118,6 +126,46 @@ async function copyText(text: string) {
 	const copied = document.execCommand("copy")
 	document.body.removeChild(input)
 	return copied
+}
+
+type ShareStatus = "idle" | "copied" | "shared" | "failed"
+
+function ReportActions({
+	hasOverrides,
+	onReset,
+	onShare,
+	shareStatus,
+}: {
+	hasOverrides: boolean
+	onReset: () => void
+	onShare: () => void
+	shareStatus: ShareStatus
+}) {
+	return (
+		<div className="report-actions">
+			{hasOverrides && (
+				<button className="secondary-button" type="button" onClick={onReset}>
+					Reset to Defaults
+				</button>
+			)}
+			<button className="secondary-button" type="button" onClick={onShare}>
+				{shareStatus === "copied"
+					? "Copied!"
+					: shareStatus === "shared"
+						? "Shared!"
+						: "Share"}
+			</button>
+			<span className="sr-only" aria-live="polite">
+				{shareStatus === "copied"
+					? "Share link copied to clipboard."
+					: shareStatus === "shared"
+						? "Share sheet opened."
+						: shareStatus === "failed"
+							? "Unable to share or copy the report link."
+							: ""}
+			</span>
+		</div>
+	)
 }
 
 const overrideOptions: Array<{
@@ -797,9 +845,7 @@ function App() {
 			new URLSearchParams(window.location.search).get("overrides"),
 		),
 	)
-	const [shareStatus, setShareStatus] = useState<"idle" | "copied" | "failed">(
-		"idle",
-	)
+	const [shareStatus, setShareStatus] = useState<ShareStatus>("idle")
 	const hasMounted = useRef(false)
 	const hasMountedCategories = useRef(false)
 	const hasOverrides = Object.keys(overrides).length > 0
@@ -859,7 +905,24 @@ function App() {
 	}
 
 	async function shareReport() {
-		const copied = await copyText(window.location.href)
+		const shareData = {
+			title: "Vancouver Council Scorecard",
+			text: `Vancouver Council Report Card: This is how the parties rank on ${formatCategoryList(selectedCategories)}.`,
+			url: window.location.href,
+		}
+
+		if (navigator.share) {
+			try {
+				await navigator.share(shareData)
+				setShareStatus("shared")
+				window.setTimeout(() => setShareStatus("idle"), 2500)
+				return
+			} catch (error) {
+				if (error instanceof DOMException && error.name === "AbortError") return
+			}
+		}
+
+		const copied = await copyText(shareData.url)
 		setShareStatus(copied ? "copied" : "failed")
 		window.setTimeout(() => setShareStatus("idle"), 2500)
 	}
@@ -948,31 +1011,12 @@ function App() {
 						</h2>
 					</div>
 					{selectedCategories.length > 0 && (
-						<div className="report-actions">
-							{hasOverrides && (
-								<button
-									className="secondary-button"
-									type="button"
-									onClick={() => setOverrides({})}
-								>
-									Reset to Defaults
-								</button>
-							)}
-							<button
-								className="secondary-button"
-								type="button"
-								onClick={shareReport}
-							>
-								{shareStatus === "copied" ? "Copied!" : "Share"}
-							</button>
-							<span className="sr-only" aria-live="polite">
-								{shareStatus === "copied"
-									? "Share link copied to clipboard."
-									: shareStatus === "failed"
-										? "Unable to copy the share link."
-										: ""}
-							</span>
-						</div>
+						<ReportActions
+							hasOverrides={hasOverrides}
+							onReset={() => setOverrides({})}
+							onShare={shareReport}
+							shareStatus={shareStatus}
+						/>
 					)}
 				</div>
 				{!selectedCategories.length ? (
@@ -983,11 +1027,19 @@ function App() {
 						<p>Choose at least one category to compare the voting records.</p>
 					</div>
 				) : (
-					<ScoreTable
-						selectedCategories={selectedCategories}
-						overrides={overrides}
-						setOverrides={setOverrides}
-					/>
+					<>
+						<ScoreTable
+							selectedCategories={selectedCategories}
+							overrides={overrides}
+							setOverrides={setOverrides}
+						/>
+						<ReportActions
+							hasOverrides={hasOverrides}
+							onReset={() => setOverrides({})}
+							onShare={shareReport}
+							shareStatus={shareStatus}
+						/>
+					</>
 				)}
 			</section>
 
@@ -1088,7 +1140,11 @@ function App() {
 				<h3>Feedback</h3>
 				<p className="methodology-copy">
 					If I messed up encoding any of the data, please let me know at{" "}
-					<a href="https://canadianveggie.com/2026/09/27/vancouver-election-2026-council-scorecard/" target="_blank" rel="noreferrer">
+					<a
+						href="https://canadianveggie.com/2026/09/27/vancouver-election-2026-council-scorecard/"
+						target="_blank"
+						rel="noreferrer"
+					>
 						canadianveggie.com
 					</a>
 					.

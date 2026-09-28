@@ -48,6 +48,7 @@ h1 em { color: var(--blue); font-style: normal; }
 h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1; }
 .selection-count { color: var(--muted); font-family: 'DM Mono', monospace; font-size: .7rem; }
 .report-actions { align-items: center; display: flex; flex-wrap: wrap; gap: .6rem; justify-content: flex-end; }
+.preview-panel > .report-actions { margin-top: 1rem; }
 .secondary-button { background: var(--panel); border: 1px solid var(--line); border-radius: 999px; color: var(--blue); cursor: pointer; font-family: 'DM Mono', monospace; font-size: .7rem; padding: .65rem .9rem; }
 .secondary-button:hover, .secondary-button:focus-visible { border-color: var(--blue); outline: 2px solid var(--blue-light); outline-offset: 2px; }
 .category-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); }
