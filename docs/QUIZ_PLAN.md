@@ -26,7 +26,7 @@ encoded answers.
    - image, when provided;
    - concise argument for;
    - concise argument against;
-   - three choices: `Support`, `Oppose`, and `Abstain`.
+   - two choices: `Support` and `Oppose`.
 4. The visitor can move forward and backward, with progress such as `3 of 11`.
    An answer is required before advancing; there is no skip option in the
    first release.
@@ -58,7 +58,8 @@ with quoted property names and JSON `null` values:
     "onecity": "Support",
     "green": "Oppose",
     "cope": "Support"
-  }
+  },
+  "newsLink": ""
 }
 ```
 
@@ -76,9 +77,9 @@ The currently proposed issue set is:
 - OPS in Downtown Vancouver — Safety
 - Lower Speed Limits — Safety
 
-This is 11 issues as currently listed. The plan should support the full list,
-but the final count must be confirmed because exact 10% increments require 10
-issues.
+This is 11 issues as currently listed, and the first release will use all 11.
+Each issue is equally weighted; the UI rounds the resulting approximately 9.1%
+increments to whole percentages.
 
 Recommended validation rules:
 
@@ -87,8 +88,6 @@ Recommended validation rules:
 - non-empty title, context, and both arguments;
 - `imageUrl` is optional and resolves correctly from the public site root;
 - each party position is `Support` or `Oppose`;
-- source terminology is normalized at build time so `Proposed` maps to
-  `Supported` and `Amended` maps to `Opposed`;
 - party IDs must exist in the existing metadata files;
 - every supported party has a position for every issue, so every issue counts
   toward every party's percentage.
@@ -137,7 +136,7 @@ S = Support
 O = Oppose
 ```
 
-For example, `votes=SOOSSSSOOS` contains 10 answers. The random order should
+For example, `votes=SOOSSSSOOSO` contains 11 answers. The random order should
 be generated and stored in client state; it must not change the meaning of the
 answer string or the result URL.
 
@@ -211,8 +210,8 @@ Likely modules:
 
 ## Suggested execution order
 
-1. Confirm the final issue count and add the approved party positions.
-2. Add the 10-issue source data and validation/build output.
+1. Confirm the editorialized party positions and issue copy.
+2. Add the 11-issue source data and validation/build output.
 3. Implement and test the pure URL, shuffle, and matching modules.
 4. Add the quiz page and card interaction.
 5. Add result entry points, ranking, share behavior, and social metadata.

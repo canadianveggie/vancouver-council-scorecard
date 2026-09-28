@@ -1,0 +1,189 @@
+[
+  {
+    "id": "villages-plan",
+    "title": "Villages Plan",
+    "category": "Housing",
+    "context": "A plan to turn 17 small commercial nodes into walkable, mixed-use neighbourhood hubs with more homes and shops.",
+    "argumentFor": "Adds homes and everyday services in existing neighbourhood centres, making it easier to live near shops, jobs, and transit.",
+    "argumentAgainst": "The scale and pace of change raised concerns about neighbourhood character, infrastructure, and whether the plan had enough public support.",
+    "imageUrl": null,
+    "partyPositions": {
+      "abc": "Oppose",
+      "green": "Oppose",
+      "onecity": "Support",
+      "cope": "Oppose",
+      "vote-vancouver": "Oppose"
+    },
+    "newsLink": "https://www.cbc.ca/news/canada/british-columbia/vancouver-council-rejects-villages-plan-9.7288472"
+  },
+  {
+    "id": "renters-office",
+    "title": "Renters Office",
+    "category": "Housing",
+    "context": "Whether Vancouver should fund a City-run office that helps renters understand their rights and navigate disputes.",
+    "argumentFor": "Gives renters practical support in a tight housing market and makes tenant protections easier to understand and use.",
+    "argumentAgainst": "The service cost roughly $600,000 a year and critics argued that tenant advocacy should be provided by senior governments or community groups.",
+    "imageUrl": null,
+    "partyPositions": {
+      "abc": "Oppose",
+      "green": "Support",
+      "onecity": "Support",
+      "cope": "Support",
+      "vote-vancouver": "Support"
+    },
+    "newsLink": "https://www.ctvnews.ca/vancouver/article/motion-to-bring-back-vancouver-renter-office-defeated-in-tie-vote/"
+  },
+  {
+    "id": "safeway-towers",
+    "title": "Safeway Towers",
+    "category": "Housing",
+    "context": "Three rental towers with more than 1,000 homes beside Commercial-Broadway Station.",
+    "argumentFor": "Adds homes next to one of Vancouver's most connected transit nodes and keeps new housing close to shops and services.",
+    "argumentAgainst": "The project's height, scale, affordability, and neighbourhood impacts drew major concerns, including the 'No Megatowers' campaign.",
+    "imageUrl": null,
+    "partyPositions": {
+      "abc": "Support",
+      "green": "Support",
+      "onecity": "Support",
+      "cope": "Oppose",
+      "vote-vancouver": "Support"
+    },
+    "newsLink": "https://globalnews.ca/news/11236071/commercial-broadway-towers-approved/"
+  },
+  {
+    "id": "beach-avenue-bike-lane",
+    "title": "Beach Avenue Bike Lane",
+    "category": "Transportation",
+    "context": "Whether to maintain an all-ages-and-abilities bike route on Beach Avenue beside Stanley Park.",
+    "argumentFor": "Protects a comfortable route for people biking and walking, including families, while reducing conflicts with fast-moving traffic.",
+    "argumentAgainst": "Removing the lane would restore two-way vehicle traffic and give drivers more direct access through the Stanley Park edge.",
+    "imageUrl": null,
+    "partyPositions": {
+      "abc": "Oppose",
+      "green": "Support",
+      "onecity": "Support",
+      "cope": "Support",
+      "vote-vancouver": "Oppose"
+    },
+    "newsLink": "https://vancouver.citynews.ca/2024/05/16/vancouvers-beach-avenue-reopening-to-two-way-traffic/"
+  },
+  {
+    "id": "natural-gas-in-new-construction",
+    "title": "Natural Gas in New Construction",
+    "category": "Environment",
+    "context": "Whether new homes and buildings should be allowed to use natural gas for heating and hot water.",
+    "argumentFor": "Keeps more heating options available and may lower upfront costs for some new buildings and households.",
+    "argumentAgainst": "Locks new buildings into fossil-fuel infrastructure and makes it harder to reduce emissions and meet climate targets.",
+    "imageUrl": null,
+    "partyPositions": {
+      "abc": "Support",
+      "green": "Oppose",
+      "onecity": "Oppose",
+      "cope": "Oppose",
+      "vote-vancouver": "Oppose"
+    },
+    "newsLink": "https://www.cbc.ca/news/canada/british-columbia/vancouver-mayor-building-codes-emissions-natural-gas-9.7208260"
+  },
+  {
+    "id": "bitcoin-friendly-city",
+    "title": "Bitcoin-Friendly City",
+    "category": "Governance",
+    "context": "Whether Vancouver should study using, holding, or accepting Bitcoin in city business.",
+    "argumentFor": "Explores new payment and financial technology options and could position Vancouver as an innovation-friendly city.",
+    "argumentAgainst": "Public money should not be exposed to a volatile asset, and studying Bitcoin may distract from more immediate city priorities.",
+    "imageUrl": null,
+    "partyPositions": {
+      "abc": "Support",
+      "green": "Oppose",
+      "onecity": "Oppose",
+      "cope": "Oppose",
+      "vote-vancouver": "Support"
+    },
+    "newsLink": "https://globalnews.ca/news/10913029/vancouver-bitcoin-motion-approved/"
+  },
+  {
+    "id": "abolishing-the-park-board",
+    "title": "Abolishing the Park Board",
+    "category": "Governance",
+    "context": "Whether Vancouver should replace its elected Park Board with parks governance directed by City Council.",
+    "argumentFor": "Could simplify decision-making, reduce duplicated administration, and align parks with the rest of the city's services.",
+    "argumentAgainst": "Removes a distinct elected voice for parks and recreation and concentrates more power over public spaces in City Council.",
+    "imageUrl": null,
+    "partyPositions": {
+      "abc": "Support",
+      "green": "Oppose",
+      "onecity": "Oppose",
+      "cope": "Oppose",
+      "vote-vancouver": "Support"
+    },
+    "newsLink": "https://globalnews.ca/news/10168076/vancouver-council-park-board-vote/"
+  },
+  {
+    "id": "increasing-police-budgets",
+    "title": "Increasing Police Budgets",
+    "category": "Safety",
+    "context": "Whether the City should spend more to expand the Vancouver Police Department, including funding for 100 additional officers.",
+    "argumentFor": "Adds police capacity for emergency response, investigations, and public safety in a growing city.",
+    "argumentAgainst": "Police increases take money from housing, mental-health, prevention, and community services that may address the causes of harm more directly.",
+    "imageUrl": null,
+    "partyPositions": {
+      "abc": "Support",
+      "green": "Oppose",
+      "onecity": "Oppose",
+      "cope": "Oppose",
+      "vote-vancouver": "Support"
+    },
+    "newsLink": "https://www.cbc.ca/news/canada/british-columbia/vancouver-budget-property-tax-increase-1.6763926"
+  },
+  {
+    "id": "zero-means-zero-budget",
+    "title": "Zero-Means-Zero Budget",
+    "category": "Affordability",
+    "context": "A budget approach that freezes property taxes while requiring the City to find offsets and reduce or reshape programs.",
+    "argumentFor": "Limits tax increases for households and businesses and pushes the City to find efficiencies before asking taxpayers for more.",
+    "argumentAgainst": "A tax freeze can mean cuts to climate, housing, and other services while still increasing spending in areas such as policing.",
+    "imageUrl": null,
+    "partyPositions": {
+      "abc": "Support",
+      "green": "Oppose",
+      "onecity": "Oppose",
+      "cope": "Oppose",
+      "vote-vancouver": "Oppose"
+    },
+    "newsLink": "https://globalnews.ca/news/11469811/vancouver-council-property-tax-freeze/"
+  },
+  {
+    "id": "ops-in-downtown-vancouver",
+    "title": "OPS in Downtown Vancouver",
+    "category": "Safety",
+    "context": "Whether Vancouver should allow a proposed overdose prevention site at 900 Helmcken Street.",
+    "argumentFor": "Keeps people who use drugs alive and connects them with health care, treatment, and other supports in a high-need area.",
+    "argumentAgainst": "Residents and businesses raised concerns about safety, street disorder, and whether the proposed location was appropriate for the surrounding community.",
+    "imageUrl": null,
+    "partyPositions": {
+      "abc": "Oppose",
+      "green": "Support",
+      "onecity": "Support",
+      "cope": "Support",
+      "vote-vancouver": "Oppose"
+    },
+    "newsLink": "https://vancouver.citynews.ca/2026/05/05/vancouver-proposed-overdose-prevention-site-mayor-motion/"
+  },
+  {
+    "id": "lower-speed-limits",
+    "title": "Lower Speed Limits",
+    "category": "Safety",
+    "context": "Whether Vancouver should lower speed limits on local streets and selected downtown roads.",
+    "argumentFor": "Lower speeds reduce the severity of crashes and make streets safer for people walking, biking, and rolling.",
+    "argumentAgainst": "Lower limits can lengthen trips, frustrate drivers, and may have limited effect without better street design and enforcement.",
+    "imageUrl": null,
+    "partyPositions": {
+      "abc": "Oppose",
+      "green": "Support",
+      "onecity": "Support",
+      "cope": "Support",
+      "vote-vancouver": "Support"
+    },
+    "newsLink": "https://visionzerovancouver.ca/2026/06/10/abc-guts-road-safety/"
+  }
+]

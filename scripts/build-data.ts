@@ -9,6 +9,7 @@ import type {
 	ScorecardData,
 	Vote,
 } from "../src/data/types"
+import type { PartyPosition, QuizData, QuizIssue } from "../src/quiz/types"
 
 type SourceRow = Record<string, string>
 
@@ -17,6 +18,7 @@ const dataDirectory = path.join(root, "data")
 const sourcePath = path.join(dataDirectory, "votes.csv")
 const generatedDirectory = path.join(dataDirectory, "generated")
 const outputPath = path.join(generatedDirectory, "scorecard.json")
+const quizOutputPath = path.join(generatedDirectory, "quiz.json")
 
 const requiredMetadataHeaders = [
 	"Vote",
@@ -110,6 +112,81 @@ function validateMetadata(parties: Party[], councillors: Councillor[]) {
 	return councillorIds
 }
 
+function normalizeImageUrl(value: unknown) {
+	if (value === null || value === undefined || value === "") return null
+	if (typeof value !== "string") return null
+	return value.replace(/^public\//, "")
+}
+
+function validateQuizData(parties: Party[], source: unknown): QuizData | null {
+	if (!Array.isArray(source)) {
+		error("key_issues.json must contain an array")
+		return null
+	}
+
+	const partyIds = new Set(parties.map((party) => party.id))
+	const issueIds = new Set<string>()
+	const partyPositions = new Set<PartyPosition>(["Support", "Oppose"])
+	const issues: QuizIssue[] = []
+
+	for (const [index, candidate] of source.entries()) {
+		const issue = candidate as Partial<QuizIssue>
+		const label = `Quiz issue ${index + 1}`
+		if (!issue.id || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(issue.id)) {
+			error(`${label}: id must be a URL-safe slug`)
+		}
+		if (issue.id && issueIds.has(issue.id)) {
+			error(`${label}: duplicate id ${issue.id}`)
+		}
+		if (issue.id) issueIds.add(issue.id)
+
+		for (const field of [
+			"title",
+			"category",
+			"context",
+			"argumentFor",
+			"argumentAgainst",
+		] as const) {
+			if (typeof issue[field] !== "string" || !issue[field]?.trim()) {
+				error(`${label}: ${field} is required`)
+			}
+		}
+
+		const positions = issue.partyPositions
+		if (!positions || typeof positions !== "object") {
+			error(`${label}: partyPositions is required`)
+			continue
+		}
+		for (const partyId of partyIds) {
+			const position = positions[partyId]
+			if (!partyPositions.has(position as PartyPosition)) {
+				error(`${label}: missing or invalid position for party ${partyId}`)
+			}
+		}
+		for (const partyId of Object.keys(positions)) {
+			if (!partyIds.has(partyId)) {
+				error(`${label}: unknown party id ${partyId}`)
+			}
+		}
+
+		let newsLink: string | null = null
+		if (issue.newsLink) newsLink = parseSourceUrl(issue.newsLink, index + 1)
+		issues.push({
+			id: issue.id ?? `quiz-issue-${index + 1}`,
+			title: issue.title?.trim() ?? "",
+			category: issue.category?.trim() ?? "",
+			context: issue.context?.trim() ?? "",
+			argumentFor: issue.argumentFor?.trim() ?? "",
+			argumentAgainst: issue.argumentAgainst?.trim() ?? "",
+			imageUrl: normalizeImageUrl(issue.imageUrl),
+			partyPositions: positions as Record<string, PartyPosition>,
+			newsLink,
+		})
+	}
+
+	return { issues }
+}
+
 function parseWeight(value: string, rowNumber: number): 1 | 2 | 3 {
 	if (!value) {
 		warning(`Row ${rowNumber}: Weight is blank; defaulting to 1`)
@@ -181,12 +258,14 @@ function parseRecordedVote(
 }
 
 async function build() {
-	const [parties, councillors, csv] = await Promise.all([
+	const [parties, councillors, csv, quizJson] = await Promise.all([
 		loadJsonFile<Party[]>("parties.json"),
 		loadJsonFile<Councillor[]>("councillors.json"),
 		readFile(sourcePath, "utf8"),
+		loadJsonFile<unknown>("key_issues.json"),
 	])
 	validateMetadata(parties, councillors)
+	const quizData = validateQuizData(parties, quizJson)
 	const sourceRows = parse(csv, {
 		columns: true,
 		skip_empty_lines: true,
@@ -287,10 +366,14 @@ async function build() {
 
 	await mkdir(generatedDirectory, { recursive: true })
 	await writeFile(outputPath, `${JSON.stringify(output, null, 2)}\n`)
+	if (quizData) {
+		await writeFile(quizOutputPath, `${JSON.stringify(quizData, null, 2)}\n`)
+	}
 	console.log(
 		`Built ${votes.length} votes for ${councillors.length} councillors and ${parties.length} parties`,
 	)
 	console.log(`Output: ${path.relative(root, outputPath)}`)
+	console.log(`Output: ${path.relative(root, quizOutputPath)}`)
 }
 
 build().catch((cause) => {

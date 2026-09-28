@@ -950,9 +950,17 @@ function App() {
 					parties, explore individual councillors, and see the votes behind
 					every result.
 				</p>
-				<a className="primary-button" href="#categories">
-					Choose your categories <span aria-hidden="true">↓</span>
-				</a>
+				<div className="hero-actions">
+					<a className="primary-button" href="#categories">
+						Choose your categories <span aria-hidden="true">↓</span>
+					</a>
+					<a
+						className="secondary-button hero-quiz-link"
+						href={`${import.meta.env.BASE_URL}quiz.html`}
+					>
+						Take the voting quiz <span aria-hidden="true">→</span>
+					</a>
+				</div>
 			</section>
 
 			<section

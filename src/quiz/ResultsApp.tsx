@@ -1,0 +1,214 @@
+import { useEffect, useState } from "react"
+import quizJson from "../../data/generated/quiz.json"
+import scorecardJson from "../../data/generated/scorecard.json"
+import type { ScorecardData } from "../data/types"
+import { calculatePartyMatches } from "./matching"
+import type { QuizData } from "./types"
+import { decodeAnswers, resultPath } from "./url"
+
+const data = quizJson as QuizData
+const scorecard = scorecardJson as ScorecardData
+const baseUrl = import.meta.env.BASE_URL
+
+async function copyText(value: string) {
+	if (navigator.clipboard) {
+		try {
+			await navigator.clipboard.writeText(value)
+			return true
+		} catch {
+			// Use the legacy method below when clipboard permissions are unavailable.
+		}
+	}
+	const input = document.createElement("textarea")
+	input.value = value
+	input.setAttribute("readonly", "")
+	input.style.position = "fixed"
+	input.style.opacity = "0"
+	document.body.appendChild(input)
+	input.select()
+	const copied = document.execCommand("copy")
+	document.body.removeChild(input)
+	return copied
+}
+
+function partyIdFromPath() {
+	const match = window.location.pathname.match(/results-([^/]+)\.html$/)
+	return match?.[1] ?? null
+}
+
+function ResultsHeader() {
+	return (
+		<nav className="quiz-topbar" aria-label="Primary navigation">
+			<a className="brand" href={baseUrl}>
+				Vancouver Council <span>Scorecard</span>
+			</a>
+			<a className="text-link" href={`${baseUrl}quiz.html`}>
+				Take the quiz again <span aria-hidden="true">↗</span>
+			</a>
+		</nav>
+	)
+}
+
+function InvalidResult() {
+	return (
+		<section className="invalid-result">
+			<p className="eyebrow">Result unavailable</p>
+			<h1>That voting record is incomplete.</h1>
+			<p>
+				Start the quiz again to create a complete result link you can share.
+			</p>
+			<a className="primary-button" href={`${baseUrl}quiz.html`}>
+				Take the quiz <span aria-hidden="true">→</span>
+			</a>
+		</section>
+	)
+}
+
+function ResultActions() {
+	const [status, setStatus] = useState<"idle" | "copied" | "shared">("idle")
+
+	async function share() {
+		const url = window.location.href
+		if (navigator.share) {
+			try {
+				await navigator.share({
+					title: "My Vancouver Council voting match",
+					text: "See which Vancouver party my voting record matches.",
+					url,
+				})
+				setStatus("shared")
+				window.setTimeout(() => setStatus("idle"), 2500)
+				return
+			} catch (error) {
+				if (error instanceof DOMException && error.name === "AbortError") return
+			}
+		}
+		if (await copyText(url)) {
+			setStatus("copied")
+			window.setTimeout(() => setStatus("idle"), 2500)
+		}
+	}
+
+	return (
+		<div className="result-actions">
+			<button className="share-button" type="button" onClick={share}>
+				<span aria-hidden="true">↗</span>
+				{status === "copied"
+					? "Link copied"
+					: status === "shared"
+						? "Shared"
+						: "Share my result"}
+			</button>
+			<a className="result-scorecard-link" href={`${baseUrl}index.html`}>
+				Dive deeper into the scorecard <span aria-hidden="true">→</span>
+			</a>
+			<output className="sr-only" aria-live="polite">
+				{status === "copied" ? "Your result link was copied." : ""}
+			</output>
+		</div>
+	)
+}
+
+export default function ResultsApp() {
+	const answers = decodeAnswers(
+		new URLSearchParams(window.location.search).get("votes"),
+		data.issues.length,
+	)
+	const matches = answers
+		? calculatePartyMatches(data.issues, scorecard.parties, answers)
+		: []
+	const winner = matches[0]
+	const winnerPartyId = winner?.party.id
+	const requestedPartyId = partyIdFromPath()
+
+	useEffect(() => {
+		if (
+			!winnerPartyId ||
+			!requestedPartyId ||
+			requestedPartyId === winnerPartyId
+		)
+			return
+		const canonicalPath = resultPath(winnerPartyId, answers ?? [], baseUrl)
+		window.history.replaceState(null, "", canonicalPath)
+	}, [answers, requestedPartyId, winnerPartyId])
+
+	if (!answers || !winner) {
+		return (
+			<main className="page-shell quiz-page results-page">
+				<ResultsHeader />
+				<InvalidResult />
+			</main>
+		)
+	}
+
+	return (
+		<main className="page-shell quiz-page results-page">
+			<ResultsHeader />
+			<section className="results-hero" aria-labelledby="results-title">
+				<p className="eyebrow">Your result</p>
+				<h1 id="results-title">Your voting record would be most similar to:</h1>
+				<div className="winner-card">
+					<div className="winner-party-mark">
+						{winner.party.logo && (
+							<img alt="" src={`${baseUrl}${winner.party.logo}`} />
+						)}
+					</div>
+					<div>
+						<p className="winner-label">The closest match</p>
+						<h2>{winner.party.name}</h2>
+						<p className="winner-match">{winner.percentage}% match</p>
+					</div>
+				</div>
+				<ResultActions />
+			</section>
+
+			<section className="ranking-section" aria-labelledby="ranking-title">
+				<p className="eyebrow">The full ranking</p>
+				<h2 id="ranking-title">You were also similar to:</h2>
+				<div className="party-ranking">
+					{matches.slice(1).map((match, index) => (
+						<div className="party-ranking-row" key={match.party.id}>
+							<span className="ranking-number">{index + 2}.</span>
+							{match.party.logo && (
+								<img
+									alt=""
+									className="ranking-logo"
+									src={`${baseUrl}${match.party.logo}`}
+								/>
+							)}
+							<strong>{match.party.name}</strong>
+							<span className="ranking-match">{match.percentage}% match</span>
+						</div>
+					))}
+				</div>
+			</section>
+
+			<section
+				className="results-method"
+				aria-labelledby="results-method-title"
+			>
+				<p className="eyebrow">How this works</p>
+				<h2 id="results-method-title">A simple comparison of 11 choices.</h2>
+				<p>
+					Every issue counts equally. Your answers are compared with each
+					party&apos;s editorialized position on the issue, based on the council
+					vote and the public record. Each match is worth roughly 9%.
+				</p>
+				<p>
+					This result is a way into the record. Visit the scorecard to see the
+					votes, councillors, sources, and methodology behind it.
+				</p>
+				<a
+					className="secondary-button inline-button"
+					href={`${baseUrl}index.html`}
+				>
+					Open the full scorecard <span aria-hidden="true">↗</span>
+				</a>
+			</section>
+			<footer className="footer">
+				<span>Vancouver Council Scorecard</span>
+				<a href={`${baseUrl}index.html#about`}>About the project ↗</a>
+			</footer>
+		</main>
+	)
+}
