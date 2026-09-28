@@ -1088,7 +1088,7 @@ function App() {
 				<h3>Feedback</h3>
 				<p className="methodology-copy">
 					If I messed up encoding any of the data, please let me know at{" "}
-					<a href="https://canadianveggie.com" target="_blank" rel="noreferrer">
+					<a href="https://canadianveggie.com/2026/09/27/vancouver-election-2026-council-scorecard/" target="_blank" rel="noreferrer">
 						canadianveggie.com
 					</a>
 					.
