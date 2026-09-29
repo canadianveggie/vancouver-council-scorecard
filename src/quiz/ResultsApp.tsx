@@ -218,7 +218,12 @@ export default function ResultsApp() {
 			</section>
 			<footer className="footer">
 				<span>Vancouver Council Scorecard</span>
-				<a href={`${baseUrl}index.html#about`}>About the project ↗</a>
+				<span>
+					Made by{" "}
+					<a href="https://canadianveggie.com" target="_blank" rel="noopener">
+						@canadianveggie
+					</a>
+				</span>
 			</footer>
 		</main>
 	)

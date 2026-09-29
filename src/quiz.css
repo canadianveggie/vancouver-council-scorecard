@@ -3,6 +3,7 @@
 .quiz-hero { border-bottom: 1px solid var(--line); padding: clamp(5rem, 13vw, 10rem) 0 clamp(4rem, 9vw, 7rem); }
 .quiz-hero h1, .results-hero h1, .invalid-result h1 { font-size: clamp(3.3rem, 8vw, 7rem); line-height: .94; max-width: 940px; }
 .quiz-hero h1 em { color: var(--blue); font-style: normal; }
+.quiz-hero-copy { color: var(--muted); font-size: clamp(1rem, 1.4vw, 1.2rem); line-height: 1.6; margin: 2rem 0 2.5rem; max-width: 570px; }
 .quiz-start { border: 0; cursor: pointer; }
 .quiz-runner { padding: 3.5rem 0 5rem; }
 .quiz-progress-row { align-items: center; display: flex; justify-content: space-between; }

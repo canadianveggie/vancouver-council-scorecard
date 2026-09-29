@@ -41,6 +41,11 @@ function Intro({ onStart }: { onStart: () => void }) {
 				<br />
 				<em>Make your record.</em>
 			</h1>
+			<p className="quiz-hero-copy">
+				Answer {data.issues.length} questions about the decisions that divided
+				Vancouver City Council. Compare your choices with the positions taken by
+				each party.
+			</p>
 			<button
 				className="primary-button quiz-start"
 				type="button"
@@ -233,7 +238,12 @@ export default function QuizApp() {
 			{started ? <QuizRunner /> : <Intro onStart={() => setStarted(true)} />}
 			<footer className="footer">
 				<span>Vancouver Council Scorecard</span>
-				<a href={`${baseUrl}index.html#about`}>About the project ↗</a>
+				<span>
+					Made by{" "}
+					<a href="https://canadianveggie.com" target="_blank" rel="noopener">
+						@canadianveggie
+					</a>
+				</span>
 			</footer>
 		</main>
 	)
