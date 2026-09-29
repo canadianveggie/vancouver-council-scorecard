@@ -34,54 +34,21 @@ function QuizHeader() {
 
 function Intro({ onStart }: { onStart: () => void }) {
 	return (
-		<>
-			<section className="quiz-hero" aria-labelledby="quiz-title">
-				<p className="eyebrow">Vancouver Council Voting Quiz</p>
-				<h1 id="quiz-title">
-					How would you vote?
-					<br />
-					<em>Make your record.</em>
-				</h1>
-				<p className="quiz-hero-copy">
-					Answer {data.issues.length} questions about the decisions that divided
-					Vancouver City Council. We&apos;ll compare your choices with the
-					positions taken by each party.
-				</p>
-				<button
-					className="primary-button quiz-start"
-					type="button"
-					onClick={onStart}
-				>
-					Start the quiz <span aria-hidden="true">→</span>
-				</button>
-			</section>
-			<section className="quiz-intro-notes" aria-label="About the quiz">
-				<div>
-					<span className="quiz-note-number">01</span>
-					<strong>{data.issues.length} issues</strong>
-					<p>Housing, safety, climate, transportation, and more.</p>
-				</div>
-				<div>
-					<span className="quiz-note-number">02</span>
-					<strong>Two choices</strong>
-					<p>Support or oppose each proposition. No fence-sitting.</p>
-				</div>
-				<div>
-					<span className="quiz-note-number">03</span>
-					<strong>One result</strong>
-					<p>See which party&apos;s record most closely matches yours.</p>
-				</div>
-			</section>
-			<section className="quiz-method-note">
-				<p className="eyebrow">A note on method</p>
-				<p>
-					Every issue is weighted equally. Party positions are editorialized
-					from council votes, public statements, and the context of each
-					decision. This is a starting point for exploring the record, not a
-					voting recommendation.
-				</p>
-			</section>
-		</>
+		<section className="quiz-hero" aria-labelledby="quiz-title">
+			<p className="eyebrow">Vancouver Council Voting Quiz</p>
+			<h1 id="quiz-title">
+				How would you vote?
+				<br />
+				<em>Make your record.</em>
+			</h1>
+			<button
+				className="primary-button quiz-start"
+				type="button"
+				onClick={onStart}
+			>
+				Start the quiz <span aria-hidden="true">→</span>
+			</button>
+		</section>
 	)
 }
 
