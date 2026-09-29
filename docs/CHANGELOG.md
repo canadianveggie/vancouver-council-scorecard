@@ -16,3 +16,4 @@
 
 * Added quiz
 * Added Jericho Lands vote
+* Bump Broadway and Jericho Lands to a +3
