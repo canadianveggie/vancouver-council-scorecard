@@ -9,7 +9,12 @@ import type {
 	ScorecardData,
 	Vote,
 } from "../src/data/types"
-import type { PartyPosition, QuizData, QuizIssue } from "../src/quiz/types"
+import type {
+	PartyPosition,
+	QuizData,
+	QuizImage,
+	QuizIssue,
+} from "../src/quiz/types"
 
 type SourceRow = Record<string, string>
 
@@ -112,10 +117,32 @@ function validateMetadata(parties: Party[], councillors: Councillor[]) {
 	return councillorIds
 }
 
-function normalizeImageUrl(value: unknown) {
+function normalizeImage(value: unknown, label: string): QuizImage | null {
 	if (value === null || value === undefined || value === "") return null
-	if (typeof value !== "string") return null
-	return value.replace(/^public\//, "")
+	if (typeof value !== "object") {
+		error(`${label}: image must be an object`)
+		return null
+	}
+
+	const image = value as Partial<QuizImage>
+	const src = typeof image.src === "string" ? image.src.trim() : ""
+	if (!src) error(`${label}: image.src is required`)
+
+	const source = image.source
+	if (!source || typeof source !== "object") {
+		error(`${label}: image.source is required`)
+		return null
+	}
+	const name = typeof source.name === "string" ? source.name.trim() : ""
+	if (!name) error(`${label}: image.source.name is required`)
+	const url = typeof source.url === "string" ? source.url.trim() : ""
+	const parsedUrl = url ? parseSourceUrl(url, 0) : null
+	if (!parsedUrl) error(`${label}: image.source.url is required`)
+
+	return {
+		src: src.replace(/^public\//, ""),
+		source: { name, url: parsedUrl ?? "" },
+	}
 }
 
 function validateQuizData(parties: Party[], source: unknown): QuizData | null {
@@ -178,7 +205,7 @@ function validateQuizData(parties: Party[], source: unknown): QuizData | null {
 			context: issue.context?.trim() ?? "",
 			argumentFor: issue.argumentFor?.trim() ?? "",
 			argumentAgainst: issue.argumentAgainst?.trim() ?? "",
-			imageUrl: normalizeImageUrl(issue.imageUrl),
+			image: normalizeImage(issue.image, label),
 			partyPositions: positions as Record<string, PartyPosition>,
 			newsLink,
 		})

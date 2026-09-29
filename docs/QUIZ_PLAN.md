@@ -53,7 +53,13 @@ with quoted property names and JSON `null` values:
   "context": "3 rental towers with more than 1,000 homes beside Commercial-Broadway Station",
   "argumentFor": "Adds density and homes next to the most connected public transit nodes in Vancouver.",
   "argumentAgainst": "Major affordability and scale concerns. Neighbourhood opposition captured by the 'No Megatowers' lawn signs.",
-  "imageUrl": "public/images/safeway-towers.png",
+  "image": {
+    "src": "public/images/safeway-towers.png",
+    "source": {
+      "name": "Image source name",
+      "url": "https://example.com/source"
+    }
+  },
   "partyPositions": {
     "onecity": "Support",
     "green": "Oppose",
@@ -86,7 +92,8 @@ Recommended validation rules:
 - exactly the approved issue count for the first release;
 - unique, URL-safe issue IDs;
 - non-empty title, context, and both arguments;
-- `imageUrl` is optional and resolves correctly from the public site root;
+- `image` is optional; when present, `src`, source name, and source URL are
+  required, and the local path resolves correctly from the public site root;
 - each party position is `Support` or `Oppose`;
 - party IDs must exist in the existing metadata files;
 - every supported party has a position for every issue, so every issue counts
@@ -226,7 +233,8 @@ Likely modules:
 - There is no skip option in the first release.
 - All 11 issues count in the denominator; displayed results are rounded to
   whole percentages, producing approximately 9% increments.
-- Quiz order is randomized per session.
+- Quiz order is randomized at the start of each quiz attempt and remains stable
+  while navigating that attempt.
 - The Green party slug is `green`.
 - Result pages recalculate from the query string rather than trusting the
   filename.

@@ -93,68 +93,94 @@ function IssueCard({
 	return (
 		<article className="issue-card">
 			<div className="issue-card-main">
-				<div className="issue-card-heading">
-					<p className="eyebrow">{issue.category}</p>
-					<h2 id="current-issue-title">{issue.title}</h2>
-					<p className="issue-context">{issue.context}</p>
-				</div>
-				{issue.imageUrl ? (
-					<img alt="" className="issue-image" src={assetUrl(issue.imageUrl)} />
-				) : (
-					<div className="issue-image-placeholder" aria-hidden="true">
-						<span>Image coming soon</span>
+				<div className="issue-summary">
+					<div className="issue-visual">
+						{issue.image ? (
+							<img
+								alt=""
+								className="issue-image"
+								src={assetUrl(issue.image.src)}
+							/>
+						) : (
+							<div className="issue-image-placeholder" aria-hidden="true">
+								<span>Image coming soon</span>
+							</div>
+						)}
+						{issue.image && (
+							<a
+								className="issue-image-source"
+								href={issue.image.source.url}
+								target="_blank"
+								rel="noreferrer"
+							>
+								{issue.image.source.name} <span aria-hidden="true">↗</span>
+							</a>
+						)}
 					</div>
-				)}
+					<div className="issue-card-heading">
+						<p className="eyebrow">{issue.category}</p>
+						<h2 id="current-issue-title">{issue.title}</h2>
+						<p className="issue-context">{issue.context}</p>
+						{issue.newsLink && (
+							<a
+								className="issue-news-link"
+								href={issue.newsLink}
+								target="_blank"
+								rel="noreferrer"
+							>
+								Read the news coverage <span aria-hidden="true">↗</span>
+							</a>
+						)}
+					</div>
+				</div>
+			</div>
+			<fieldset className="issue-choice">
+				<legend>How would you vote?</legend>
 				<div className="issue-arguments">
 					<div className="argument argument-for">
 						<span className="argument-label">The case for</span>
 						<p>{issue.argumentFor}</p>
+						<label
+							className={`choice-button ${answer === "S" ? "selected" : ""}`}
+						>
+							<input
+								checked={answer === "S"}
+								name={`answer-${issue.id}`}
+								onChange={() => onAnswer("S")}
+								type="radio"
+								value="S"
+							/>
+							<span className="choice-mark" aria-hidden="true">
+								S
+							</span>
+							<span>
+								<strong>Support</strong>
+								<small>I would support this</small>
+							</span>
+						</label>
 					</div>
 					<div className="argument argument-against">
 						<span className="argument-label">The case against</span>
 						<p>{issue.argumentAgainst}</p>
-					</div>
-				</div>
-				{issue.newsLink && (
-					<a
-						className="issue-news-link"
-						href={issue.newsLink}
-						target="_blank"
-						rel="noreferrer"
-					>
-						Read the news coverage <span aria-hidden="true">↗</span>
-					</a>
-				)}
-			</div>
-			<fieldset className="issue-choice">
-				<legend>How would you vote?</legend>
-				<div className="choice-grid">
-					{(
-						[
-							["S", "Support", "I would support this"] as const,
-							["O", "Oppose", "I would oppose this"] as const,
-						] satisfies Array<[QuizAnswer, string, string]>
-					).map(([value, label, description]) => (
 						<label
-							className={`choice-button ${answer === value ? "selected" : ""}`}
-							key={value}
+							className={`choice-button ${answer === "O" ? "selected" : ""}`}
 						>
 							<input
-								checked={answer === value}
+								checked={answer === "O"}
 								name={`answer-${issue.id}`}
-								onChange={() => onAnswer(value)}
+								onChange={() => onAnswer("O")}
 								type="radio"
-								value={value}
+								value="O"
 							/>
 							<span className="choice-mark" aria-hidden="true">
-								{value}
+								O
 							</span>
 							<span>
-								<strong>{label}</strong>
-								<small>{description}</small>
+								<strong>Oppose</strong>
+								<small>I would oppose this</small>
 							</span>
 						</label>
-					))}
+					</div>
 				</div>
 			</fieldset>
 		</article>

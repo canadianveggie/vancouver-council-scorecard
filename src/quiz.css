@@ -1,4 +1,4 @@
-.quiz-page { max-width: 1180px; }
+.quiz-page { max-width: 1280px; }
 .quiz-topbar { align-items: center; display: flex; justify-content: space-between; padding: 28px 0; }
 .quiz-hero { border-bottom: 1px solid var(--line); padding: clamp(5rem, 13vw, 10rem) 0 clamp(4rem, 9vw, 7rem); }
 .quiz-hero h1, .results-hero h1, .invalid-result h1 { font-size: clamp(3.3rem, 8vw, 7rem); line-height: .94; max-width: 940px; }
@@ -19,23 +19,27 @@
 .quiz-progress-count span { color: var(--line); padding: 0 .3rem; }
 .quiz-progress { background: var(--line); height: 4px; margin: .8rem 0 2rem; overflow: hidden; }
 .quiz-progress > div { background: var(--blue); height: 100%; transition: width .3s ease; }
-.issue-card { background: var(--panel); border: 1px solid var(--line); display: grid; grid-template-columns: minmax(0, 1fr) 320px; }
+.issue-card { background: var(--panel); border: 1px solid var(--line); }
 .issue-card-main { padding: clamp(1.25rem, 4vw, 3rem); }
+.issue-summary { align-items: center; display: grid; gap: clamp(1.25rem, 3vw, 2.5rem); grid-template-columns: clamp(120px, 18vw, 190px) minmax(0, 1fr); min-height: 230px; }
+.issue-visual { min-width: 0; }
 .issue-card-heading h2 { font-size: clamp(2rem, 4vw, 4.3rem); line-height: .98; max-width: 720px; }
-.issue-context { color: var(--muted); font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 1.55; margin: 1.25rem 0 2.5rem; max-width: 680px; }
-.issue-image, .issue-image-placeholder { aspect-ratio: 4 / 3; background: #e2e6dc; border-bottom: 1px solid var(--line); object-fit: cover; width: 100%; }
+.issue-context { color: var(--muted); font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 1.55; margin: 1.25rem 0 0; max-width: 680px; }
+.issue-image, .issue-image-placeholder { aspect-ratio: 1; background: #e2e6dc; border: 1px solid var(--line); object-fit: cover; width: 100%; }
 .issue-image-placeholder { align-items: center; color: var(--muted); display: flex; font-family: 'DM Mono', monospace; font-size: .7rem; justify-content: center; letter-spacing: .08em; text-transform: uppercase; }
-.issue-arguments { border-top: 1px solid var(--line); display: grid; gap: 1.25rem; grid-template-columns: 1fr 1fr; padding-top: 1.5rem; }
-.argument { border-left: 3px solid var(--blue); padding-left: 1rem; }
+.issue-image-source { color: var(--muted); display: block; font-family: 'DM Mono', monospace; font-size: .6rem; line-height: 1.35; margin-top: .5rem; overflow-wrap: anywhere; }
+.issue-image-source:hover { color: var(--blue); }
+.issue-arguments { display: grid; gap: 1.25rem; grid-template-columns: 1fr 1fr; min-height: 190px; }
+.argument { border-left: 3px solid var(--blue); display: flex; flex-direction: column; padding-left: 1rem; }
 .argument-against { border-color: #b4533e; }
 .argument-label { color: var(--muted); display: block; font-family: 'DM Mono', monospace; font-size: .65rem; letter-spacing: .08em; text-transform: uppercase; }
-.argument p { font-size: .9rem; line-height: 1.55; margin: .45rem 0 0; }
-.issue-news-link { color: var(--blue); display: inline-block; font-family: 'DM Mono', monospace; font-size: .7rem; margin-top: 2rem; }
+.argument p { font-size: .9rem; line-height: 1.55; margin: .45rem 0 1.25rem; }
+.issue-news-link { color: var(--blue); display: inline-block; font-family: 'DM Mono', monospace; font-size: .7rem; margin-top: 1rem; }
 .issue-news-link:hover { color: var(--blue-dark); }
-.issue-choice { border: 0; border-left: 1px solid var(--line); margin: 0; padding: clamp(1.25rem, 3vw, 2rem); }
+.issue-choice { border: 0; border-top: 1px solid var(--line); margin: 0; padding: clamp(1.25rem, 4vw, 2rem) clamp(1.25rem, 4vw, 3rem) clamp(1.5rem, 4vw, 3rem); }
 .issue-choice legend { color: var(--muted); font-family: 'DM Mono', monospace; font-size: .7rem; letter-spacing: .08em; margin-bottom: 1rem; text-transform: uppercase; }
-.choice-grid { display: grid; gap: .75rem; }
 .choice-button { align-items: center; background: #f0f1e7; border: 1px solid var(--line); color: var(--ink); cursor: pointer; display: flex; gap: .8rem; min-height: 82px; padding: .9rem; transition: background .2s, border .2s, transform .2s; }
+.argument .choice-button { margin-top: auto; }
 .choice-button:hover, .choice-button:focus-within { border-color: var(--blue); transform: translateY(-2px); }
 .choice-button.selected { background: var(--blue); border-color: var(--blue); color: #fff; }
 .choice-button input { height: 1px; opacity: 0; position: absolute; width: 1px; }
@@ -84,14 +88,16 @@
   .quiz-intro-notes { grid-template-columns: 1fr; }
   .quiz-intro-notes > div { min-height: 0; }
   .quiz-note-number { margin-bottom: 1rem; }
-  .issue-card { display: block; }
-  .issue-choice { border-left: 0; border-top: 1px solid var(--line); }
+  .issue-summary { align-items: start; min-height: 190px; }
   .choice-grid { grid-template-columns: 1fr 1fr; }
   .party-ranking-row { gap: .65rem; grid-template-columns: 24px 30px 1fr auto; }
 }
 
 @media (max-width: 520px) {
+  .issue-summary { display: block; min-height: 400px; }
+  .issue-image, .issue-image-placeholder { margin-bottom: 1.5rem; max-width: 140px; }
   .issue-arguments { grid-template-columns: 1fr; }
+  .argument { min-height: 190px; }
   .choice-grid { grid-template-columns: 1fr; }
   .winner-card { align-items: flex-start; }
   .party-ranking-row strong { font-size: 1rem; }
