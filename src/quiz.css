@@ -52,7 +52,7 @@
 .results-hero h1 { font-size: clamp(2.8rem, 6vw, 5.8rem); max-width: 950px; }
 .winner-card { align-items: center; background: var(--blue); color: #fff; display: flex; gap: 1.5rem; margin-top: 3rem; max-width: 760px; padding: clamp(1.25rem, 4vw, 2.5rem); }
 .winner-party-mark { align-items: center; background: #fff; border-radius: 50%; display: flex; flex: 0 0 auto; height: clamp(68px, 9vw, 108px); justify-content: center; overflow: hidden; width: clamp(68px, 9vw, 108px); }
-.winner-party-mark img { height: 82%; object-fit: contain; width: 82%; }
+.winner-party-mark img { height: 1002%; object-fit: contain; width: 100%; }
 .winner-label { color: #d4e1ef; font-family: 'DM Mono', monospace; font-size: .65rem; letter-spacing: .08em; margin: 0 0 .5rem; text-transform: uppercase; }
 .winner-card h2 { font-size: clamp(2rem, 4vw, 4rem); }
 .winner-match { font-family: 'DM Mono', monospace; font-size: 1rem; margin: .75rem 0 0; }
@@ -85,10 +85,27 @@
 }
 
 @media (max-width: 520px) {
-  .issue-summary { display: block; min-height: 400px; }
-  .issue-image, .issue-image-placeholder { margin-bottom: 1.5rem; max-width: 140px; }
-  .issue-arguments { grid-template-columns: 1fr; }
-  .argument { min-height: 190px; }
+  .eyebrow { margin: 0;}
+  .quiz-runner { padding: 1.5rem 0 2rem; }
+  .quiz-progress { margin: .55rem 0 1rem; }
+  .issue-card-main { padding: .9rem; }
+  .issue-summary { display: block; min-height: 0; }
+  .issue-image, .issue-image-placeholder { max-width: 110px; }
+  .issue-card-heading h2 { font-size: clamp(1.8rem, 9vw, 2.5rem); }
+  .issue-context { font-size: .95rem; line-height: 1.4; margin-top: .75rem; }
+  .issue-image-source {margin-top: 0; }
+  .issue-news-link { margin-top: .65rem; }
+  .issue-arguments { gap: .75rem; grid-template-columns: 1fr; min-height: 0; }
+  .argument { min-height: 0; padding-left: .75rem; }
+  .argument p { font-size: .82rem; line-height: 1.4; margin: .35rem 0 .65rem; }
+  .issue-choice { padding: .9rem; }
+  .issue-choice legend { margin-bottom: .65rem; }
+  .choice-button { min-height: 64px; padding: .65rem; }
+  .choice-mark { height: 26px; width: 26px; }
+  .choice-button strong { font-size: 1rem; }
+  .choice-button small { font-size: .65rem; }
+  .quiz-navigation { margin-top: .75rem; }
+  .quiz-back-button { padding: .5rem 0; }
   .choice-grid { grid-template-columns: 1fr; }
   .winner-card { align-items: flex-start; }
   .party-ranking-row strong { font-size: 1rem; }
