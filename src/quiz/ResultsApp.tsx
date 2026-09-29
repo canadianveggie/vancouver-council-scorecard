@@ -64,16 +64,16 @@ function InvalidResult() {
 	)
 }
 
-function ResultActions() {
+function ResultActions({ partyName }: { partyName: string }) {
 	const [status, setStatus] = useState<"idle" | "copied" | "shared">("idle")
 
-	async function share() {
+	async function share(party: string) {
 		const url = window.location.href
 		if (navigator.share) {
 			try {
 				await navigator.share({
 					title: "My Vancouver Council voting match",
-					text: "See which Vancouver party my voting record matches.",
+					text: `My voting record would be most like ${party}. Which Vancouver political party would you be?`,
 					url,
 				})
 				setStatus("shared")
@@ -91,7 +91,11 @@ function ResultActions() {
 
 	return (
 		<div className="result-actions">
-			<button className="share-button" type="button" onClick={share}>
+			<button
+				className="share-button"
+				type="button"
+				onClick={() => share(partyName)}
+			>
 				<span aria-hidden="true">↗</span>
 				{status === "copied"
 					? "Link copied"
@@ -159,7 +163,7 @@ export default function ResultsApp() {
 						<p className="winner-match">{winner.percentage}% match</p>
 					</div>
 				</div>
-				<ResultActions />
+				<ResultActions partyName={winner.party.name} />
 			</section>
 
 			<section className="ranking-section" aria-labelledby="ranking-title">
