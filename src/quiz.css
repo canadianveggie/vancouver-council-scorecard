@@ -57,6 +57,7 @@
 .winner-card h2 { font-size: clamp(2rem, 4vw, 4rem); }
 .winner-match { font-family: 'DM Mono', monospace; font-size: 1rem; margin: .75rem 0 0; }
 .result-actions { align-items: center; display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; margin-top: 1.5rem; }
+.result-actions .primary-button { align-items: center; }
 .share-button { background: var(--ink); border: 0; border-radius: 999px; color: #fff; cursor: pointer; font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; padding: 1rem 1.45rem; }
 .share-button:hover, .share-button:focus-visible { background: var(--blue-dark); outline: 2px solid var(--blue-light); outline-offset: 3px; }
 .share-button span { margin-right: .55rem; }

@@ -108,8 +108,8 @@ function ResultActions({ partyName }: { partyName: string }) {
 						? "Shared"
 						: "Share my result"}
 			</button>
-			<a className="result-scorecard-link" href={`${baseUrl}index.html`}>
-				Dive deeper into the scorecard <span aria-hidden="true">→</span>
+			<a className="primary-button" href={`${baseUrl}quiz.html`}>
+				Retake the quiz <span aria-hidden="true">↗</span>
 			</a>
 			<output className="sr-only" aria-live="polite">
 				{status === "copied" ? "Your result link was copied." : ""}
@@ -201,16 +201,17 @@ export default function ResultsApp() {
 					A simple comparison of {data.issues.length} choices.
 				</h2>
 				<p>
-					Every issue counts equally. Your answers are compared with each
-					party&apos;s editorialized position on the issue, based on the council
-					vote and the public record. Each match is worth roughly 9%.
+					Your answers are compared with each party&apos;s historical position
+					on the issue, based on the council vote and the public record.
 				</p>
 				<p>
-					This result is a way into the record. Visit the scorecard to see the
-					votes, councillors, sources, and methodology behind it.
+					<strong>Note:</strong> Parties may oppose issues for a variety of
+					reasons, and their current position may not match how they voted in
+					the past.
 				</p>
+				<p>Visit the scorecard to see more votes and go even deeper.</p>
 				<a
-					className="secondary-button inline-button"
+					className="primary-button inline-button"
 					href={`${baseUrl}index.html`}
 				>
 					Open the full scorecard <span aria-hidden="true">↗</span>

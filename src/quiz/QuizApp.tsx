@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import quizJson from "../../data/generated/quiz.json"
 import scorecardJson from "../../data/generated/scorecard.json"
 import type { ScorecardData } from "../data/types"
@@ -190,8 +190,47 @@ function QuizRunner() {
 		window.location.assign(new URL(path, window.location.origin).href)
 	}
 
+	function advance() {
+		if (!answer) return
+		if (isLast) {
+			finish()
+			return
+		}
+		setCurrentIndex((current) => current + 1)
+	}
+
+	useEffect(() => {
+		function handleKeyDown(event: KeyboardEvent) {
+			const target = event.target
+			if (target instanceof HTMLElement && target.closest("a, button")) {
+				return
+			}
+			if (target instanceof HTMLInputElement && target.type !== "radio") {
+				return
+			}
+
+			const key = event.key.toLowerCase()
+			if (key === "s" || key === "o") {
+				event.preventDefault()
+				setAnswer(key === "s" ? "S" : "O")
+				return
+			}
+			if (key === " " || key === "spacebar" || key === "enter") {
+				event.preventDefault()
+				advance()
+			}
+		}
+
+		window.addEventListener("keydown", handleKeyDown)
+		return () => window.removeEventListener("keydown", handleKeyDown)
+	})
+
 	return (
-		<section className="quiz-runner" aria-labelledby="current-issue-title">
+		<section
+			className="quiz-runner"
+			aria-labelledby="current-issue-title"
+			aria-keyshortcuts="S O Space Enter"
+		>
 			<div className="quiz-progress-row">
 				<span className="eyebrow">Your voting record</span>
 				<span className="quiz-progress-count">
@@ -216,9 +255,7 @@ function QuizRunner() {
 				<button
 					className="primary-button quiz-next-button"
 					disabled={!answer}
-					onClick={() =>
-						isLast ? finish() : setCurrentIndex((current) => current + 1)
-					}
+					onClick={advance}
 					type="button"
 				>
 					{isLast ? "See my result" : "Next issue"}{" "}
