@@ -112,15 +112,16 @@
   .issue-card-main { padding: .9rem; }
   .issue-summary { display: block; min-height: 0; }
   .issue-image, .issue-image-placeholder { max-width: 110px; }
+  .issue-image-source { display: none; }
   .issue-card-heading h2 { font-size: clamp(1.8rem, 9vw, 2.5rem); }
   .issue-context { font-size: .95rem; line-height: 1.4; margin-top: .75rem; }
   .issue-image-source {margin-top: 0; }
-  .issue-news-link { margin-top: .65rem; }
+  .issue-news-link { margin-top: .15rem; }
   .issue-arguments { gap: .75rem; grid-template-columns: 1fr; min-height: 0; }
   .argument { min-height: 0; padding-left: .75rem; }
   .argument p { font-size: .82rem; line-height: 1.4; margin: .35rem 0 .65rem; }
-  .issue-choice { padding: .9rem; }
-  .issue-choice legend { margin-bottom: .65rem; }
+  .issue-choice { padding: .2rem; }
+  .issue-choice legend { margin-bottom: .15rem; }
   .choice-button { min-height: 64px; padding: .65rem; }
   .choice-mark { height: 26px; width: 26px; }
   .choice-button strong { font-size: 1rem; }
