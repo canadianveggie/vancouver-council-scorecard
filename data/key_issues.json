@@ -4,12 +4,12 @@
     "title": "Villages Plan",
     "category": "Housing",
     "context": "Should Vancouver turn 17 small commercial nodes into walkable, mixed-use neighbourhood hubs with more homes and shops?",
-    "argumentFor": "Adds homes and everyday services in existing neighbourhood centres, making it easier to live near shops, jobs, and transit.",
-    "argumentAgainst": "The scale and pace of change raised concerns about neighbourhood character, infrastructure, and whether the plan had enough public support.",
+    "argumentFor": "Adds medium-density (up to 6-storeys) housing and everyday services in existing neighbourhood centres, making it easier to live near shops, jobs, and transit.",
+    "argumentAgainst": "The scale and pace of change threaten neighbourhood character and might strain existing infrastructure.",
     "image": {
       "src": "public/images/villages_plan.jpeg",
       "source": {
-        "name": "City of Vancouver | Villages planning program",
+        "name": "City of Vancouver",
         "url": "https://www.shapeyourcity.ca/villages"
       }
     },
@@ -28,11 +28,11 @@
     "category": "Housing",
     "context": "Should Vancouver fund a City-run office that helps renters understand their rights and navigate disputes?",
     "argumentFor": "Gives renters practical support in a tight housing market and makes tenant protections easier to understand and use.",
-    "argumentAgainst": "The service cost roughly $600,000 a year and critics argued that tenant advocacy should be provided by senior governments or community groups.",
+    "argumentAgainst": "The service cost roughly $600,000 a year and tenant advocacy should be provided by senior governments or community groups.",
     "image": {
       "src": "public/images/renters_office.png",
       "source": {
-        "name": "City of Vancouver | Renter Office Newsletter",
+        "name": "City of Vancouver",
         "url": "https://vancouver.ca/images/web/renters-office/renters-office-newsletter-1-may-2020.html"
       }
     },
@@ -51,11 +51,11 @@
     "category": "Housing",
     "context": "Should Vancouver approve three rental towers with more than 1,000 homes beside Commercial-Broadway Station?",
     "argumentFor": "Adds homes next to one of Vancouver's most connected transit nodes and keeps new housing close to shops and services.",
-    "argumentAgainst": "The project's height, scale, affordability, and neighbourhood impacts drew major concerns, including the 'No Megatowers' campaign.",
+    "argumentAgainst": "The project's height and scale are disproportionate with the nearby buildings. Only 10% of units are allocated for below-market housing.",
     "image": {
       "src": "public/images/safeway_towers.png",
       "source": {
-        "name": "Perkins + Will | Development Application",
+        "name": "Perkins + Will",
         "url": "https://www.shapeyourcity.ca/1780-e-broadway-rz"
       }
     },
@@ -72,14 +72,14 @@
     "id": "beach-avenue-bike-lane",
     "title": "Beach Avenue Bike Lane",
     "category": "Transportation",
-    "context": "Should Vancouver maintain an all-ages-and-abilities bike route on Beach Avenue beside Stanley Park?",
-    "argumentFor": "Protects a comfortable route for people biking and walking, including families, while reducing conflicts with fast-moving traffic.",
-    "argumentAgainst": "Removing the lane would restore two-way vehicle traffic and give drivers more direct access through the Stanley Park edge.",
+    "context": "Should Vancouver keep an all-ages-and-abilities bike route on Beach Avenue between Hornby and Stanley Park?",
+    "argumentFor": "The seperated bike route was added in 2020 and is heavily used. It provides a safe biking and walking route, and it doesn't make sense to spend money to remove it.",
+    "argumentAgainst": "Removing the lane would restore two-way vehicle traffic and give drivers more direct access to Stanley Park.",
     "image": {
-      "src": "public/images/villages_plan.jpeg",
+      "src": "public/images/beach_bike_lane.jpg",
       "source": {
-        "name": "City of Vancouver | Villages planning program",
-        "url": "https://www.shapeyourcity.ca/villages"
+        "name": "Christopher Porter",
+        "url": "https://flickr.com/photos/canadianveggie/51171896649/"
       }
     },
     "partyPositions": {
@@ -97,12 +97,12 @@
     "category": "Environment",
     "context": "Should Vancouver allow new homes and buildings to use natural gas for heating and hot water?",
     "argumentFor": "Keeps more heating options available and may lower upfront costs for some new buildings and households.",
-    "argumentAgainst": "Locks new buildings into fossil-fuel infrastructure and makes it harder to reduce emissions and meet climate targets.",
+    "argumentAgainst": "Locks new buildings into fossil-fuel infrastructure, which makes it harder to reduce emissions. Also increases renovation costs for retrofits.",
     "image": {
-      "src": "public/images/villages_plan.jpeg",
+      "src": "public/images/gas_stove.jpg",
       "source": {
-        "name": "City of Vancouver | Villages planning program",
-        "url": "https://www.shapeyourcity.ca/villages"
+        "name": "Wikimedia",
+        "url": "https://commons.wikimedia.org/wiki/Category:Gas_stoves#/media/File:Gas_stove_13.jpg"
       }
     },
     "partyPositions": {
@@ -118,14 +118,14 @@
     "id": "bitcoin-friendly-city",
     "title": "Bitcoin-Friendly City",
     "category": "Governance",
-    "context": "Should Vancouver study using, holding, or accepting Bitcoin in city business?",
+    "context": "Should Vancouver invest in Bitcoin and accept it for payment for business services?",
     "argumentFor": "Explores new payment and financial technology options and could position Vancouver as an innovation-friendly city.",
-    "argumentAgainst": "Public money should not be exposed to a volatile asset, and studying Bitcoin may distract from more immediate city priorities.",
+    "argumentAgainst": "Public money should not be exposed to a volatile asset, and Bitcoin may distract from more immediate city priorities.",
     "image": {
-      "src": "public/images/villages_plan.jpeg",
+      "src": "public/images/bitcoin.svg",
       "source": {
-        "name": "City of Vancouver | Villages planning program",
-        "url": "https://www.shapeyourcity.ca/villages"
+        "name": "Wikimedia",
+        "url": "https://commons.wikimedia.org/wiki/File:Bitcoin.svg"
       }
     },
     "partyPositions": {
@@ -138,40 +138,40 @@
     "newsLink": "https://globalnews.ca/news/10913029/vancouver-bitcoin-motion-approved/"
   },
   {
-    "id": "abolishing-the-park-board",
-    "title": "Abolishing the Park Board",
+    "id": "elected-park-board",
+    "title": "Elected Park Board",
     "category": "Governance",
-    "context": "Do you think Vancouver should replace its elected Park Board with parks governance directed by City Council?",
-    "argumentFor": "Could simplify decision-making, reduce duplicated administration, and align parks with the rest of the city's services.",
-    "argumentAgainst": "Removes a distinct elected voice for parks and recreation and concentrates more power over public spaces in City Council.",
+    "context": "Do you think Vancouver should have an elected Park Board?",
+    "argumentFor": "The Park Board is a unique and distinct voice for our public spaces. Eliminating it would concentrate more power over public spaces in City Council.",
+    "argumentAgainst": "Abolishing the Park Board could simplify decision-making, reduce duplicated administration, and align parks with the rest of the city's services.",
     "image": {
-      "src": "public/images/villages_plan.jpeg",
+      "src": "public/images/park_board.jpg",
       "source": {
-        "name": "City of Vancouver | Villages planning program",
-        "url": "https://www.shapeyourcity.ca/villages"
+        "name": "City of Vancouver",
+        "url": "https://vancouver.ca/your-government/vancouver-board-of-parks-and-recreation.aspx"
       }
     },
     "partyPositions": {
-      "abc": "Support",
-      "green": "Oppose",
-      "onecity": "Oppose",
-      "cope": "Oppose",
-      "vote-vancouver": "Support"
+      "abc": "Oppose",
+      "green": "Support",
+      "onecity": "Support",
+      "cope": "Support",
+      "vote-vancouver": "Oppose"
     },
     "newsLink": "https://globalnews.ca/news/10168076/vancouver-council-park-board-vote/"
   },
   {
-    "id": "increasing-police-budgets",
-    "title": "Increasing Police Budgets",
+    "id": "police-budget",
+    "title": "Increased Police Budget",
     "category": "Safety",
-    "context": "Should Vancouver spend more to expand the Vancouver Police Department, including funding for 100 additional officers?",
+    "context": "Should Vancouver spend more to expand the Vancouver Police Department, including hiring additional officers?",
     "argumentFor": "Adds police capacity for emergency response, investigations, and public safety in a growing city.",
-    "argumentAgainst": "Police increases take money from housing, mental-health, prevention, and community services that may address the causes of harm more directly.",
+    "argumentAgainst": "The police budget increased 44% between 2022 and 2026, taking money from housing, mental-health, and community services that may address the causes of harm more directly.",
     "image": {
-      "src": "public/images/villages_plan.jpeg",
+      "src": "public/images/vpd.png",
       "source": {
-        "name": "City of Vancouver | Villages planning program",
-        "url": "https://www.shapeyourcity.ca/villages"
+        "name": "Wikimedia",
+        "url": "https://commons.wikimedia.org/wiki/File:Vancouver_Police_Ford_CVPI_in_Blue_and_Yellow_livery.jpg"
       }
     },
     "partyPositions": {
@@ -187,9 +187,9 @@
     "id": "zero-means-zero-budget",
     "title": "Zero-Means-Zero Budget",
     "category": "Affordability",
-    "context": "Are you in favour of freezing property taxes at the current rate, while requiring the City to find offsets and reduce or reshape programs?",
-    "argumentFor": "Limits tax increases for households and businesses and pushes the City to find efficiencies before asking taxpayers for more.",
-    "argumentAgainst": "A tax freeze can mean cuts to climate, housing, and other services while still increasing spending in areas such as policing.",
+    "context": "Are you in favour of freezing property taxes at the current rate, while requiring the City to raise fees or cut programs?",
+    "argumentFor": "Reduces tax burden for households and businesses and pushes the City to find efficiencies before asking taxpayers for more.",
+    "argumentAgainst": "A tax freeze forces cuts to public services, eliminates municipal jobs, and raises user fees. The ever-increasing police budget would remain unaffected.",
     "image": {
       "src": "public/images/villages_plan.jpeg",
       "source": {
@@ -212,12 +212,12 @@
     "category": "Safety",
     "context": "Should Vancouver allow a proposed overdose prevention site at 900 Helmcken Street?",
     "argumentFor": "Keeps people who use drugs alive and connects them with health care, treatment, and other supports in a high-need area.",
-    "argumentAgainst": "Residents and businesses raised concerns about safety, street disorder, and whether the proposed location was appropriate for the surrounding community.",
+    "argumentAgainst": "Concerns about safety, street disorder, and whether the proposed location is appropriate for the surrounding community.",
     "image": {
-      "src": "public/images/villages_plan.jpeg",
+      "src": "public/images/ops.png",
       "source": {
-        "name": "City of Vancouver | Villages planning program",
-        "url": "https://www.shapeyourcity.ca/villages"
+        "name": "CBC News",
+        "url": "https://www.cbc.ca/news/canada/british-columbia/yaletown-overdose-prevention-site-9.7214552"
       }
     },
     "partyPositions": {
@@ -233,7 +233,7 @@
     "id": "lower-speed-limits",
     "title": "Lower Speed Limits",
     "category": "Safety",
-    "context": "Should Vancouver lower speed limits on some streets to reduce fatal crashes?",
+    "context": "Should Vancouver lower speed limits on some streets including downtown?",
     "argumentFor": "Lower speeds reduce the severity of crashes and make streets safer for people walking, biking, and rolling.",
     "argumentAgainst": "Lower limits can lengthen trips, frustrate drivers, and may have limited effect without better street design and enforcement.",
     "image": {
@@ -251,5 +251,28 @@
       "vote-vancouver": "Support"
     },
     "newsLink": "https://visionzerovancouver.ca/2026/06/10/abc-guts-road-safety/"
+  },
+  {
+    "id": "floating-hotel",
+    "title": "Floating Hotel",
+    "category": "Urbanism",
+    "context": "Should Vancouver allow a 250-room floating hotel beside the Vancouver Convention Centre?",
+    "argumentFor": "Adds hotel rooms and visitor-serving space beside the convention centre without using scarce downtown land, while creating a new public walkway.",
+    "argumentAgainst": "Adds private commercial activity to the waterfront and could affect the harbour, public access, and the character of Vancouver's shoreline.",
+    "image": {
+      "src": "public/images/floating_hotel.png",
+      "source": {
+        "name": "Sunborn Vancouver",
+        "url": "https://www.sunbornvancouver.ca/"
+      }
+    },
+    "partyPositions": {
+      "abc": "Support",
+      "green": "Support",
+      "onecity": "Support",
+      "cope": "Oppose",
+      "vote-vancouver": "Support"
+    },
+    "newsLink": "https://www.cbc.ca/news/canada/british-columbia/vancouver-bc-floating-hotel-approved-9.7164665"
   }
 ]

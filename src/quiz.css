@@ -23,7 +23,7 @@
 .issue-card-main { padding: clamp(1.25rem, 4vw, 3rem); }
 .issue-summary { align-items: center; display: grid; gap: clamp(1.25rem, 3vw, 2.5rem); grid-template-columns: clamp(120px, 18vw, 190px) minmax(0, 1fr); min-height: 230px; }
 .issue-visual { min-width: 0; }
-.issue-card-heading h2 { font-size: clamp(2rem, 4vw, 4.3rem); line-height: .98; max-width: 720px; }
+.issue-card-heading h2 { font-size: clamp(2rem, 4vw, 4.3rem); line-height: .98; }
 .issue-context { color: var(--muted); font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 1.55; margin: 1.25rem 0 0; max-width: 680px; }
 .issue-image, .issue-image-placeholder { aspect-ratio: 1; background: #e2e6dc; border: 1px solid var(--line); object-fit: cover; width: 100%; }
 .issue-image-placeholder { align-items: center; color: var(--muted); display: flex; font-family: 'DM Mono', monospace; font-size: .7rem; justify-content: center; letter-spacing: .08em; text-transform: uppercase; }

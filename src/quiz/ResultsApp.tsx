@@ -188,7 +188,9 @@ export default function ResultsApp() {
 				aria-labelledby="results-method-title"
 			>
 				<p className="eyebrow">How this works</p>
-				<h2 id="results-method-title">A simple comparison of 11 choices.</h2>
+				<h2 id="results-method-title">
+					A simple comparison of {data.issues.length} choices.
+				</h2>
 				<p>
 					Every issue counts equally. Your answers are compared with each
 					party&apos;s editorialized position on the issue, based on the council

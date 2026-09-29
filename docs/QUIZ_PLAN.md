@@ -3,7 +3,7 @@
 Status: proposed
 
 This document describes a static, shareable quiz at `quiz.html` that asks a
-visitor how they would vote on 11 major issues that divided Vancouver City
+visitor how they would vote on 12 major issues that divided Vancouver City
 Council during the previous term. It will produce a party match and a
 shareable URL of the form:
 
@@ -27,7 +27,7 @@ encoded answers.
    - concise argument for;
    - concise argument against;
    - two choices: `Support` and `Oppose`.
-4. The visitor can move forward and backward, with progress such as `3 of 11`.
+4. The visitor can move forward and backward, with progress such as `3 of 12`.
    An answer is required before advancing; there is no skip option in the
    first release.
 5. The final action calculates party similarity and navigates to the matching
@@ -82,9 +82,10 @@ The currently proposed issue set is:
 - Zero-Means-Zero Budget — Affordability
 - OPS in Downtown Vancouver — Safety
 - Lower Speed Limits — Safety
+- Floating Hotel — Urbanism
 
-This is 11 issues as currently listed, and the first release will use all 11.
-Each issue is equally weighted; the UI rounds the resulting approximately 9.1%
+This is 12 issues as currently listed, and the first release will use all 12.
+Each issue is equally weighted; the UI rounds the resulting approximately 8.3%
 increments to whole percentages.
 
 Recommended validation rules:
@@ -127,9 +128,8 @@ issue agreement = 1 when user answer equals party position
 party match = matching issues / total issues
 ```
 
-All 11 issues count equally in the denominator. Each correct answer is worth
-1/11 (approximately 9.1%); the UI will display rounded whole percentages, so
-the visible results will read as 9%, 18%, 27%, and so on. Ties should be
+All 12 issues count equally in the denominator. Each correct answer is worth
+1/12 (approximately 8.3%); the UI will display rounded whole percentages. Ties should be
 deterministic, using the party order in `data/parties.json` as the final
 tie-breaker.
 
@@ -143,7 +143,7 @@ S = Support
 O = Oppose
 ```
 
-For example, `votes=SOOSSSSOOSO` contains 11 answers. The random order should
+For example, `votes=SOOSSSSOOSOSO` contains 12 answers. The random order should
 be generated and stored in client state; it must not change the meaning of the
 answer string or the result URL.
 
@@ -218,7 +218,7 @@ Likely modules:
 ## Suggested execution order
 
 1. Confirm the editorialized party positions and issue copy.
-2. Add the 11-issue source data and validation/build output.
+2. Add the 12-issue source data and validation/build output.
 3. Implement and test the pure URL, shuffle, and matching modules.
 4. Add the quiz page and card interaction.
 5. Add result entry points, ranking, share behavior, and social metadata.
@@ -231,10 +231,10 @@ Likely modules:
 - Matching is against editorialized, aggregated party positions.
 - Users choose only `Support` or `Oppose`.
 - There is no skip option in the first release.
-- All 11 issues count in the denominator; displayed results are rounded to
-  whole percentages, producing approximately 9% increments.
-- Quiz order is randomized at the start of each quiz attempt and remains stable
-  while navigating that attempt.
+- All 12 issues count in the denominator; displayed results are rounded to
+  whole percentages, producing approximately 8% increments.
+- Quiz order is randomized once per browser session and remains stable while
+  navigating or reopening the quiz during that session.
 - The Green party slug is `green`.
 - Result pages recalculate from the query string rather than trusting the
   filename.

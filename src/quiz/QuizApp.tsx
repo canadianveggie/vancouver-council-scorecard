@@ -39,9 +39,9 @@ function Intro({ onStart }: { onStart: () => void }) {
 					<em>Make your record.</em>
 				</h1>
 				<p className="quiz-hero-copy">
-					Answer 11 questions about the decisions that divided Vancouver City
-					Council. We&apos;ll compare your choices with the positions taken by
-					each party.
+					Answer {data.issues.length} questions about the decisions that divided
+					Vancouver City Council. We&apos;ll compare your choices with the
+					positions taken by each party.
 				</p>
 				<button
 					className="primary-button quiz-start"
@@ -54,7 +54,7 @@ function Intro({ onStart }: { onStart: () => void }) {
 			<section className="quiz-intro-notes" aria-label="About the quiz">
 				<div>
 					<span className="quiz-note-number">01</span>
-					<strong>11 issues</strong>
+					<strong>{data.issues.length} issues</strong>
 					<p>Housing, safety, climate, transportation, and more.</p>
 				</div>
 				<div>
