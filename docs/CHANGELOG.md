@@ -10,6 +10,9 @@
 * Vote added: Expanding Tenant Protection City-wide
 * Vote changed: Cornwall Avenue Safety Speed Reduction
 
-## 2026-09-27 19:00
-
 * Fix some vote dates
+
+## 2026-09-27 22:30
+
+* Added quiz
+* Added Jericho Lands vote
