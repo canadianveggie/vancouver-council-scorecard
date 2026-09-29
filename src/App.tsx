@@ -930,12 +930,20 @@ function App() {
 	return (
 		<main className="page-shell">
 			<nav className="topbar" aria-label="Primary navigation">
-				<a className="brand" href="/">
+				<a className="brand" href={import.meta.env.BASE_URL}>
 					Vancouver Council <span>Scorecard</span>
 				</a>
-				<a className="text-link" href="#about">
-					About this project <span aria-hidden="true">↗</span>
-				</a>
+				<div className="site-nav-links">
+					<a className="text-link" href={import.meta.env.BASE_URL}>
+						Scorecard
+					</a>
+					<a
+						className="text-link"
+						href={`${import.meta.env.BASE_URL}quiz.html`}
+					>
+						Take the quiz
+					</a>
+				</div>
 			</nav>
 
 			<section className="hero" aria-labelledby="page-title">

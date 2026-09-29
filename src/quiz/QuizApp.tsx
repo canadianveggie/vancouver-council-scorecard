@@ -20,9 +20,14 @@ function QuizHeader() {
 			<a className="brand" href={baseUrl}>
 				Vancouver Council <span>Scorecard</span>
 			</a>
-			<a className="text-link" href={`${baseUrl}index.html`}>
-				View the scorecard <span aria-hidden="true">↗</span>
-			</a>
+			<div className="site-nav-links">
+				<a className="text-link" href={`${baseUrl}index.html`}>
+					Scorecard
+				</a>
+				<a className="text-link" href={`${baseUrl}quiz.html`}>
+					Take the quiz
+				</a>
+			</div>
 		</nav>
 	)
 }
