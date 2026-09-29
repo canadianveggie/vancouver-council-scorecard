@@ -68,7 +68,7 @@
 .ranking-section { padding: 3.5rem 0 4rem; }
 .ranking-section h2, .results-method h2 { font-size: clamp(2rem, 4vw, 3.4rem); }
 .vote-comparison-scroll { border: 1px solid var(--line); margin-top: 1.25rem; max-width: 760px; overflow-x: auto; }
-.vote-comparison { border-collapse: collapse; min-width: 760px; width: 100%; }
+.vote-comparison { border-collapse: collapse; min-width: 0; width: 100%; }
 .vote-comparison th, .vote-comparison td { border-bottom: 1px solid var(--line); padding: .45rem .35rem; }
 .vote-comparison thead th { background: #ebece4; color: var(--muted); font-family: 'DM Mono', monospace; font-size: .7rem; font-weight: 400; text-align: center; }
 .vote-comparison thead th:nth-child(2), .vote-comparison tbody th:nth-child(2) { text-align: left; }
@@ -103,6 +103,7 @@
   .quiz-topbar { padding: 20px 0; }
   .issue-summary { align-items: start; min-height: 190px; }
   .choice-grid { grid-template-columns: 1fr 1fr; }
+  .vote-comparison { min-width: 760px; }
 }
 
 @media (max-width: 520px) {
