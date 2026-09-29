@@ -2,26 +2,31 @@
     {
         "id": "abc",
         "name": "ABC",
-        "logo": "party/abc.jpg"
+        "logo": "party/abc.jpg",
+        "website": "https://abcvancouver.ca/"
     },
     {
         "id": "green",
         "name": "Green",
-        "logo": "party/greens.webp"
+        "logo": "party/greens.webp",
+        "website": "https://www.vangreens.ca/"
     },
     {
         "id": "onecity",
         "name": "OneCity",
-        "logo": "party/onecity.webp"
+        "logo": "party/onecity.webp",
+        "website": "https://www.onecityvancouver.ca/"
     },
     {
         "id": "cope",
         "name": "COPE",
-        "logo": "party/cope.webp"
+        "logo": "party/cope.webp",
+        "website": "https://www.votecope.ca/"
     },
     {
         "id": "vote-vancouver",
         "name": "Vote Vancouver",
-        "logo": "party/vote_vancouver.jpg"
+        "logo": "party/vote_vancouver.jpg",
+        "website": "https://www.votevancouver.ca/"
     }
 ]

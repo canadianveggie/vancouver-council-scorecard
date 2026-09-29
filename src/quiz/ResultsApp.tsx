@@ -129,6 +129,20 @@ export default function ResultsApp() {
 	const winner = matches[0]
 	const winnerPartyId = winner?.party.id
 	const requestedPartyId = partyIdFromPath()
+	const winnerCardContent = winner ? (
+		<>
+			<div className="winner-party-mark">
+				{winner.party.logo && (
+					<img alt="" src={`${baseUrl}${winner.party.logo}`} />
+				)}
+			</div>
+			<div>
+				<p className="winner-label">The closest match</p>
+				<h2>{winner.party.name}</h2>
+				<p className="winner-match">{winner.percentage}% match</p>
+			</div>
+		</>
+	) : null
 
 	useEffect(() => {
 		if (
@@ -156,18 +170,19 @@ export default function ResultsApp() {
 			<section className="results-hero" aria-labelledby="results-title">
 				<p className="eyebrow">Your result</p>
 				<h1 id="results-title">Your voting record would be most similar to:</h1>
-				<div className="winner-card">
-					<div className="winner-party-mark">
-						{winner.party.logo && (
-							<img alt="" src={`${baseUrl}${winner.party.logo}`} />
-						)}
-					</div>
-					<div>
-						<p className="winner-label">The closest match</p>
-						<h2>{winner.party.name}</h2>
-						<p className="winner-match">{winner.percentage}% match</p>
-					</div>
-				</div>
+				{winner.party.website ? (
+					<a
+						className="winner-card"
+						href={winner.party.website}
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label={`Visit ${winner.party.name}'s website (opens in a new tab)`}
+					>
+						{winnerCardContent}
+					</a>
+				) : (
+					<div className="winner-card">{winnerCardContent}</div>
+				)}
 				<ResultActions partyName={winner.party.name} />
 			</section>
 

@@ -2,6 +2,7 @@ export type Party = {
 	id: string
 	name: string
 	logo: string | null
+	website?: string | null
 }
 
 export type Councillor = {
