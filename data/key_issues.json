@@ -115,17 +115,17 @@
     "newsLink": "https://www.cbc.ca/news/canada/british-columbia/vancouver-council-rejects-villages-plan-9.7288472"
   },
   {
-    "id": "natural-gas",
-    "title": "Natural Gas in New Builds",
-    "category": "Environment",
-    "context": "Should Vancouver allow new homes and buildings to use natural gas for heating and hot water?",
-    "argumentFor": "Keeps more heating options available and may lower upfront costs for some new buildings and households.",
-    "argumentAgainst": "Locks new buildings into fossil-fuel infrastructure, which makes it harder to reduce emissions. Also increases renovation costs for retrofits.",
+    "id": "zero-means-zero-budget",
+    "title": "Zero-Means-Zero Budget",
+    "category": "Affordability",
+    "context": "Are you in favour of freezing property taxes at the current rate, while requiring the City to raise fees or cut programs?",
+    "argumentFor": "Reduces tax burden for households and businesses and pushes the City to find efficiencies before asking taxpayers for more.",
+    "argumentAgainst": "A tax freeze forces cuts to public services, eliminates municipal jobs, and raises user fees. The ever-increasing police budget would remain unaffected.",
     "image": {
-      "src": "public/images/gas_stove.jpg",
+      "src": "public/images/zero.png",
       "source": {
-        "name": "Wikimedia",
-        "url": "https://commons.wikimedia.org/wiki/Category:Gas_stoves#/media/File:Gas_stove_13.jpg"
+        "name": "Christopher Porter",
+        "url": "https://docs.google.com/"
       }
     },
     "partyPositions": {
@@ -135,7 +135,7 @@
       "cope": "Oppose",
       "vote-vancouver": "Oppose"
     },
-    "newsLink": "https://www.cbc.ca/news/canada/british-columbia/vancouver-mayor-building-codes-emissions-natural-gas-9.7208260"
+    "newsLink": "https://globalnews.ca/news/11469811/vancouver-council-property-tax-freeze/"
   },
   {
     "id": "elected-park-board",
@@ -230,17 +230,17 @@
     "newsLink": "https://www.cbc.ca/news/canada/british-columbia/vancouver-budget-property-tax-increase-1.6763926"
   },
   {
-    "id": "zero-means-zero-budget",
-    "title": "Zero-Means-Zero Budget",
-    "category": "Affordability",
-    "context": "Are you in favour of freezing property taxes at the current rate, while requiring the City to raise fees or cut programs?",
-    "argumentFor": "Reduces tax burden for households and businesses and pushes the City to find efficiencies before asking taxpayers for more.",
-    "argumentAgainst": "A tax freeze forces cuts to public services, eliminates municipal jobs, and raises user fees. The ever-increasing police budget would remain unaffected.",
+    "id": "natural-gas",
+    "title": "Natural Gas in New Builds",
+    "category": "Environment",
+    "context": "Should Vancouver allow new homes and buildings to use natural gas for heating and hot water?",
+    "argumentFor": "Keeps more heating options available and may lower upfront costs for some new buildings and households.",
+    "argumentAgainst": "Locks new buildings into fossil-fuel infrastructure, which makes it harder to reduce emissions. Also increases renovation costs for retrofits.",
     "image": {
-      "src": "public/images/zero.png",
+      "src": "public/images/gas_stove.jpg",
       "source": {
-        "name": "Christopher Porter",
-        "url": "https://docs.google.com/"
+        "name": "Wikimedia",
+        "url": "https://commons.wikimedia.org/wiki/Category:Gas_stoves#/media/File:Gas_stove_13.jpg"
       }
     },
     "partyPositions": {
@@ -250,7 +250,7 @@
       "cope": "Oppose",
       "vote-vancouver": "Oppose"
     },
-    "newsLink": "https://globalnews.ca/news/11469811/vancouver-council-property-tax-freeze/"
+    "newsLink": "https://www.cbc.ca/news/canada/british-columbia/vancouver-mayor-building-codes-emissions-natural-gas-9.7208260"
   },
   {
     "id": "downtown-ops",
