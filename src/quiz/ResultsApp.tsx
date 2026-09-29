@@ -3,7 +3,7 @@ import quizJson from "../../data/generated/quiz.json"
 import scorecardJson from "../../data/generated/scorecard.json"
 import type { ScorecardData } from "../data/types"
 import { calculatePartyMatches } from "./matching"
-import type { QuizData } from "./types"
+import type { PartyPosition, QuizAnswer, QuizData } from "./types"
 import { decodeAnswers, resultPath } from "./url"
 
 const data = quizJson as QuizData
@@ -117,6 +117,37 @@ function WinnerCard({
 		>
 			{content}
 		</a>
+	)
+}
+
+function voteLabel(value: QuizAnswer | PartyPosition) {
+	return value === "S" || value === "Support" ? "S" : "O"
+}
+
+function VoteCell({
+	value,
+	matched,
+	isUserVote = false,
+}: {
+	value: QuizAnswer | PartyPosition
+	matched?: boolean
+	isUserVote?: boolean
+}) {
+	const label = voteLabel(value)
+	const fullLabel = label === "S" ? "Support" : "Oppose"
+	const alignment =
+		matched === true
+			? ", matches your answer"
+			: matched === false
+				? ", differs from your answer"
+				: ""
+	return (
+		<td
+			className={`vote-cell vote-${label.toLowerCase()} ${matched === true ? "is-match" : ""} ${matched === false ? "is-miss" : ""} ${isUserVote ? "is-user-vote" : ""}`}
+			aria-label={`${fullLabel}${alignment}`}
+		>
+			{label}
+		</td>
 	)
 }
 
@@ -240,24 +271,82 @@ export default function ResultsApp() {
 			</section>
 
 			<section className="ranking-section" aria-labelledby="ranking-title">
-				<p className="eyebrow">The full ranking</p>
-				<h2 id="ranking-title">You were also similar to:</h2>
-				<div className="party-ranking">
-					{matches.slice(1).map((match, index) => (
-						<div className="party-ranking-row" key={match.party.id}>
-							<span className="ranking-number">{index + 2}.</span>
-							{match.party.logo && (
-								<img
-									alt=""
-									className="ranking-logo"
-									src={`${baseUrl}${match.party.logo}`}
-								/>
-							)}
-							<strong>{match.party.name}</strong>
-							<span className="ranking-match">{match.percentage}% match</span>
-						</div>
-					))}
+				<p className="eyebrow">Compare your record</p>
+				<h2 id="ranking-title">How your votes line up</h2>
+				<div className="vote-comparison-scroll">
+					<table className="vote-comparison">
+						<caption className="sr-only">
+							Your answers compared with each party&apos;s position on every
+							quiz issue.
+						</caption>
+						<thead>
+							<tr>
+								<th scope="col" aria-label="Ranking" />
+								<th scope="col">Party</th>
+								<th scope="col">Match</th>
+								{data.issues.map((issue, index) => (
+									<th
+										key={issue.id}
+										scope="col"
+										title={issue.title}
+										aria-label={`Issue ${index + 1}: ${issue.title}`}
+									>
+										{issue.image ? (
+											<img
+												className="comparison-issue-image"
+												alt=""
+												src={`${baseUrl}${issue.image.src}`}
+											/>
+										) : (
+											<span>{index + 1}</span>
+										)}
+									</th>
+								))}
+							</tr>
+						</thead>
+						<tbody>
+							<tr className="comparison-your-votes">
+								<th scope="row" />
+								<th scope="row">Your votes</th>
+								<td className="comparison-match" />
+								{answers.map((answer, index) => (
+									<VoteCell
+										key={data.issues[index].id}
+										value={answer}
+										isUserVote
+									/>
+								))}
+							</tr>
+							{matches.map((match, index) => (
+								<tr key={match.party.id}>
+									<th scope="row" className="comparison-rank">
+										{index + 1}
+									</th>
+									<th scope="row" className="comparison-party">
+										{match.party.name}
+									</th>
+									<td className="comparison-match">
+										{match.percentage}% match
+									</td>
+									{data.issues.map((issue, issueIndex) => {
+										const partyPosition = issue.partyPositions[match.party.id]
+										const partyVote = voteLabel(partyPosition)
+										return (
+											<VoteCell
+												key={issue.id}
+												value={partyPosition}
+												matched={partyVote === answers[issueIndex]}
+											/>
+										)
+									})}
+								</tr>
+							))}
+						</tbody>
+					</table>
 				</div>
+				<p className="comparison-note">
+					<strong>S</strong> = Support · <strong>O</strong> = Oppose
+				</p>
 			</section>
 
 			<section

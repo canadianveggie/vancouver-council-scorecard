@@ -65,12 +65,32 @@
 .share-button span { margin-right: .55rem; }
 .result-scorecard-link { color: var(--blue); font-family: 'DM Mono', monospace; font-size: .7rem; }
 .ranking-section, .results-method { border-bottom: 1px solid var(--line); padding: 5rem 0; }
+.ranking-section { padding: 3.5rem 0 4rem; }
 .ranking-section h2, .results-method h2 { font-size: clamp(2rem, 4vw, 3.4rem); }
-.party-ranking { border-top: 1px solid var(--line); margin-top: 2rem; max-width: 760px; }
-.party-ranking-row { align-items: center; border-bottom: 1px solid var(--line); display: grid; gap: 1rem; grid-template-columns: 28px 34px 1fr auto; min-height: 70px; }
-.ranking-number, .ranking-match { color: var(--muted); font-family: 'DM Mono', monospace; font-size: .75rem; }
-.ranking-logo { background: #fff; border: 1px solid var(--line); border-radius: 50%; height: 30px; object-fit: contain; width: 30px; }
-.party-ranking-row strong { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; }
+.vote-comparison-scroll { border: 1px solid var(--line); margin-top: 1.25rem; max-width: 760px; overflow-x: auto; }
+.vote-comparison { border-collapse: collapse; min-width: 760px; width: 100%; }
+.vote-comparison th, .vote-comparison td { border-bottom: 1px solid var(--line); padding: .45rem .35rem; }
+.vote-comparison thead th { background: #ebece4; color: var(--muted); font-family: 'DM Mono', monospace; font-size: .7rem; font-weight: 400; text-align: center; }
+.vote-comparison thead th:nth-child(2), .vote-comparison tbody th:nth-child(2) { text-align: left; }
+.vote-comparison thead th:first-child, .vote-comparison tbody th:first-child { padding-left: .65rem; padding-right: .2rem; width: 1%; }
+.vote-comparison thead th:nth-child(n + 4), .vote-comparison td.vote-cell { min-width: 30px; text-align: center; }
+.comparison-issue-image { aspect-ratio: 1; border: 1px solid var(--line); display: block; height: 28px; object-fit: cover; width: 28px; }
+.vote-comparison tbody th { background: var(--panel); font-weight: 500; white-space: nowrap; }
+.vote-comparison tbody tr:last-child th, .vote-comparison tbody tr:last-child td { border-bottom: 0; }
+.comparison-your-votes th { background: #f0f1e7; }
+.comparison-your-votes th:nth-child(2) { font-family: 'DM Mono', monospace; font-size: .7rem; text-transform: uppercase; }
+.comparison-rank { color: var(--muted); font-family: 'DM Mono', monospace; font-size: .75rem; text-align: center; }
+.comparison-party { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; }
+.vote-cell { font-family: 'DM Mono', monospace; font-size: .75rem; font-weight: 400; }
+.vote-cell.vote-s { background: #bcd8ef; color: var(--blue-dark); }
+.vote-cell.vote-o { background: #e7c5bc; color: #a84734; }
+.vote-cell.is-miss.vote-s { background: #eef5fb; color: #7893ac; }
+.vote-cell.is-miss.vote-o { background: #fbf1ee; color: #b8877b; }
+.vote-cell.is-match { font-weight: 700; }
+.vote-cell.is-match.vote-s, .vote-cell.is-user-vote.vote-s { box-shadow: inset 0 -1px 0 var(--blue-dark); }
+.vote-cell.is-match.vote-o, .vote-cell.is-user-vote.vote-o { box-shadow: inset 0 -1px 0 #a84734; }
+.comparison-match { color: var(--muted); font-family: 'DM Mono', monospace; font-size: .7rem; padding-left: .65rem !important; padding-right: .65rem !important; white-space: nowrap; }
+.comparison-note { color: var(--muted); font-family: 'DM Mono', monospace; font-size: .65rem; line-height: 1.5; margin: .65rem auto 0; max-width: 760px; text-align: center; }
 .results-method { color: var(--muted); max-width: 760px; }
 .results-method h2 { color: var(--ink); margin-bottom: 1.5rem; }
 .results-method p { line-height: 1.65; }
@@ -83,7 +103,6 @@
   .quiz-topbar { padding: 20px 0; }
   .issue-summary { align-items: start; min-height: 190px; }
   .choice-grid { grid-template-columns: 1fr 1fr; }
-  .party-ranking-row { gap: .65rem; grid-template-columns: 24px 30px 1fr auto; }
 }
 
 @media (max-width: 520px) {
@@ -110,6 +129,4 @@
   .quiz-back-button { padding: .5rem 0; }
   .choice-grid { grid-template-columns: 1fr; }
   .winner-card { align-items: flex-start; }
-  .party-ranking-row strong { font-size: 1rem; }
-  .ranking-match { font-size: .65rem; }
 }
