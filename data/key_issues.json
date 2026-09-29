@@ -1,26 +1,49 @@
 [
   {
-    "id": "villages-plan",
-    "title": "Villages Plan",
-    "category": "Housing",
-    "context": "Should Vancouver turn 17 small commercial nodes into walkable, mixed-use neighbourhood hubs with more homes and shops?",
-    "argumentFor": "Adds medium-density (up to 6-storeys) housing and everyday services in existing neighbourhood centres, making it easier to live near shops, jobs, and transit.",
-    "argumentAgainst": "The scale and pace of change threaten neighbourhood character and might strain existing infrastructure.",
+    "id": "floating-hotel",
+    "title": "Floating Hotel",
+    "category": "Urbanism",
+    "context": "Should Vancouver allow a 250-room floating hotel beside the Vancouver Convention Centre?",
+    "argumentFor": "Adds hotel rooms and visitor-serving space beside the convention centre without using scarce downtown land, while creating a new public walkway.",
+    "argumentAgainst": "Adds private commercial activity to the waterfront and could affect the harbour, public access, and the character of Vancouver's shoreline.",
     "image": {
-      "src": "public/images/villages_plan.jpeg",
+      "src": "public/images/floating_hotel.png",
+      "source": {
+        "name": "Sunborn Vancouver",
+        "url": "https://www.sunbornvancouver.ca/"
+      }
+    },
+    "partyPositions": {
+      "abc": "Support",
+      "green": "Support",
+      "onecity": "Support",
+      "cope": "Oppose",
+      "vote-vancouver": "Support"
+    },
+    "newsLink": "https://www.cbc.ca/news/canada/british-columbia/vancouver-bc-floating-hotel-approved-9.7164665"
+  },
+  {
+    "id": "lower-speed-limits",
+    "title": "Lower Speed Limits",
+    "category": "Safety",
+    "context": "Should Vancouver lower speed limits on some streets including downtown?",
+    "argumentFor": "Lowering speeds from 50 km/h to 40 or 30 reduces the severity of crashes and make streets safer for people walking, biking, and rolling.",
+    "argumentAgainst": "Lower limits can lengthen trips, frustrate drivers, and may have limited effect without better street design and enforcement.",
+    "image": {
+      "src": "public/images/speed_limit.png",
       "source": {
         "name": "City of Vancouver",
-        "url": "https://www.shapeyourcity.ca/villages"
+        "url": "https://vancouver.ca/news-calendar/30-kmh-speed-limits-coming-to-local-streets-july-2025.aspx"
       }
     },
     "partyPositions": {
       "abc": "Oppose",
-      "green": "Oppose",
+      "green": "Support",
       "onecity": "Support",
-      "cope": "Oppose",
-      "vote-vancouver": "Oppose"
+      "cope": "Support",
+      "vote-vancouver": "Support"
     },
-    "newsLink": "https://www.cbc.ca/news/canada/british-columbia/vancouver-council-rejects-villages-plan-9.7288472"
+    "newsLink": "https://visionzerovancouver.ca/2026/06/10/abc-guts-road-safety/"
   },
   {
     "id": "renters-office",
@@ -46,29 +69,6 @@
     "newsLink": "https://www.ctvnews.ca/vancouver/article/motion-to-bring-back-vancouver-renter-office-defeated-in-tie-vote/"
   },
   {
-    "id": "safeway-towers",
-    "title": "Safeway Towers",
-    "category": "Housing",
-    "context": "Should Vancouver approve three rental towers with more than 1,000 homes beside Commercial-Broadway Station?",
-    "argumentFor": "Adds homes next to one of Vancouver's most connected transit nodes and keeps new housing close to shops and services.",
-    "argumentAgainst": "The project's height and scale are disproportionate with the nearby buildings. Only 10% of units are allocated for below-market housing.",
-    "image": {
-      "src": "public/images/safeway_towers.png",
-      "source": {
-        "name": "Perkins + Will",
-        "url": "https://www.shapeyourcity.ca/1780-e-broadway-rz"
-      }
-    },
-    "partyPositions": {
-      "abc": "Support",
-      "green": "Support",
-      "onecity": "Support",
-      "cope": "Oppose",
-      "vote-vancouver": "Support"
-    },
-    "newsLink": "https://globalnews.ca/news/11236071/commercial-broadway-towers-approved/"
-  },
-  {
     "id": "beach-avenue-bike-lane",
     "title": "Beach Avenue Bike Lane",
     "category": "Transportation",
@@ -90,6 +90,29 @@
       "vote-vancouver": "Oppose"
     },
     "newsLink": "https://vancouver.citynews.ca/2024/05/16/vancouvers-beach-avenue-reopening-to-two-way-traffic/"
+  },
+  {
+    "id": "villages-plan",
+    "title": "Villages Plan",
+    "category": "Housing",
+    "context": "Should Vancouver turn 17 small commercial nodes into walkable, mixed-use neighbourhood hubs with more homes and shops?",
+    "argumentFor": "Adds medium-density (up to 6-storeys) housing and everyday services in existing neighbourhood centres, making it easier to live near shops, jobs, and transit.",
+    "argumentAgainst": "The scale and pace of change threaten neighbourhood character and might strain existing infrastructure.",
+    "image": {
+      "src": "public/images/villages_plan.jpeg",
+      "source": {
+        "name": "City of Vancouver",
+        "url": "https://www.shapeyourcity.ca/villages"
+      }
+    },
+    "partyPositions": {
+      "abc": "Oppose",
+      "green": "Oppose",
+      "onecity": "Support",
+      "cope": "Oppose",
+      "vote-vancouver": "Oppose"
+    },
+    "newsLink": "https://www.cbc.ca/news/canada/british-columbia/vancouver-council-rejects-villages-plan-9.7288472"
   },
   {
     "id": "natural-gas",
@@ -115,29 +138,6 @@
     "newsLink": "https://www.cbc.ca/news/canada/british-columbia/vancouver-mayor-building-codes-emissions-natural-gas-9.7208260"
   },
   {
-    "id": "bitcoin-friendly-city",
-    "title": "Bitcoin-Friendly City",
-    "category": "Governance",
-    "context": "Should Vancouver invest in Bitcoin and accept it for payment for business services?",
-    "argumentFor": "Explores new payment and financial technology options and could position Vancouver as an innovation-friendly city.",
-    "argumentAgainst": "Public money should not be exposed to a volatile asset, and Bitcoin may distract from more immediate city priorities.",
-    "image": {
-      "src": "public/images/bitcoin.svg",
-      "source": {
-        "name": "Wikimedia",
-        "url": "https://commons.wikimedia.org/wiki/File:Bitcoin.svg"
-      }
-    },
-    "partyPositions": {
-      "abc": "Support",
-      "green": "Oppose",
-      "onecity": "Oppose",
-      "cope": "Oppose",
-      "vote-vancouver": "Oppose"
-    },
-    "newsLink": "https://globalnews.ca/news/10913029/vancouver-bitcoin-motion-approved/"
-  },
-  {
     "id": "elected-park-board",
     "title": "Elected Park Board",
     "category": "Governance",
@@ -159,6 +159,52 @@
       "vote-vancouver": "Oppose"
     },
     "newsLink": "https://globalnews.ca/news/10168076/vancouver-council-park-board-vote/"
+  },
+  {
+    "id": "safeway-towers",
+    "title": "Safeway Towers",
+    "category": "Housing",
+    "context": "Should Vancouver approve three rental towers with more than 1,000 homes beside Commercial-Broadway Station?",
+    "argumentFor": "Adds homes next to one of Vancouver's most connected transit nodes and keeps new housing close to shops and services.",
+    "argumentAgainst": "The project's height and scale are disproportionate with the nearby buildings. Only 10% of units are allocated for below-market housing.",
+    "image": {
+      "src": "public/images/safeway_towers.png",
+      "source": {
+        "name": "Perkins + Will",
+        "url": "https://www.shapeyourcity.ca/1780-e-broadway-rz"
+      }
+    },
+    "partyPositions": {
+      "abc": "Support",
+      "green": "Support",
+      "onecity": "Support",
+      "cope": "Oppose",
+      "vote-vancouver": "Support"
+    },
+    "newsLink": "https://globalnews.ca/news/11236071/commercial-broadway-towers-approved/"
+  },
+  {
+    "id": "bitcoin-friendly-city",
+    "title": "Bitcoin-Friendly City",
+    "category": "Governance",
+    "context": "Should Vancouver invest in Bitcoin and accept it for payment for business services?",
+    "argumentFor": "Explores new payment and financial technology options and could position Vancouver as an innovation-friendly city.",
+    "argumentAgainst": "Public money should not be exposed to a volatile asset, and Bitcoin may distract from more immediate city priorities.",
+    "image": {
+      "src": "public/images/bitcoin.svg",
+      "source": {
+        "name": "Wikimedia",
+        "url": "https://commons.wikimedia.org/wiki/File:Bitcoin.svg"
+      }
+    },
+    "partyPositions": {
+      "abc": "Support",
+      "green": "Oppose",
+      "onecity": "Oppose",
+      "cope": "Oppose",
+      "vote-vancouver": "Oppose"
+    },
+    "newsLink": "https://globalnews.ca/news/10913029/vancouver-bitcoin-motion-approved/"
   },
   {
     "id": "police-budget",
@@ -191,10 +237,10 @@
     "argumentFor": "Reduces tax burden for households and businesses and pushes the City to find efficiencies before asking taxpayers for more.",
     "argumentAgainst": "A tax freeze forces cuts to public services, eliminates municipal jobs, and raises user fees. The ever-increasing police budget would remain unaffected.",
     "image": {
-      "src": "public/images/villages_plan.jpeg",
+      "src": "public/images/zero.png",
       "source": {
-        "name": "City of Vancouver | Villages planning program",
-        "url": "https://www.shapeyourcity.ca/villages"
+        "name": "Christopher Porter",
+        "url": "https://docs.google.com/"
       }
     },
     "partyPositions": {
@@ -228,51 +274,5 @@
       "vote-vancouver": "Oppose"
     },
     "newsLink": "https://vancouver.citynews.ca/2026/05/05/vancouver-proposed-overdose-prevention-site-mayor-motion/"
-  },
-  {
-    "id": "lower-speed-limits",
-    "title": "Lower Speed Limits",
-    "category": "Safety",
-    "context": "Should Vancouver lower speed limits on some streets including downtown?",
-    "argumentFor": "Lower speeds reduce the severity of crashes and make streets safer for people walking, biking, and rolling.",
-    "argumentAgainst": "Lower limits can lengthen trips, frustrate drivers, and may have limited effect without better street design and enforcement.",
-    "image": {
-      "src": "public/images/villages_plan.jpeg",
-      "source": {
-        "name": "City of Vancouver | Villages planning program",
-        "url": "https://www.shapeyourcity.ca/villages"
-      }
-    },
-    "partyPositions": {
-      "abc": "Oppose",
-      "green": "Support",
-      "onecity": "Support",
-      "cope": "Support",
-      "vote-vancouver": "Support"
-    },
-    "newsLink": "https://visionzerovancouver.ca/2026/06/10/abc-guts-road-safety/"
-  },
-  {
-    "id": "floating-hotel",
-    "title": "Floating Hotel",
-    "category": "Urbanism",
-    "context": "Should Vancouver allow a 250-room floating hotel beside the Vancouver Convention Centre?",
-    "argumentFor": "Adds hotel rooms and visitor-serving space beside the convention centre without using scarce downtown land, while creating a new public walkway.",
-    "argumentAgainst": "Adds private commercial activity to the waterfront and could affect the harbour, public access, and the character of Vancouver's shoreline.",
-    "image": {
-      "src": "public/images/floating_hotel.png",
-      "source": {
-        "name": "Sunborn Vancouver",
-        "url": "https://www.sunbornvancouver.ca/"
-      }
-    },
-    "partyPositions": {
-      "abc": "Support",
-      "green": "Support",
-      "onecity": "Support",
-      "cope": "Oppose",
-      "vote-vancouver": "Support"
-    },
-    "newsLink": "https://www.cbc.ca/news/canada/british-columbia/vancouver-bc-floating-hotel-approved-9.7164665"
   }
 ]

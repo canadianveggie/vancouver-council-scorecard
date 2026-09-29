@@ -19,7 +19,8 @@ encoded answers.
 
 1. `quiz.html` opens with a short explanation of the quiz, its relationship to
    the scorecard, and a clear start button.
-2. The quiz presents every issue exactly once in a randomized order.
+2. The quiz presents every issue exactly once in the fixed order stored in
+   `data/key_issues.json`.
 3. Each issue appears as a focused card containing:
    - issue title;
    - short context;
@@ -135,17 +136,17 @@ tie-breaker.
 
 ## URL and result pages
 
-The quiz answer string should use one character per issue in the canonical
-issue order, independent of the randomized presentation order:
+The quiz answer string uses one character per issue in the fixed presentation
+order stored in `data/key_issues.json`:
 
 ```text
 S = Support
 O = Oppose
 ```
 
-For example, `votes=SOOSSSSOOSOSO` contains 12 answers. The random order should
-be generated and stored in client state; it must not change the meaning of the
-answer string or the result URL.
+For example, `votes=SOOSSSSOOSOSO` contains 12 answers. Because the quiz and
+results page use the same fixed issue order, each character always maps to the
+issue the visitor was asked about.
 
 `results-{party}.html` is a static entry point for each supported party. The
 page reads `votes`, validates it, identifies the party slug from the filename,
@@ -183,13 +184,12 @@ URL as a fallback, matching the existing scorecard behavior.
 
 Likely modules:
 
-- `src/quiz/QuizApp.tsx` — introduction, randomized card flow, navigation,
+- `src/quiz/QuizApp.tsx` — introduction, fixed-order card flow, navigation,
   progress, and answer state.
 - `src/quiz/ResultsApp.tsx` — URL parsing, matching, ranking, and sharing.
 - `src/quiz/types.ts` — quiz issue, answer, and result types.
 - `src/quiz/matching.ts` — pure similarity functions with unit tests.
 - `src/quiz/url.ts` — answer encoding/decoding and party-slug validation.
-- `src/quiz/random.ts` — deterministic/testable shuffle helpers.
 - `src/quiz.css` — quiz-specific responsive presentation, reusing existing
   design tokens where practical.
 
@@ -210,7 +210,7 @@ Likely modules:
   percentages, and ties;
 - URL tests for valid answer strings of the approved issue length, malformed strings, unknown party
   slugs, and round trips;
-- component or browser checks for randomized order, required answers,
+- component or browser checks for fixed issue order, required answers,
   back-navigation, refresh/share links, mobile layout, and reduced motion;
 - production build verification that `quiz.html` and every result entry point
   contain the correct asset paths under the GitHub Pages base path.
@@ -233,8 +233,8 @@ Likely modules:
 - There is no skip option in the first release.
 - All 12 issues count in the denominator; displayed results are rounded to
   whole percentages, producing approximately 8% increments.
-- Quiz order is randomized once per browser session and remains stable while
-  navigating or reopening the quiz during that session.
+- Quiz order is fixed in `data/key_issues.json`, so the answer slug always
+  corresponds to the presentation order.
 - The Green party slug is `green`.
 - Result pages recalculate from the query string rather than trusting the
   filename.

@@ -1,9 +1,8 @@
-import { useMemo, useState } from "react"
+import { useState } from "react"
 import quizJson from "../../data/generated/quiz.json"
 import scorecardJson from "../../data/generated/scorecard.json"
 import type { ScorecardData } from "../data/types"
 import { calculatePartyMatches } from "./matching"
-import { quizOrder } from "./random"
 import type { QuizAnswer, QuizData } from "./types"
 import { resultPath } from "./url"
 
@@ -188,7 +187,7 @@ function IssueCard({
 }
 
 function QuizRunner() {
-	const order = useMemo(() => quizOrder(data.issues.length), [])
+	const order = data.issues.map((_, index) => index)
 	const [currentIndex, setCurrentIndex] = useState(0)
 	const [answers, setAnswers] = useState<Partial<Record<string, QuizAnswer>>>(
 		{},
