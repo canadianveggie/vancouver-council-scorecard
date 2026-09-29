@@ -69,11 +69,65 @@ function InvalidResult() {
 	)
 }
 
+function ResultsFooter() {
+	return (
+		<footer className="footer">
+			<span>Vancouver Council Scorecard</span>
+			<span>
+				Made by{" "}
+				<a href="https://canadianveggie.com" target="_blank" rel="noopener">
+					@canadianveggie
+				</a>
+			</span>
+		</footer>
+	)
+}
+
+function WinnerCard({
+	party,
+	percentage,
+}: {
+	party: ScorecardData["parties"][number]
+	percentage?: number
+}) {
+	const content = (
+		<>
+			<div className="winner-party-mark">
+				{party.logo && <img alt="" src={`${baseUrl}${party.logo}`} />}
+			</div>
+			<div>
+				<p className="winner-label">The closest match</p>
+				<h2>{party.name}</h2>
+				{percentage !== undefined && (
+					<p className="winner-match">{percentage}% match</p>
+				)}
+			</div>
+		</>
+	)
+
+	if (!party.website) return <div className="winner-card">{content}</div>
+
+	return (
+		<a
+			className="winner-card"
+			href={party.website}
+			target="_blank"
+			rel="noopener noreferrer"
+			aria-label={`Visit ${party.name}'s website (opens in a new tab)`}
+		>
+			{content}
+		</a>
+	)
+}
+
 function ResultActions({ partyName }: { partyName: string }) {
 	const [status, setStatus] = useState<"idle" | "copied" | "shared">("idle")
 
 	async function share(party: string) {
-		const url = window.location.href
+		const shareUrl = new URL(window.location.href)
+		shareUrl.search = ""
+		shareUrl.hash = ""
+		const url = shareUrl.toString()
 		if (navigator.share) {
 			try {
 				await navigator.share({
@@ -129,20 +183,9 @@ export default function ResultsApp() {
 	const winner = matches[0]
 	const winnerPartyId = winner?.party.id
 	const requestedPartyId = partyIdFromPath()
-	const winnerCardContent = winner ? (
-		<>
-			<div className="winner-party-mark">
-				{winner.party.logo && (
-					<img alt="" src={`${baseUrl}${winner.party.logo}`} />
-				)}
-			</div>
-			<div>
-				<p className="winner-label">The closest match</p>
-				<h2>{winner.party.name}</h2>
-				<p className="winner-match">{winner.percentage}% match</p>
-			</div>
-		</>
-	) : null
+	const requestedParty = requestedPartyId
+		? scorecard.parties.find((party) => party.id === requestedPartyId)
+		: undefined
 
 	useEffect(() => {
 		if (
@@ -156,6 +199,28 @@ export default function ResultsApp() {
 	}, [answers, requestedPartyId, winnerPartyId])
 
 	if (!answers || !winner) {
+		if (requestedParty) {
+			return (
+				<main className="page-shell quiz-page results-page">
+					<ResultsHeader />
+					<section className="results-hero" aria-labelledby="results-title">
+						<p className="eyebrow">Your result</p>
+						<h1 id="results-title">
+							Your voting record would be most similar to:
+						</h1>
+						<WinnerCard party={requestedParty} />
+						<a
+							className="primary-button inline-button"
+							href={`${baseUrl}quiz.html`}
+						>
+							Take the quiz <span aria-hidden="true">→</span>
+						</a>
+					</section>
+					<ResultsFooter />
+				</main>
+			)
+		}
+
 		return (
 			<main className="page-shell quiz-page results-page">
 				<ResultsHeader />
@@ -170,19 +235,7 @@ export default function ResultsApp() {
 			<section className="results-hero" aria-labelledby="results-title">
 				<p className="eyebrow">Your result</p>
 				<h1 id="results-title">Your voting record would be most similar to:</h1>
-				{winner.party.website ? (
-					<a
-						className="winner-card"
-						href={winner.party.website}
-						target="_blank"
-						rel="noopener noreferrer"
-						aria-label={`Visit ${winner.party.name}'s website (opens in a new tab)`}
-					>
-						{winnerCardContent}
-					</a>
-				) : (
-					<div className="winner-card">{winnerCardContent}</div>
-				)}
+				<WinnerCard party={winner.party} percentage={winner.percentage} />
 				<ResultActions partyName={winner.party.name} />
 			</section>
 
@@ -232,15 +285,7 @@ export default function ResultsApp() {
 					Open the full scorecard <span aria-hidden="true">↗</span>
 				</a>
 			</section>
-			<footer className="footer">
-				<span>Vancouver Council Scorecard</span>
-				<span>
-					Made by{" "}
-					<a href="https://canadianveggie.com" target="_blank" rel="noopener">
-						@canadianveggie
-					</a>
-				</span>
-			</footer>
+			<ResultsFooter />
 		</main>
 	)
 }
