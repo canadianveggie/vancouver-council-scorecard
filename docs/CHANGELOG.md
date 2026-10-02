@@ -17,3 +17,8 @@
 * Added quiz
 * Added Jericho Lands vote
 * Bump Broadway and Jericho Lands to a +3
+
+## 2026-10-02 16:30
+
+* Changed the grade averaging to make more sense (A+, D, F averages to averages to a B not an A).
+* 100% scored in a category is now an A+.
