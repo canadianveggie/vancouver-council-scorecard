@@ -66,7 +66,7 @@ test("calculates councillor and party grades", () => {
 		(councillor) => councillor.councillorId === "newcomer",
 	)!
 
-	assert.equal(alice.letterGrade, "A")
+	assert.equal(alice.letterGrade, "C")
 	assert.equal(
 		alice.categoryGrades.find((category) => category.category === "Housing")
 			?.letterGrade,
@@ -77,18 +77,32 @@ test("calculates councillor and party grades", () => {
 			?.voteScores["housing-1"],
 		4,
 	)
-	assert.equal(bob.letterGrade, "F")
+	assert.equal(bob.letterGrade, "D")
 	assert.equal(
 		newcomer.categoryGrades.find((category) => category.category === "Housing")
 			?.voteScores["housing-1"],
 		null,
 	)
 
-	assert.equal(abc.letterGrade, "A+")
+	assert.equal(abc.letterGrade, "C")
 	assert.equal(
 		results.parties.find((party) => party.partyId === "green")?.letterGrade,
-		"F",
+		"D",
 	)
+})
+
+test("weights selected categories equally in overall scores", () => {
+	const results = calculateScores(votes, councillors, parties, [
+		"Housing",
+		"Safety",
+	])
+	const abc = results.parties.find((party) => party.partyId === "abc")!
+	const alice = abc.councillors.find(
+		(councillor) => councillor.councillorId === "alice",
+	)!
+
+	assert.equal(alice.averageScore, (1.1 + -0.1) / 2)
+	assert.equal(abc.averageScore, (1.1 + -0.1) / 2)
 })
 
 test("only includes votes from selected categories", () => {
@@ -139,8 +153,8 @@ test("ranks parties and councillors by average score", () => {
 })
 
 test("uses documented fixed grade boundaries", () => {
-	assert.equal(gradeForScore(1.01), "A+")
-	assert.equal(gradeForScore(1), "A")
+	assert.equal(gradeForScore(1), "A+")
+	assert.equal(gradeForScore(0.99), "A")
 	assert.equal(gradeForScore(0.9), "B")
 	assert.equal(gradeForScore(0.75), "C")
 	assert.equal(gradeForScore(0.4), "D")

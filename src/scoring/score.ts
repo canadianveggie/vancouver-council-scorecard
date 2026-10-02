@@ -66,7 +66,7 @@ export function scoreRecordedVote(
 }
 
 export function gradeForScore(averageScore: number) {
-	if (averageScore > 1) return "A+"
+	if (averageScore >= 1) return "A+"
 	if (averageScore > 0.9) return "A"
 	if (averageScore > 0.75) return "B"
 	if (averageScore > 0.4) return "C"
@@ -108,6 +108,16 @@ function categoryGrade(
 	}
 }
 
+function overallAverageScore(categoryGrades: CategoryGrade[]) {
+	return categoryGrades.length === 0
+		? 0
+		: categoryGrades.reduce(
+				// Cap best at 1.1 and worst at -0.1 for each category
+				(sum, categoryGrade) => sum + Math.max(Math.min(categoryGrade.averageScore, 1.1), -0.1),
+				0,
+			) / categoryGrades.length
+}
+
 function scoreForVote(councillorId: string, vote: Vote) {
 	const recordedVote = vote.councillorVotes[councillorId]
 	return recordedVote
@@ -146,12 +156,14 @@ function scoresForCouncillor(
 		votes.map((vote) => [vote.id, scoreForVote(councillor.id, vote)]),
 	)
 	const summary = scoreSummary(voteScores, votes)
+	const averageScore = overallAverageScore(categoryGrades)
 
 	return {
 		councillorId: councillor.id,
 		partyId: councillor.partyId,
 		...summary,
-		letterGrade: gradeForScore(summary.averageScore),
+		averageScore,
+		letterGrade: gradeForScore(averageScore),
 		categoryGrades,
 	}
 }
@@ -192,11 +204,13 @@ function scoresForParty(
 		votes.map((vote) => [vote.id, averageVoteScores(councillors, vote)]),
 	)
 	const summary = scoreSummary(voteScores, votes)
+	const averageScore = overallAverageScore(categoryGrades)
 
 	return {
 		partyId,
 		...summary,
-		letterGrade: gradeForScore(summary.averageScore),
+		averageScore,
+		letterGrade: gradeForScore(averageScore),
 		councillors: [...councillors].sort(
 			(a, b) =>
 				b.averageScore - a.averageScore ||
