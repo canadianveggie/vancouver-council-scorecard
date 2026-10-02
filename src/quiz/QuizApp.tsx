@@ -269,6 +269,16 @@ function QuizRunner() {
 export default function QuizApp() {
 	const [started, setStarted] = useState(false)
 
+	useEffect(() => {
+		for (const issue of data.issues) {
+			if (!issue.image) continue
+
+			const image = new Image()
+			image.decoding = "async"
+			image.src = assetUrl(issue.image.src)
+		}
+	}, [])
+
 	return (
 		<main className="page-shell quiz-page">
 			<QuizHeader />
