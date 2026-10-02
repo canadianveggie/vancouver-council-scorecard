@@ -242,7 +242,7 @@ h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1; }
 
 @media (max-width: 850px) {
   .page-shell { padding: 0 1.25rem; }
-  .topbar { padding: 20px 0; }
+  .topbar { padding: 0; }
   .site-nav-links { gap: .8rem; }
   .text-link { font-size: .6rem; }
   .hero { padding-top: 5rem; }
