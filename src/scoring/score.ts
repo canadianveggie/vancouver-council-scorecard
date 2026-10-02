@@ -113,7 +113,8 @@ function overallAverageScore(categoryGrades: CategoryGrade[]) {
 		? 0
 		: categoryGrades.reduce(
 				// Cap best at 1.1 and worst at -0.1 for each category
-				(sum, categoryGrade) => sum + Math.max(Math.min(categoryGrade.averageScore, 1.1), -0.1),
+				(sum, categoryGrade) =>
+					sum + Math.max(Math.min(categoryGrade.averageScore, 1.1), -0.1),
 				0,
 			) / categoryGrades.length
 }
